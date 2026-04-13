@@ -62,172 +62,554 @@ body {
 .panel-left {
   width: 480px;
   min-width: 380px;
-  max-width: 520px;
-  height: 100vh;
-  overflow-y: auto;
-  overflow-x: hidden;
-  background: var(--bg);
-  padding: 20px 16px 40px;
   flex-shrink: 0;
-  scrollbar-width: thin;
-  scrollbar-color: var(--data-grey) transparent;
+  display: flex;
+  flex-direction: column;
+  background: var(--surface);
+  border-right: 1px solid var(--border);
+  box-shadow: 0 0 1px rgba(0,0,0,0.06);
 }
-.panel-left::-webkit-scrollbar { width: 6px; }
-.panel-left::-webkit-scrollbar-thumb { background: var(--data-grey); border-radius: 3px; }
 
-/* Right panel: sticky map */
+.panel-header {
+  padding: 24px 24px 16px;
+  border-bottom: 1px solid var(--border);
+  flex-shrink: 0;
+}
+
+.title {
+  font-family: var(--font-display);
+  font-size: 28px;
+  line-height: 1.2;
+  color: var(--text-primary);
+  margin-bottom: 8px;
+}
+
+.subtitle {
+  font-size: 13px;
+  color: var(--text-muted);
+  font-weight: 400;
+}
+
+/* Scrollable area for cards */
+.cards-container {
+  flex: 1;
+  overflow-y: auto;
+  padding: 16px 12px;
+  scroll-behavior: smooth;
+}
+
+.cards-container::-webkit-scrollbar {
+  width: 8px;
+}
+
+.cards-container::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.cards-container::-webkit-scrollbar-thumb {
+  background: var(--border);
+  border-radius: 4px;
+}
+
+.cards-container::-webkit-scrollbar-thumb:hover {
+  background: #C0C5CE;
+}
+
+.card {
+  background: var(--surface-muted);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 16px;
+  margin-bottom: 12px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  position: relative;
+}
+
+.card:hover {
+  border-color: var(--accent);
+  box-shadow: var(--shadow-md);
+  transform: translateY(-2px);
+}
+
+.card.active {
+  background: var(--accent-light);
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px rgba(232, 75, 60, 0.1);
+}
+
+.card-image {
+  width: 100%;
+  height: 180px;
+  background: #e0e0e0;
+  border-radius: var(--radius-md);
+  margin-bottom: 12px;
+  overflow: hidden;
+}
+
+.card-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.card-title {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: 4px;
+  line-height: 1.3;
+}
+
+.card-desc {
+  font-size: 12px;
+  color: var(--text-muted);
+  line-height: 1.4;
+  margin-bottom: 8px;
+}
+
+.card-tag {
+  display: inline-block;
+  font-size: 11px;
+  padding: 4px 8px;
+  background: rgba(232, 75, 60, 0.1);
+  color: var(--accent);
+  border-radius: var(--radius-sm);
+  font-weight: 500;
+}
+
+/* Right panel: map */
 .panel-right {
   flex: 1;
-  height: 100vh;
-  position: relative;
-  background: var(--surface);
+  display: flex;
+  flex-direction: column;
+  background: var(--bg);
 }
 
 #map {
   width: 100%;
   height: 100%;
+  flex: 1;
 }
 
-/* ── HEADER ── */
-.header {
-  text-align: center;
-  padding: 28px 16px 20px;
-}
-.header-badge {
-  display: inline-block;
-  padding: 4px 14px;
-  border-radius: var(--radius-pill);
-  background: var(--accent-light);
-  color: var(--accent);
-  font-size: 11px;
-  font-weight: 700;
-  letter-spacing: 0.02em;
-  margin-bottom: 10px;
-}
-.header h1 {
-  font-family: var(--font-display);
-  font-size: 28px;
-  color: var(--text-primary);
-  line-height: 1.1;
-  margin-bottom: 4px;
-  font-weight: 400;
-}
-.header p {
-  font-size: 13px;
-  color: var(--text-muted);
-  font-weight: 500;
-}
-
-/* ── STATS ROW ── */
-.stats-row {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
+.map-controls {
+  position: absolute;
+  bottom: 20px;
+  left: 20px;
+  z-index: 10;
+  display: flex;
   gap: 8px;
-  margin-bottom: 16px;
-}
-.stat-card {
-  background: var(--surface);
-  border-radius: var(--radius-md);
-  box-shadow: var(--shadow-sm);
-  padding: 12px 8px;
-  text-align: center;
-}
-.stat-card .stat-value {
-  font-size: 22px;
-  font-weight: 800;
-  color: var(--text-primary);
-  line-height: 1;
-  margin-bottom: 2px;
-}
-.stat-card .stat-label {
-  font-size: 10px;
-  font-weight: 600;
-  color: var(--text-muted);
-  text-transform: uppercase;
-  letter-spacing: 0.04em;
 }
 
-/* ── ROUTE TIMELINE ── */
-.timeline-card {
+.control-btn {
   background: var(--surface);
-  border-radius: var(--radius-lg);
-  box-shadow: var(--shadow-sm);
-  padding: 16px;
-  margin-bottom: 16px;
-}
-.timeline-card h2 {
-  font-size: 14px;
-  font-weight: 700;
-  color: var(--text-primary);
-  margin-bottom: 12px;
-}
-.timeline {
-  display: flex;
-  align-items: flex-start;
-  overflow-x: auto;
-  gap: 0;
-  padding: 4px 0 8px;
-}
-.tl-stop {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  min-width: 64px;
-  flex-shrink: 0;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: 10px 12px;
   cursor: pointer;
-  transition: opacity 0.15s;
-}
-.tl-stop:hover { opacity: 0.8; }
-.tl-dot {
-  width: 28px;
-  height: 28px;
-  border-radius: 50%;
-  background: var(--data-blue);
-  color: #fff;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 12px;
-  font-weight: 700;
-  margin-bottom: 4px;
-  position: relative;
-  z-index: 1;
-}
-.tl-dot.overnight { box-shadow: 0 0 0 3px var(--data-blue-light); }
-.tl-name {
-  font-size: 10px;
-  font-weight: 700;
+  font-size: 13px;
+  font-weight: 500;
   color: var(--text-primary);
-  text-align: center;
-  line-height: 1.2;
-  max-width: 64px;
+  transition: all 0.2s ease;
+  box-shadow: var(--shadow-sm);
 }
-.tl-night {
-  font-size: 9px;
-  color: var(--data-blue);
+
+.control-btn:hover {
+  background: var(--surface-muted);
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+/* info window */
+.info-window {
+  font-family: var(--font);
+  min-width: 220px;
+}
+
+.iw-title {
+  font-size: 15px;
   font-weight: 600;
-  margin-top: 1px;
-}
-.tl-connector {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  min-width: 32px;
-  padding-top: 4px;
-}
-.tl-line {
-  width: 100%;
-  height: 2px;
-  background: var(--data-blue);
+  color: var(--text-primary);
   margin-bottom: 4px;
 }
-.tl-line.return {
-  background: repeating-linear-gradient(90deg, var(--accent) 0, var(--accent) 4px, transparent 4px, transparent 8px);
+
+.iw-desc {
+  font-size: 12px;
+  color: var(--text-body);
+  line-height: 1.4;
+  margin-bottom: 8px;
 }
-.tl-time {
-  font-size: 9px;
+
+.iw-detail {
+  font-size: 11px;
   color: var(--text-muted);
-  font-weight: 600;
-  white-space: nowrap;
+  margin: 4px 0;
 }
+
+.iw-addr {
+  font-size: 12px;
+  color: var(--data-blue);
+  font-weight: 500;
+  margin-top: 6px;
+  padding-top: 6px;
+  border-top: 1px solid var(--border);
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+  .panel-left {
+    width: 360px;
+  }
+}
+
+@media (max-width: 768px) {
+  .app {
+    flex-direction: column;
+  }
+
+  .panel-left {
+    width: 100%;
+    height: 280px;
+  }
+
+  .panel-right {
+    flex: 1;
+  }
+
+  .title {
+    font-size: 22px;
+  }
+}
+
+</style>
+</head>
+<body>
+
+<div class="app">
+  <!-- Left panel: scrollable cards -->
+  <div class="panel-left">
+    <div class="panel-header">
+      <h1 class="title">Banagher Tour</h1>
+      <p class="subtitle">Click a stop to see details on the map</p>
+    </div>
+    <div class="cards-container" id="cardsContainer"></div>
+  </div>
+
+  <!-- Right panel: map -->
+  <div class="panel-right">
+    <div id="map"></div>
+    <div class="map-controls">
+      <button class="control-btn" id="zoomInBtn">Zoom In</button>
+      <button class="control-btn" id="zoomOutBtn">Zoom Out</button>
+      <button class="control-btn" id="centerBtn">Center Map</button>
+    </div>
+  </div>
+</div>
+
+<script>
+
+// Tour stop data with coordinates
+const tourStops = [
+  {
+    title: "Banagher Bridge",
+    description: "Historic 13-arch bridge crossing the Shannon, built in 1843. A marvel of Victorian engineering.",
+    category: "Historic",
+    lat: 53.6556,
+    lng: -7.9089,
+    address: "Banagher, Co. Offaly",
+    searchTerm: "Banagher Bridge Offaly"
+  },
+  {
+    title: "Banagher Church",
+    description: "A charming stone church with historical significance, serving the local community.",
+    category: "Religious",
+    lat: 53.6543,
+    lng: -7.9075,
+    address: "Main Street, Banagher",
+    searchTerm: "Banagher Church Offaly"
+  },
+  {
+    title: "Castle Gardens",
+    description: "Scenic riverside gardens offering peaceful walks and beautiful views of the Shannon.",
+    category: "Parks",
+    lat: 53.6515,
+    lng: -7.9150,
+    address: "Banagher, Co. Offaly",
+    searchTerm: "Castle Gardens Banagher"
+  },
+  {
+    title: "The Marina",
+    description: "Modern riverside facility for boaters and tourists, perfect for a leisurely cruise stop.",
+    category: "Amenities",
+    lat: 53.6560,
+    lng: -7.9100,
+    address: "Marina, Banagher",
+    searchTerm: "Banagher Marina Offaly"
+  },
+  {
+    title: "Shannon Cruises",
+    description: "Boat rental and guided cruise operations, the heart of the Lower Shannon tourism.",
+    category: "Tourism",
+    lat: 53.6550,
+    lng: -7.9110,
+    address: "Banagher, Co. Offaly",
+    searchTerm: "Shannon Cruises Banagher"
+  },
+  {
+    title: "Birr Castle",
+    description: "Magnificent estate with impressive castle and manicured gardens, 20 min from Banagher.",
+    category: "Historic",
+    lat: 53.0955,
+    lng: -7.9005,
+    address: "Birr, Co. Offaly",
+    searchTerm: "Birr Castle Offaly"
+  },
+  {
+    title: "Clonmacnoise",
+    description: "Ancient monastic site on the Shannon with round towers and historic ruins dating to 546 AD.",
+    category: "Historic",
+    lat: 53.3600,
+    lng: -7.8144,
+    address: "Clonmacnoise, Co. Westmeath",
+    searchTerm: "Clonmacnoise Westmeath"
+  },
+  {
+    title: "Athlone Castle",
+    description: "13th-century castle overlooking the Shannon, now a museum with interactive exhibits.",
+    category: "Historic",
+    lat: 53.4281,
+    lng: -7.9453,
+    address: "Athlone, Co. Westmeath",
+    searchTerm: "Athlone Castle Westmeath"
+  },
+  {
+    title: "Shannonbridge",
+    description: "Historic village with traditional pubs and restaurants, gateway to the middle Shannon.",
+    category: "Villages",
+    lat: 53.4206,
+    lng: -7.7978,
+    address: "Shannonbridge, Co. Offaly",
+    searchTerm: "Shannonbridge Offaly"
+  },
+  {
+    title: "Ballinasloe",
+    description: "Market town known for its historic fair, livestock auctions, and local culture.",
+    category: "Towns",
+    lat: 53.3264,
+    lng: -8.1929,
+    address: "Ballinasloe, Co. Galway",
+    searchTerm: "Ballinasloe Galway"
+  },
+  {
+    title: "Eyrecourt",
+    description: "Small riverside village with a historic castle, picturesque setting on the Shannon.",
+    category: "Villages",
+    lat: 53.2964,
+    lng: -7.8189,
+    address: "Eyrecourt, Co. Galway",
+    searchTerm: "Eyrecourt Galway"
+  },
+  {
+    title: "King John's Castle",
+    description: "Medieval castle in Limerick with panoramic views, further south on the Shannon.",
+    category: "Historic",
+    lat: 52.6617,
+    lng: -8.6288,
+    address: "Limerick, Co. Limerick",
+    searchTerm: "King John's Castle Limerick"
+  }
+];
+
+let map;
+let markers = {};
+let infoWindow = null;
+let service = null;
+
+function initMap() {
+  console.log("Initializing map...");
+
+  // Create map centered on Banagher
+  const banagher = { lat: 53.6556, lng: -7.9089 };
+  map = new google.maps.Map(document.getElementById('map'), {
+    zoom: 11,
+    center: banagher,
+    mapTypeControl: true,
+    fullscreenControl: true,
+    styles: [
+      { elementType: 'labels.text.fill', stylers: [{ color: '#666' }] },
+      { elementType: 'geometry.fill', stylers: [{ color: '#f0f0f0' }] },
+      { elementType: 'geometry.stroke', stylers: [{ color: '#ddd' }] }
+    ]
+  });
+
+  // Initialize the Place service
+  service = new google.maps.places.PlacesService(map);
+
+  // Create markers and cards for each stop
+  tourStops.forEach((stop, index) => {
+    createMarker(stop, index);
+    createCard(stop, index);
+  });
+
+  // Map controls
+  document.getElementById('zoomInBtn').addEventListener('click', () => {
+    map.setZoom(map.getZoom() + 1);
+  });
+
+  document.getElementById('zoomOutBtn').addEventListener('click', () => {
+    map.setZoom(map.getZoom() - 1);
+  });
+
+  document.getElementById('centerBtn').addEventListener('click', () => {
+    map.setCenter(banagher);
+  });
+
+  console.log("Map initialized with " + tourStops.length + " stops");
+}
+
+function createMarker(stop, index) {
+  const marker = new google.maps.Marker({
+    position: { lat: stop.lat, lng: stop.lng },
+    map: map,
+    title: stop.title,
+    label: String(index + 1),
+    icon: {
+      path: google.maps.SymbolPath.CIRCLE,
+      scale: 8,
+      fillColor: '#E84B3C',
+      fillOpacity: 1,
+      strokeColor: '#fff',
+      strokeWeight: 2,
+    }
+  });
+
+  markers[index] = marker;
+
+  marker.addListener('click', () => {
+    selectStop(index);
+  });
+}
+
+function createCard(stop, index) {
+  const card = document.createElement('div');
+  card.className = 'card';
+  card.id = 'card-' + index;
+
+  card.innerHTML = `
+    <div class="card-image">
+      <img src="https://via.placeholder.com/400x300?text=${encodeURIComponent(stop.title)}" alt="${stop.title}">
+    </div>
+    <div class="card-title">${stop.title}</div>
+    <div class="card-desc">${stop.description}</div>
+    <span class="card-tag">${stop.category}</span>
+  `;
+
+  card.addEventListener('click', () => {
+    selectStop(index);
+  });
+
+  document.getElementById('cardsContainer').appendChild(card);
+}
+
+function selectStop(index) {
+  console.log("Selected stop: " + tourStops[index].title);
+
+  // Update active card
+  document.querySelectorAll('.card').forEach((card, i) => {
+    card.classList.toggle('active', i === index);
+  });
+
+  const stop = tourStops[index];
+
+  // Pan map to marker
+  map.panTo({ lat: stop.lat, lng: stop.lng });
+
+  // Close previous info window if open
+  if (infoWindow) {
+    infoWindow.close();
+  }
+
+  // Search for the place using the new Place API (searchByText)
+  searchAndShowPlace(stop, index);
+}
+
+function searchAndShowPlace(stop, index) {
+  // Use the new Place API (searchByText) to find the place
+  const request = {
+    textQuery: stop.searchTerm,
+    fields: ['places.displayName', 'places.formattedAddress', 'places.photos', 'places.rating'],
+    maxResultCount: 1,
+  };
+
+  console.log("Searching for: " + stop.searchTerm);
+
+  // Use the PlacesService to search (this internally uses the new API)
+  service.textSearch(request, (results, status) => {
+    console.log("Search status: " + status);
+
+    let displayAddress = stop.address;
+    let displayRating = null;
+    let displayWebsite = null;
+
+    if (status === google.maps.places.PlacesServiceStatus.OK && results && results.length > 0) {
+      const place = results[0];
+      console.log("Found place:", place.name);
+
+      if (place.formatted_address) {
+        displayAddress = place.formatted_address;
+      }
+
+      if (place.rating) {
+        displayRating = place.rating;
+      }
+
+      if (place.website) {
+        displayWebsite = place.website;
+      }
+    } else if (status !== google.maps.places.PlacesServiceStatus.ZERO_RESULTS) {
+      console.warn("Place search failed:", status);
+    }
+
+    // Create and show info window with the data
+    const infoContent = createInfoWindowContent(stop, displayAddress, displayRating, displayWebsite);
+
+    infoWindow = new google.maps.InfoWindow({
+      content: infoContent,
+      position: { lat: stop.lat, lng: stop.lng }
+    });
+
+    infoWindow.open(map, markers[index]);
+
+    // Log the details being shown
+    console.log("Info window opened for: " + stop.title + " at " + displayAddress);
+  });
+}
+
+function createInfoWindowContent(stop, address, rating, website) {
+  let html = `
+    <div class="info-window">
+      <div class="iw-title">${stop.title}</div>
+      <div class="iw-desc">${stop.description}</div>
+  `;
+
+  if (address) {
+    html += `<div class="iw-addr">${address}</div>`;
+  }
+
+  if (rating) {
+    html += `<div class="iw-detail">Rating: ${rating.toFixed(1)} ⭐</div>`;
+  }
+
+  if (website) {
+    html += `<div class="iw-detail"><a href="${website}" target="_blank">Visit Website</a></div>`;
+  }
+
+  html += `</div>`;
+
+  return html;
+}
+
+</script>
+
+</body>
+</html>
