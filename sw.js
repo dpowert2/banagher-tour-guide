@@ -1,7 +1,7 @@
-var VERSION = 'banagher-v3';
+var VERSION = 'banagher-v4';
 var CORE = 'banagher-core-' + VERSION;
 var EXT = 'banagher-ext-' + VERSION;
-var PRECACHE = ['./', './index.html', './manifest.webmanifest', './icon-192.png', './icon-512.png'];
+var PRECACHE = ['./', './index.html', './navigate.html', './manifest.webmanifest', './icon-192.png', './icon-512.png'];
 
 self.addEventListener('install', function (e) {
   e.waitUntil(
