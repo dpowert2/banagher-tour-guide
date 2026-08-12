@@ -1,0 +1,15 @@
+{
+  "name": "Banagher Leisurely Tour",
+  "short_name": "Banagher Tour",
+  "description": "4-night Lower Shannon cruise guide — Silverline Cruisers, Banagher. Passage plan, stops, wind gate, and offline map.",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#E2E6ED",
+  "theme_color": "#E2E6ED",
+  "icons": [
+    { "src": "icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
+    { "src": "icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ]
+}
