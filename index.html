@@ -228,7 +228,8 @@ footer a{color:var(--text-muted)}
 </header>
 
 <nav class="daynav">
-  <a href="#plan" class="hot">Plan</a>
+  <a href="#brief" class="hot">Today</a>
+  <a href="#plan">Plan</a>
   <a href="#live">Live</a>
   <a href="#d1">Day 1</a>
   <a href="#d2">Day 2</a>
@@ -246,7 +247,34 @@ footer a{color:var(--text-muted)}
   <div class="stat-cell"><div class="stat-value">0</div><div class="stat-label">Locks</div></div>
 </div>
 
-<!-- ===== BOAT ===== -->
+<div class="card" id="brief" style="scroll-margin-top:64px">
+  <div class="section-label" style="color:var(--accent)">Booking #905983 · Silver Spray · Thu 13 → Mon 17 Aug</div>
+  <h2 style="margin-bottom:10px">Today</h2>
+  <div class="alert" style="margin-bottom:16px"><b>Check-in is today, not tomorrow</b>Your confirmation reads check-in <b>13 August</b>, check-out <b>17 August</b>, 4 nights. Boarding is from 4pm this afternoon. If you were planning to travel tomorrow, ring Silverline now on <a href="tel:+353579151112" style="color:var(--accent);font-weight:700">057 915 1112</a> — a no-show on day one is not something to discover at the marina.</div>
+  <ul class="note-list">
+    <li><span class="note-ico">💳</span><div><b>Bring card capacity for ~€2,250</b>Balance <b>€729.50</b> on arrival, plus the refundable damage deposit of €800–€1,500 — or the insurance waiver at €200–€300 with a €200 residual deposit. Decide which before you're at the desk. Buy the smart card while you're there; you need it for shore power at Athlone on Friday night.</div></li>
+    <li><span class="note-ico">📺</span><div><b>Watch the safety briefing video on the drive down</b>It's in your Silverline email. Doing it before you arrive is what turns a 5pm departure from aspiration into fact.</div></li>
+    <li><span class="note-ico">🛒</span><div><b>Shop on the way, or at Sexton's</b>Food pre-order is long closed. Sexton's SuperValu, Lower Main Street, is five minutes from the marina and open till 9pm — but doing it between handover and casting off costs you daylight. Better to stop en route.</div></li>
+    <li><span class="note-ico">🍽️</span><div><b>Ring Luker's for tonight</b>You'll moor at Shannonbridge around 6:20pm. Open till 12:30am Thursdays. <a href="tel:+353876565943" style="color:var(--data-blue);font-weight:600">087 656 5943</a>.</div></li>
+    <li><span class="note-ico">📞</span><div><b>Book Thyme for Friday night</b>Friday 5–9pm, 4.8★ and small. <a href="tel:+353906478850" style="color:var(--data-blue);font-weight:600">090 647 8850</a>. Fallback: Kin Khao Thai, open 4pm Friday, <a href="tel:+353906498805" style="color:var(--data-blue);font-weight:600">090 649 8805</a>.</div></li>
+    <li><span class="note-ico">🎟️</span><div><b>Book Baysports for Saturday</b>Saturday is their long day — open till <b>7pm</b> rather than the 5pm Sunday close. Book online tonight and bring socks for all four; under-10s need an adult in the water, so one of you is going in with Caoimhe.</div></li>
+    <li><span class="note-ico">📖</span><div><b>Save Silverline's two flipbooks</b>"50 things to do with kids" and the Hidden Gems guide came with your confirmation. Download both before you lose signal on Lough Ree.</div></li>
+  </ul>
+</div>
+
+<div class="card">
+  <div class="section-label">What the dates change</div>
+  <h2 style="margin-bottom:10px">Your five days, resolved</h2>
+  <table>
+    <tr><th>Day</th><th>Watch out for</th></tr>
+    <tr><td><b>Thu 13</b><br><span style="color:var(--text-muted)">Shannonbridge</span></td><td>All clear and warm — the tail of the hot spell, around 25°C. Luker's open till 12:30am, Sexton's till 9pm. Ideal evening for the first hop.</td></tr>
+    <tr><td><b>Fri 14</b><br><span style="color:var(--text-muted)">Athlone</span></td><td>Everything open: Killeen's 9:30, Left Bank 12–9:30, Luan Gallery 11–5, Thyme 5–9. Fresher day, 17–19°C, scattered showers early then drying, light NW breeze. A Friday evening at Sean's is busy but survivable — go mid-afternoon with the kids.</td></tr>
+    <tr><td><b>Sat 15</b><br><span style="color:var(--text-muted)">Lough Ree · Killinure</span></td><td><b>The crossing day — and you've drawn the good card.</b> Met Éireann has Saturday mainly dry with sunny spells and a light to moderate west-northwest breeze. That's inside the gate. Baysports open till 7pm. Glasson dinner: Fatted Calf open from 3pm, Villager from 2pm.</td></tr>
+    <tr><td><b>Sun 16</b><br><span style="color:var(--text-muted)">Clonmacnoise</span></td><td>Atlantic rain pushing in — Met Éireann flags real uncertainty for Sunday. Two hours in roofless ruins with no visitor centre for shelter, so go in earlier if the morning looks the drier half. <b>Left Bank closed Sundays</b> — lunch is deli-and-deck. Athlone shops on Sunday hours.</td></tr>
+    <tr><td><b>Mon 17</b><br><span style="color:var(--text-muted)">Home before 10am</span></td><td>Wettest of the five, ~65% rain — but you're only doing the dawn run, so it barely matters. <b>The Crank Café is closed Mondays</b>; Flynn's opens 10:30. Birr Castle open 9–6, and its science centre is indoors if it's lashing.</td></tr>
+  </table>
+  <div class="gate gate-go" style="margin-top:16px"><b>The scheduling luck is real</b>Boarding Thursday rather than Friday puts the Lough Ree crossing on Saturday — the calmest, driest day of the five — and moves the wettest day onto the morning you're driving home anyway. Baysports also lands on its 7pm day instead of the 5pm Sunday. Don't change the running order.</div>
+</div>
 <div class="card" id="boat">
   <div class="section-label">Your boat</div>
   <h2>Silver Spray</h2>
@@ -1181,7 +1209,12 @@ function render(item, d){
 }
 
 /* ---------- Wind gate + dates (Tier 3) ---------- */
-var WKEY = 'banagher-wx-v1', DKEY = 'banagher-date-v1';
+var WKEY = 'banagher-wx-v1', DKEY = 'banagher-date-v1', DEFAULT_START = '2026-08-13';
+function getStart(){
+  var s = null;
+  try{ s = localStorage.getItem(DKEY); }catch(e){}
+  return s || DEFAULT_START;
+}
 function beaufort(k){ if(k<12) return 'F2'; if(k<20) return 'F3'; if(k<29) return 'F4'; if(k<39) return 'F5'; if(k<50) return 'F6'; return 'F7+'; }
 function gateStatus(k, g){
   if(k > 28 || g >= 45) return ['nogo','NO-GO'];
@@ -1198,8 +1231,7 @@ function renderWx(data, cachedAt){
   var sun = document.getElementById('sunline');
   if(!data || !data.daily){ grid.innerHTML = '<div style="font-size:13px;color:var(--text-faint);padding:8px 4px">Forecast unavailable \u2014 check Met \u00C9ireann.</div>'; return; }
   var dl = data.daily, html = '';
-  var start = null;
-  try{ start = localStorage.getItem(DKEY); }catch(e){}
+  var start = getStart();
   var day3 = null;
   if(start){
     var d3 = new Date(start + 'T12:00:00'); d3.setDate(d3.getDate() + 2);
@@ -1238,8 +1270,7 @@ function loadWx(){
   });
 }
 function applyDates(){
-  var start = null;
-  try{ start = localStorage.getItem(DKEY); }catch(e){}
+  var start = getStart();
   var inp = document.getElementById('tripdate');
   if(start){ inp.value = start; }
   for(var i=1; i<=5; i++){
