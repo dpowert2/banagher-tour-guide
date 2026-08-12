@@ -112,6 +112,26 @@ td b{color:var(--text-primary);font-weight:600}
 .gate-go{background:#EAF4EE}.gate-go b{color:var(--success)}
 .gate-no{background:var(--accent-light)}.gate-no b{color:var(--accent)}
 
+/* day plan timeline */
+.plan-card{background:var(--surface);border-radius:var(--r-lg);box-shadow:var(--shadow-sm);padding:20px 22px;margin-bottom:12px}
+.plan-head{font-size:11px;font-weight:600;letter-spacing:.11em;text-transform:uppercase;color:var(--text-muted);margin-bottom:16px;display:flex;justify-content:space-between;align-items:baseline;gap:10px;flex-wrap:wrap}
+.plan-eng{font-size:11px;font-weight:600;color:var(--data-blue);letter-spacing:0;text-transform:none}
+.tl{list-style:none;position:relative;padding-left:62px}
+.tl:before{content:"";position:absolute;left:50px;top:6px;bottom:12px;width:2px;background:var(--border)}
+.tl li{position:relative;padding:0 0 17px}
+.tl li:last-child{padding-bottom:0}
+.tl .t{position:absolute;left:-62px;top:0;width:44px;text-align:right;font-size:12px;font-weight:700;color:var(--text-primary);font-variant-numeric:tabular-nums}
+.tl li:before{content:"";position:absolute;left:-16px;top:5px;width:9px;height:9px;border-radius:50%;background:var(--data-grey);box-shadow:0 0 0 3px var(--surface)}
+.tl li.sail:before{background:var(--data-blue)}
+.tl li.key:before{background:var(--accent);width:11px;height:11px;left:-17px}
+.tl .ti{font-size:14.5px;font-weight:600;color:var(--text-primary);line-height:1.3}
+.tl .tn{font-size:13px;color:var(--text-muted);margin-top:2px}
+.tl .tw{display:none;margin-top:5px;font-size:11.5px;font-weight:600;color:var(--accent);background:var(--accent-light);padding:3px 9px;border-radius:var(--r-pill)}
+.tl li.shut .tw{display:inline-block}
+.tl li.shut .ti{color:var(--text-faint)}
+.plan-alt{font-size:12.5px;color:var(--text-muted);margin-top:16px;padding-top:12px;border-top:1px solid var(--border)}
+.plan-alt b{color:var(--text-primary);font-weight:600}
+
 .day-head{margin:34px 6px 14px;display:flex;align-items:baseline;gap:12px;flex-wrap:wrap;scroll-margin-top:64px}
 .day-num{font-family:var(--serif);font-size:44px;line-height:.85;color:var(--data-grey);letter-spacing:-.02em}
 .day-title{font-size:19px;font-weight:700;color:var(--text-primary)}
@@ -420,6 +440,20 @@ footer a{color:var(--text-muted)}
   <div class="day-sub">Board from 4pm, lines off ~5pm · ~1h 20 evening cruise · Night 1 on the water, dinner at Luker's</div>
 </div>
 
+<div class="plan-card">
+  <div class="plan-head"><span>The day</span><span class="plan-eng">⛵ 13 km · 1h 20 engine</span></div>
+  <ul class="tl">
+    <li><span class="t">15:30</span><div class="ti">Arrive Banagher Marina</div><div class="tn">Check in, settle the balance, suitcases into storage, buy the smart card. Free parking on site.</div></li>
+    <li class="key"><span class="t">16:00</span><div class="ti">Board Silver Spray</div><div class="tn">Handover demo on board. One of you films the walkaround — hull, prop, fenders, interior — while the other listens to the demo.</div></li>
+    <li><span class="t">16:40</span><div class="ti">Top up water, stow, quick shop</div><div class="tn">Sexton's SuperValu is 5 minutes up Lower Main Street, open till 9pm (6pm Sun) — unless you pre-ordered, in which case it's already aboard.</div></li>
+    <li class="sail key"><span class="t">17:00</span><div class="ti">Lines off — first cruise</div><div class="tn">13km upstream through the Callows. Kids on the upper deck, engine gentle, no pressure.</div></li>
+    <li class="sail"><span class="t">18:20</span><div class="ti">Moor at Shannonbridge</div><div class="tn">Jetties either side of the sixteen-arch bridge. Your first mooring — take it slow, use the bow thruster.</div></li>
+    <li class="key" data-closed=""><span class="t">19:15</span><div class="ti">Dinner at Luker's</div><div class="tn">One minute from the boat. Open from 12pm daily; ring ahead for a table. 4.5★ from 1,296 reviews, river views, live music some nights.<span class="tw">Closed that day — try JJ Killeen's</span></div></li>
+    <li><span class="t">20:45</span><div class="ti">Sunset over the Shannon</div><div class="tn">Luker's new room faces the river. In August you'll get it around 9pm; the old 1700s bar is worth asking to see.</div></li>
+  </ul>
+  <div class="plan-alt"><b>If handover runs late:</b> you can leave as late as 6pm and still moor in daylight. <b>If it rains:</b> stay in Banagher for Night 1, eat at Flynn's (food from 5pm), and add the hour onto Day 2 — you have the slack.</div>
+</div>
+
 <details class="stop" id="s1" data-lat="53.1925" data-lng="-7.9905">
   <img class="photo" loading="lazy" src="https://upload.wikimedia.org/wikipedia/commons/8/87/Banagher_Bridge_and_Maltings_-_geograph.org.uk_-_585653.jpg" alt="Banagher bridge and the old maltings on the Shannon">
   <div class="photo-credit">geograph.org.uk / CC BY-SA</div>
@@ -448,10 +482,20 @@ footer a{color:var(--text-muted)}
         <div class="item-desc">Georgian townhouse restaurant, the upmarket option in town. Worth booking for the first night if handover goes smoothly.</div>
         <div class="pills"><span class="pill">🚶 3 min</span><span class="pill pill-adult">Book ahead</span></div>
       </div>
-      <div class="item" data-place="Flynn's Bar Banagher Offaly">
-        <span class="item-name">Flynn's Bar</span>
-        <div class="item-desc">Locals' pub, straightforward food, no ceremony. The reliable fallback.</div>
-        <div class="pills"><span class="pill">🚶 2 min</span></div>
+      <div class="item" data-place="Flynn's of Banagher">
+        <span class="item-name">Flynn's of Banagher</span>
+        <div class="item-desc">Gastropub with a good outdoor space, open 10:30am–11pm seven days with dinner from 5pm. 4.5★ from 482. The wet-weather Night 1 fallback and the Day 5 lunch if the Crank is shut.</div>
+        <div class="pills"><span class="pill">🚶 2 min</span><span class="pill">Open 7 days</span></div>
+      </div>
+      <div class="item" data-place="Sexton's SuperValu Banagher">
+        <span class="item-name">Sexton's SuperValu</span>
+        <div class="item-desc">Lower Main Street, five minutes up from the marina. Open 8am–9pm Mon–Sat, 9–6 Sunday, with a butcher and deli counter. Your Day 1 shop if you haven't pre-ordered.</div>
+        <div class="pills"><span class="pill">🚶 5 min</span><span class="pill">Till 9pm</span></div>
+      </div>
+      <div class="item" data-place="The Crank Cafe Banagher">
+        <span class="item-name">The Crank Café</span>
+        <div class="item-desc">The Day 5 coffee stop after handover — 4.6★, banana bread with a following. Thursday to Sunday only, from 10am.</div>
+        <div class="pills"><span class="pill">🚶 3 min</span><span class="pill pill-cost">Thu–Sun only</span></div>
       </div>
     </div>
     <div class="cat">
@@ -514,10 +558,10 @@ footer a{color:var(--text-muted)}
         <div class="item-desc">The reason this is Night 1. Right on the water, famous locally for sunsets over the Shannon and trad sessions — you'll be watching that sunset from a table an hour and a half after picking up the boat. Proper pub food done well.</div>
         <div class="pills"><span class="pill pill-must">Must do</span><span class="pill">🚶 1 min</span><span class="pill pill-kids">Family friendly</span></div>
       </div>
-      <div class="item" data-place="Killeen's Bar Shannonbridge">
-        <span class="item-name">Killeen's Bar</span>
-        <div class="item-desc">The other institution — half pub, half shop, all character. Recommended by generations of Shannon boaters.</div>
-        <div class="pills"><span class="pill">🚶 2 min</span></div>
+      <div class="item" data-place="JJ Killeen's Shannonbridge">
+        <span class="item-name">JJ Killeen's</span>
+        <div class="item-desc">Opens 9:30 seven days — which makes it the breakfast stop on Day 2 and the single most useful address on the route. Half pub, half shop, all character; famous raspberry scones, a proper full Irish, kids' menu and high chairs. 4.7★ from 730.</div>
+        <div class="pills"><span class="pill pill-must">Breakfast, Day 2</span><span class="pill">🚶 2 min</span><span class="pill pill-kids">High chairs</span></div>
       </div>
     </div>
     <div class="cat">
@@ -544,6 +588,24 @@ footer a{color:var(--text-muted)}
   <div class="day-sub">~2h 10 engine time · Cruise past Clonmacnoise (save it for Day 4) · Full afternoon + night in Athlone</div>
 </div>
 
+<div class="plan-card">
+  <div class="plan-head"><span>The day</span><span class="plan-eng">⛵ 21 km · 2h 10 engine</span></div>
+  <ul class="tl">
+    <li data-closed=""><span class="t">09:30</span><div class="ti">Breakfast at JJ Killeen's</div><div class="tn">Opens 9:30. Full Irish, famous scones, kids' menu and high chairs — 4.7★ from 730. Two minutes from the jetty and the best breakfast on the route.<span class="tw">Closed that day — eat aboard</span></div></li>
+    <li><span class="t">10:45</span><div class="ti">Napoleonic fort walk</div><div class="tn">Twenty minutes round the batteries and redoubt. Free, no queue, and the kids can run at it.</div></li>
+    <li class="sail key"><span class="t">11:15</span><div class="ti">Lines off, north</div><div class="tn">Through the arches and into the Callows. Binoculars out — this is corncrake and heron country.</div></li>
+    <li class="sail"><span class="t">12:15</span><div class="ti">Clonmacnoise from the water</div><div class="tn">Throttle right back. Round towers rising off the east bank — the medieval arrival view. Don't stop: you get two hours here on Day 4.</div></li>
+    <li class="sail"><span class="t">13:25</span><div class="ti">Moor at Athlone town quay</div><div class="tn">Under the castle walls. Smart card runs the shore power and showers; small nightly charge.</div></li>
+    <li data-closed="0,6"><span class="t">14:00</span><div class="ti">Lunch at The Left Bank Bistro</div><div class="tn">Two minutes off the quay, serves 12–9:30. 4.5★ from 606.<span class="tw">Closed Mon &amp; Sun — try Killeen's earlier or the castle café</span></div></li>
+    <li class="key"><span class="t">15:15</span><div class="ti">Athlone Castle</div><div class="tn">Opens 10am. 3D maps, touchscreens and a 360° siege film — genuinely good with kids, plus a dress-up area they'll refuse to leave. 4.4★ from 1,450. Allow 90 minutes.</div></li>
+    <li data-closed="0"><span class="t">16:45</span><div class="ti">Luan Gallery</div><div class="tn">Free, riverside, closes at 5pm — twenty minutes is plenty. Skip without guilt if the castle overran.<span class="tw">Closed Mondays</span></div></li>
+    <li class="key"><span class="t">17:15</span><div class="ti">Sean's Bar</div><div class="tn">Oldest pub in Ireland, 4.7★ from 7,045 — and heaving by evening. Now is the window: the beer garden works with kids, and the original wattle-and-daub wall is in the front bar.</div></li>
+    <li><span class="t">18:15</span><div class="ti">Restock</div><div class="tn">Tesco and Aldi both within walking distance. This is the big shop — Day 3 and 4 have no real shops.</div></li>
+    <li data-closed="0,1"><span class="t">19:30</span><div class="ti">Dinner — Thyme</div><div class="tn">Riverside, 4.8★ from 748, the best food on the route. Wed–Sat from 5pm, Sun 1–7pm. Book well ahead.<span class="tw">Closed Mon &amp; Tue — go to Kin Khao instead</span></div></li>
+  </ul>
+  <div class="plan-alt"><b>Dinner fallback:</b> Kin Khao Thai (4.6★, 931) opens 5pm seven days and is the family-friendly pick — three minutes from the quay. <b>Skip Viking Tours:</b> their €15 cruise runs Athlone→Hodson Bay and Athlone→Clonmacnoise — both legs you're doing yourselves on your own boat this week. Save the money.</div>
+</div>
+
 <details class="stop" id="s4" data-lat="53.4231" data-lng="-7.9419">
   <img class="photo" loading="lazy" src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/32/Athlone%2C_castle_and_river_Shannon_-_geograph.org.uk_-_3361380.jpg/960px-Athlone%2C_castle_and_river_Shannon_-_geograph.org.uk_-_3361380.jpg" alt="Athlone Castle and the River Shannon">
   <div class="photo-credit">geograph.org.uk / CC BY-SA</div>
@@ -568,23 +630,18 @@ footer a{color:var(--text-muted)}
       </div>
       <div class="item" data-place="Thyme Restaurant Athlone">
         <span class="item-name">Thyme Restaurant</span>
-        <div class="item-desc">Riverside, modern Irish, the best dinner in town. Book ahead — it's small and it fills.</div>
-        <div class="pills"><span class="pill">🚶 3 min</span><span class="pill pill-adult">Book ahead</span></div>
+        <div class="item-desc">Riverside, modern Irish, and the best food anywhere on this route. Wed–Sat from 5pm and Sun 1–7pm only — closed Monday and Tuesday, so check which night you're in town before setting your heart on it. Book well ahead.</div>
+        <div class="pills"><span class="pill">🚶 3 min</span><span class="pill pill-adult">Book ahead</span><span class="pill pill-cost">Closed Mon &amp; Tue</span></div>
       </div>
-      <div class="item" data-place="The Fatted Calf Athlone">
-        <span class="item-name">The Fatted Calf</span>
-        <div class="item-desc">Charcoal oven, unfussy, excellent. The best lunch option and easier to get into than Thyme.</div>
-        <div class="pills"><span class="pill">🚶 5 min</span></div>
+      <div class="item" data-place="Left Bank Bistro Athlone">
+        <span class="item-name">The Left Bank Bistro</span>
+        <div class="item-desc">Two minutes off the quay, serving 12–9:30 — the most useful restaurant in town because it covers both lunch and dinner. Closed Mondays and Sundays.</div>
+        <div class="pills"><span class="pill">🚶 2 min</span><span class="pill pill-kids">Family friendly</span><span class="pill pill-cost">Closed Mon &amp; Sun</span></div>
       </div>
       <div class="item" data-place="Kin Khao Thai Athlone">
         <span class="item-name">Kin Khao Thai</span>
-        <div class="item-desc">Long-running Thai in the old quarter, consistently among the highest-rated in Athlone. Genuinely good with kids.</div>
-        <div class="pills"><span class="pill">🚶 5 min</span><span class="pill pill-kids">Family friendly</span></div>
-      </div>
-      <div class="item" data-place="Left Bank Bistro Athlone">
-        <span class="item-name">Left Bank Bistro</span>
-        <div class="item-desc">Breakfast and brunch institution. Worth walking off the boat for on the morning you head north.</div>
-        <div class="pills"><span class="pill">🚶 4 min</span></div>
+        <div class="item-desc">Long-running Thai in the old quarter, three minutes from the quay. Dinner only, from 5pm seven days (4pm Fri/Sat) — which makes it the reliable one when Thyme is shut.</div>
+        <div class="pills"><span class="pill">🚶 3 min</span><span class="pill pill-kids">Family friendly</span><span class="pill">Open 7 days</span></div>
       </div>
     </div>
     <div class="cat">
@@ -603,9 +660,9 @@ footer a{color:var(--text-muted)}
     <div class="cat">
       <div class="cat-title">🎯 Activities</div>
       <div class="item" data-place="Viking Tours Athlone">
-        <span class="item-name">Viking Tours</span>
-        <div class="item-desc">A replica Viking longship sailing from the castle quay up to Lough Ree, stopping at Hodson Bay — 75 to 90 minutes with live commentary on Viking hoards and river life. Helmets and swords for the crew. No pre-booking; tickets onboard. Weather and water-level dependent.</div>
-        <div class="pills"><span class="pill pill-kids">Great for kids</span><span class="pill">🚶 1 min</span><span class="pill">75–90 min</span></div>
+        <span class="item-name">Viking Tours <span style="font-weight:400;color:var(--text-muted)">— probably skip</span></span>
+        <div class="item-desc">A replica Viking longship from the castle quay, €15 a head, 11am or 2:30pm, 75–90 minutes with commentary and free tea. Genuinely well run (4.6★). But its two routes are Athlone→Hodson Bay and Athlone→Clonmacnoise — both legs you're cruising yourselves this week on your own boat. Only worth it if the kids specifically want the helmets and swords.</div>
+        <div class="pills"><span class="pill">€15pp</span><span class="pill">11:00 / 14:30</span><span class="pill pill-cost">Duplicates your route</span></div>
       </div>
       <div class="item" data-place="Old Rail Trail Greenway Athlone">
         <span class="item-name">Old Rail Trail Greenway</span>
@@ -641,6 +698,22 @@ footer a{color:var(--text-muted)}
   <div class="day-sub">~1½ h engine time · The open-water day — check the wind gate before leaving the quay</div>
 </div>
 
+<div class="plan-card">
+  <div class="plan-head"><span>The day</span><span class="plan-eng">⛵ 16 km · 1h 30 engine</span></div>
+  <ul class="tl">
+    <li class="key"><span class="t">08:45</span><div class="ti">Check the wind gate</div><div class="tn">Breakfast aboard, then read the forecast panel at the top of this page. Above F4 on Lough Ree, switch to Plan B and stay another night in Athlone.</div></li>
+    <li class="sail key"><span class="t">09:30</span><div class="ti">Lines off — onto Lough Ree</div><div class="tn">The river widens and the horizon opens. Morning is deliberate: the lake is calmest before noon.</div></li>
+    <li class="sail"><span class="t">10:20</span><div class="ti">Moor at Hodson Bay</div><div class="tn">Jetty by the hotel and Baysports. More exposed than the river — check the wind direction before leaving her long.</div></li>
+    <li class="key"><span class="t">10:45</span><div class="ti">Baysports — booked session</div><div class="tn">Opens 10:30 (7pm close Thu–Sat, 5pm otherwise). 4.7★ from 1,199. Roughly €25–27 a head for an hour on the park; wetsuits and lifejackets supplied, but bring socks or buy them there (€3). <b style="color:var(--accent)">Under-10s need an adult in the water</b> — so one of you is going in with Caoimhe. Book online before you leave Athlone.</div></li>
+    <li><span class="t">12:30</span><div class="ti">Lunch — Waterfront Bar, Hodson Bay Hotel</div><div class="tn">Two minutes from the jetty, carvery and kids' menus, no booking needed. Showers and changing rooms at Baysports first.</div></li>
+    <li data-closed=""><span class="t">14:15</span><div class="ti">Glendeer Pet Farm <span style="font-weight:400;color:var(--text-muted)">(optional)</span></div><div class="tn">11am–6pm, ~€10 a head, 15 minutes by cab. 4.7★ from 1,286 — alpacas, kangaroos, emus, indoor playground for rain. Only if Baysports hasn't finished them off.<span class="tw">Closed that day</span></div></li>
+    <li class="sail key"><span class="t">16:15</span><div class="ti">Lines off for Killinure</div><div class="tn">Forty minutes east into the sheltered inner lough. Last cruise of the day and the prettiest.</div></li>
+    <li><span class="t">17:00</span><div class="ti">Anchor · swim off the platform</div><div class="tn">Engine off, steps down off the bathing platform, lifejackets on. Then binoculars — grebes, herons, cormorants. This is the quiet hour the whole trip is built around.</div></li>
+    <li><span class="t">19:00</span><div class="ti">Dinner aboard</div><div class="tn">Nothing out here — cook what you bought in Athlone. Run the engine before evening to top the batteries.</div></li>
+  </ul>
+  <div class="plan-alt"><b>Grown-up alternative for tonight:</b> Glasson is 15 minutes by cab from the Killinure/Hodson shore — <b>The Fatted Calf</b> (4.7★, 506; Tue/Wed/Fri from 5pm, Sat from 3pm, closed Mon/Thu/Sun), <b>The Villager Bar</b> (4.7★, 672; Wed–Sun) or <b>Wineport Lodge</b> on the lakeshore. All need booking. <b>Wind Plan B:</b> second night in Athlone, taxi to Baysports, and Day 4 absorbs it easily.</div>
+</div>
+
 <details class="stop" id="s5" data-lat="53.4694" data-lng="-7.9869">
   <img class="photo" loading="lazy" src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/f1/LoughRee5750.jpg/960px-LoughRee5750.jpg" alt="Open water on Lough Ree">
   <div class="photo-credit">Wikimedia Commons / CC BY-SA</div>
@@ -660,7 +733,7 @@ footer a{color:var(--text-muted)}
       <div class="cat-title">🎯 Activities</div>
       <div class="item" data-place="Baysports Hodson Bay Athlone">
         <span class="item-name">Baysports</span>
-        <div class="item-desc">Ireland's largest inflatable waterpark on Lough Ree, including the Guinness-record tallest inflatable slide in the world. Wetsuits and lifejackets provided, lifeguarded, with a separate junior park for ages two to six. Kayak/waterpark combos around €39. Weekday sessions are limited outside peak weeks — book online before you head north.</div>
+        <div class="item-desc">Ireland's largest inflatable waterpark on Lough Ree, including the Guinness-record tallest inflatable slide in the world. 4.7★ from 1,199. Wetsuits and lifejackets provided, lifeguarded, with a separate junior park for ages two to six. Roughly €25–27 a head for an hour on the park; combos with kayaking around €39. Two things reviewers flag: <b>bring your own socks</b> (or €3 there), and <b>under-10s need an adult in the water with them</b>. Opens 10:30; closes 5pm, or 7pm Thu–Sat. Book online before you leave Athlone.</div>
         <div class="pills"><span class="pill pill-must">Trip highlight</span><span class="pill pill-kids">Great for kids</span><span class="pill">🚶 On the doorstep</span><span class="pill pill-cost">Book online first</span></div>
       </div>
       <div class="item" data-place="Hodson Bay Hotel">
@@ -673,8 +746,18 @@ footer a{color:var(--text-muted)}
       <div class="cat-title">🍽️ A night off</div>
       <div class="item" data-place="Wineport Lodge Glasson">
         <span class="item-name">Wineport Lodge, Glasson</span>
-        <div class="item-desc">Lakeside dining on the far shore, about as good a setting as Ireland offers for a slow dinner. The one for a night without the kids — confirm it's open and book well ahead.</div>
+        <div class="item-desc">Lakeside dining on the far shore, about as good a setting as Ireland offers for a slow dinner. Book well ahead.</div>
         <div class="pills"><span class="pill">🚕 15 min</span><span class="pill pill-adult">Adults · book ahead</span></div>
+      </div>
+      <div class="item" data-place="The Fatted Calf Glasson">
+        <span class="item-name">The Fatted Calf, Glasson</span>
+        <div class="item-desc">Not in Athlone, as half the internet will tell you — it's in Glasson village, which puts it a short cab from this shore. 4.7★ and the best cooking within reach of Lough Ree. Tue/Wed/Fri from 5pm, Sat from 3pm; closed Mon, Thu and Sun.</div>
+        <div class="pills"><span class="pill">🚕 15 min</span><span class="pill pill-adult">Book ahead</span><span class="pill pill-cost">Closed Mon/Thu/Sun</span></div>
+      </div>
+      <div class="item" data-place="The Villager Bar Glasson">
+        <span class="item-name">The Villager Bar, Glasson</span>
+        <div class="item-desc">The easier Glasson option — proper bar food, dog-friendly, good with kids, and they'll fit you in. Wed–Sun.</div>
+        <div class="pills"><span class="pill">🚕 15 min</span><span class="pill pill-kids">Family friendly</span><span class="pill pill-cost">Closed Mon &amp; Tue</span></div>
       </div>
     </div>
     <div class="cat">
@@ -741,6 +824,22 @@ footer a{color:var(--text-muted)}
   <div class="day-sub">~2h 15 engine time · Restock in Athlone, two hours in the ruins, night at the jetty</div>
 </div>
 
+<div class="plan-card">
+  <div class="plan-head"><span>The day</span><span class="plan-eng">⛵ 22 km · 2h 15 engine</span></div>
+  <ul class="tl">
+    <li class="sail"><span class="t">09:00</span><div class="ti">Lines off from Killinure</div><div class="tn">Back across the southern lough while it's flat. Breakfast under way if the crew are slow.</div></li>
+    <li class="sail"><span class="t">09:45</span><div class="ti">Athlone quay — pit stop</div><div class="tn">Water top-up (free), last real shop of the trip, and anything forgotten. Two hours here, not four.</div></li>
+    <li data-closed="0,6"><span class="t">12:00</span><div class="ti">Lunch ashore in Athlone</div><div class="tn">Left Bank Bistro again, or grab from the deli counter and eat on the upper deck under way.<span class="tw">Left Bank closed Mon &amp; Sun — deli-and-deck instead</span></div></li>
+    <li class="sail key"><span class="t">13:30</span><div class="ti">Lines off, south</div><div class="tn">Ninety minutes back down through the Callows with the current behind you.</div></li>
+    <li class="sail key"><span class="t">15:00</span><div class="ti">Moor at Clonmacnoise jetty</div><div class="tn">Deliberately late — the coaches thin after 3pm. Last admission 5:30pm; site open 9:00–17:30.</div></li>
+    <li class="key"><span class="t">15:15</span><div class="ti">Clonmacnoise — the site</div><div class="tn">4.6★ from 4,769. Ask at the hub for the <b>kids' map with the scavenger hunt</b> — visitors say it's the thing that makes it work for children. Cathedral, two round towers, replica high crosses, nine churches, and the Shannon below. Two hours.</div></li>
+    <li><span class="t">17:15</span><div class="ti">The Nuns' Church</div><div class="tn">Three hundred metres east along a green lane. Finest Romanesque doorway in the country and you'll have it to yourselves.</div></li>
+    <li><span class="t">18:30</span><div class="ti">Dinner aboard at the jetty</div><div class="tn">No pub here, and that's the point. Cook on the boat with the round towers on the skyline.</div></li>
+    <li class="key"><span class="t">20:30</span><div class="ti">The ruins at dusk</div><div class="tn">Car park barrier drops at six and everyone leaves. Walk the riverside path in the last light — the single best hour of the week, and it costs nothing.</div></li>
+  </ul>
+  <div class="plan-alt"><b>Ticket note:</b> published price is €8 / €4 child / €20 family, but with the visitor centre closed for redevelopment several 2026 visitors report being admitted free or at reduced rate. Bring cash and expect either. <b>Prefer a lazier last morning?</b> Push 40 minutes on to Shannonbridge after the Nuns' Church, eat at Luker's, and start Day 5 at 8:15 instead of 7:45.</div>
+</div>
+
 <details class="stop" id="s3" data-lat="53.3259" data-lng="-7.9868">
   <img class="photo" loading="lazy" src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/77/Clonmacnoise_-_O%27Rouke%27s_Round_Tower_%5E_River_-_geograph.org.uk_-_3017579.jpg/960px-Clonmacnoise_-_O%27Rouke%27s_Round_Tower_%5E_River_-_geograph.org.uk_-_3017579.jpg" alt="O'Rourke's Round Tower at Clonmacnoise above the Shannon">
   <div class="photo-credit">geograph.org.uk / CC BY-SA</div>
@@ -774,7 +873,7 @@ footer a{color:var(--text-muted)}
       <div class="cat-title">👧 With kids</div>
       <div class="item">
         <span class="item-name">How it actually plays</span>
-        <div class="item-desc">Better than you'd expect. The ruins are open and explorable, there's grass to run on, and the round towers do the work. With the AV show out of action, give them a hunt — count the high crosses, find the carved animals on the grave slabs, spot the swifts nesting in the tower.</div>
+        <div class="item-desc">Better than you'd expect. Ask at the welcome hub for the <b>kids' map with the scavenger hunt and games</b> — visitors this year single it out as the thing that makes the site work for children, and it fills the gap left by the closed AV show. The ruins are open and explorable, there's grass to run on, and the round towers do the rest.</div>
         <div class="pills"><span class="pill pill-kids">Good for kids</span></div>
       </div>
     </div>
@@ -795,6 +894,22 @@ footer a{color:var(--text-muted)}
   <div class="day-title">Clonmacnoise → Banagher</div>
   <div class="day-date" id="dt5"></div>
   <div class="day-sub">~2h engine time · Lines off 7:45 · Boat back before 10am</div>
+</div>
+
+<div class="plan-card">
+  <div class="plan-head"><span>The day</span><span class="plan-eng">⛵ 19 km · 2h engine</span></div>
+  <ul class="tl">
+    <li><span class="t">07:00</span><div class="ti">Coffee and the towers</div><div class="tn">Strip beds, pack, load. You have the site to yourselves again — worth ten minutes on deck before you go.</div></li>
+    <li class="sail key"><span class="t">07:45</span><div class="ti">Lines off</div><div class="tn">Mist on the Callows, nobody else on the water. The best cruising of the week and the kids will sleep through half of it.</div></li>
+    <li class="sail"><span class="t">08:25</span><div class="ti">Under the arches at Shannonbridge</div><div class="tn">Same bridge, fourth day, and it still looks good from the water.</div></li>
+    <li class="sail key"><span class="t">09:45</span><div class="ti">Alongside at Banagher</div><div class="tn">Fifteen minutes inside the 10am deadline.</div></li>
+    <li class="key"><span class="t">10:00</span><div class="ti">Handover back</div><div class="tn">Return walkaround filmed the same way as arrival, settle the HVO (~€110–165), collect the suitcases, confirm the deposit release timeline.</div></li>
+    <li><span class="t">10:45</span><div class="ti">Banagher, finally on foot</div><div class="tn">The bit you skipped on Day 1: Martello Tower, Fort Eliza, the seven-arch bridge and the riverside walk. Forty-five minutes.</div></li>
+    <li data-closed="0,1,2"><span class="t">11:45</span><div class="ti">Coffee at The Crank Café</div><div class="tn">4.6★, Thu–Sun only, 10am. Otherwise Flynn's opens 10:30 seven days.<span class="tw">Closed Mon–Wed — Flynn's instead</span></div></li>
+    <li class="key"><span class="t">13:00</span><div class="ti">Birr Castle Demesne</div><div class="tn">Fifteen minutes by car, open 9–6 daily, ~€12 adult. 4.6★ from 4,084. Great Telescope, science centre, Ireland's tallest treehouse and the adventure playground. Earns a half day and sends everyone home tired.</div></li>
+    <li><span class="t">16:00</span><div class="ti">Home to Johnstown</div><div class="tn">Roughly 1h 40 via the M6/M7.</div></li>
+  </ul>
+  <div class="plan-alt"><b>Tight on time?</b> Drop Birr and you're home by two. <b>Not ready to leave?</b> Clonfert Cathedral is 15 minutes the other way — free, empty, and that Romanesque doorway is worth the detour.</div>
 </div>
 
 <div class="card">
@@ -1135,6 +1250,25 @@ function applyDates(){
       el.textContent = '\u00B7 ' + d.toLocaleDateString('en-IE', {weekday:'short', day:'numeric', month:'short'});
     } else { el.textContent = ''; }
   }
+  applyClosures(start);
+}
+
+/* flag any timeline item shut on that weekday (0 = Monday) */
+function applyClosures(start){
+  var cards = document.querySelectorAll('.plan-card');
+  cards.forEach(function(card, idx){
+    var wd = null;
+    if(start){
+      var d = new Date(start + 'T12:00:00'); d.setDate(d.getDate() + idx);
+      wd = (d.getDay() + 6) % 7;
+    }
+    card.querySelectorAll('li[data-closed]').forEach(function(li){
+      var raw = li.getAttribute('data-closed') || '';
+      var days = raw.split(',').filter(function(s){ return s !== ''; }).map(Number);
+      var shut = (wd !== null) && days.indexOf(wd) !== -1;
+      li.classList.toggle('shut', shut);
+    });
+  });
 }
 document.getElementById('tripdate').addEventListener('change', function(e){
   try{ localStorage.setItem(DKEY, e.target.value); }catch(err){}
