@@ -3,1369 +3,878 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Banagher Leisurely Tour — Lower Shannon Cruise Guide</title>
+<meta name="theme-color" content="#E2E6ED">
+<meta name="description" content="A 4-night, 60km circular cruise on the Lower Shannon from Banagher — route, moorings, and things to do at every stop.">
+<title>Banagher Leisurely Tour — Lower Shannon</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;0,9..40,800;1,9..40,400&family=DM+Serif+Display&display=swap" rel="stylesheet">
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCwU1X-mknScWu4beKJ7wjvehmLotGh-eY&libraries=places&callback=initMap" async defer></script>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600;9..40,700;9..40,800&family=DM+Serif+Display&display=swap" rel="stylesheet">
 <style>
-:root {
-  --bg: #E2E6ED;
-  --surface: #FFFFFF;
-  --surface-muted: #F3F4F6;
-  --border: #E5E8EE;
-  --text-primary: #111827;
-  --text-body: #374151;
-  --text-muted: #6B7280;
-  --text-faint: #9CA3AF;
-  --accent: #E84B3C;
-  --accent-light: #FEF2F0;
-  --data-blue: #7B9BB5;
-  --data-blue-light: #D6E4EE;
-  --data-dark: #1C1C2C;
-  --data-grey: #D1D5DB;
-  --success: #16A34A;
-  --warning: #D97706;
-  --shadow-sm: 0 1px 3px rgba(0,0,0,0.06), 0 1px 2px rgba(0,0,0,0.04);
-  --shadow-md: 0 4px 12px rgba(0,0,0,0.08), 0 2px 4px rgba(0,0,0,0.04);
-  --shadow-lg: 0 8px 24px rgba(0,0,0,0.10), 0 4px 8px rgba(0,0,0,0.06);
-  --radius-sm: 8px;
-  --radius-md: 14px;
-  --radius-lg: 20px;
-  --radius-xl: 28px;
-  --radius-pill: 999px;
-  --font: 'DM Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-  --font-display: 'DM Serif Display', Georgia, serif;
+:root{
+  --bg:#E2E6ED;
+  --surface:#FFFFFF;
+  --surface-muted:#F3F4F6;
+  --border:#E5E8EE;
+  --text-primary:#111827;
+  --text-body:#374151;
+  --text-muted:#6B7280;
+  --text-faint:#9CA3AF;
+  --accent:#E84B3C;
+  --accent-light:#FEF2F0;
+  --data-blue:#7B9BB5;
+  --data-dark:#1C1C2C;
+  --data-grey:#D1D5DB;
+  --water:#AFC6D6;
+  --water-deep:#8FAFC4;
+  --land:#EDEEE9;
+  --land-alt:#E4E7DF;
+  --shadow-sm:0 1px 3px rgba(0,0,0,.06),0 1px 2px rgba(0,0,0,.04);
+  --shadow-md:0 4px 12px rgba(0,0,0,.08),0 2px 4px rgba(0,0,0,.04);
+  --shadow-lg:0 8px 24px rgba(0,0,0,.10),0 4px 8px rgba(0,0,0,.06);
+  --r-sm:8px; --r-md:14px; --r-lg:20px; --r-xl:28px; --r-pill:999px;
+  --font:'DM Sans',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+  --serif:'DM Serif Display',Georgia,serif;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  font-family:var(--font);
+  background:var(--bg);
+  color:var(--text-body);
+  font-size:15px;
+  line-height:1.6;
+  -webkit-font-smoothing:antialiased;
+  padding-bottom:56px;
+}
+.wrap{max-width:760px;margin:0 auto;padding:20px 14px 0}
+
+/* ---------- header ---------- */
+.masthead{padding:20px 6px 26px}
+.eyebrow{
+  display:inline-flex;align-items:center;gap:7px;
+  font-size:11px;font-weight:600;letter-spacing:.09em;text-transform:uppercase;
+  color:var(--accent);background:var(--accent-light);
+  padding:5px 12px;border-radius:var(--r-pill);margin-bottom:16px;
+}
+h1{
+  font-family:var(--serif);font-weight:400;
+  font-size:clamp(34px,9vw,52px);line-height:1.03;
+  color:var(--text-primary);letter-spacing:-.01em;margin-bottom:12px;
+}
+h1 em{font-style:italic;color:var(--accent)}
+.dek{font-size:16px;color:var(--text-muted);max-width:46ch}
+
+/* ---------- stats ---------- */
+.stat-row{
+  display:grid;grid-template-columns:repeat(4,1fr);
+  background:var(--surface);border-radius:var(--r-lg);
+  box-shadow:var(--shadow-sm);overflow:hidden;margin-bottom:18px;
+}
+.stat-cell{padding:16px 10px 18px;border-right:1px solid var(--border);text-align:center}
+.stat-cell:last-child{border-right:none}
+.stat-value{font-size:30px;font-weight:800;color:var(--text-primary);line-height:1}
+.stat-value span{font-size:14px;font-weight:600;color:var(--text-muted)}
+.stat-label{font-size:10.5px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--text-muted);margin-top:7px}
+
+/* ---------- cards ---------- */
+.card{
+  background:var(--surface);border-radius:var(--r-lg);
+  box-shadow:var(--shadow-sm);padding:24px 26px;margin-bottom:18px;
+}
+.card-pad-tight{padding:18px 18px 22px}
+.section-label{
+  font-size:11px;font-weight:600;letter-spacing:.11em;text-transform:uppercase;
+  color:var(--text-muted);margin-bottom:14px;
+}
+h2{
+  font-family:var(--serif);font-weight:400;font-size:27px;line-height:1.15;
+  color:var(--text-primary);margin-bottom:6px;
+}
+h3{font-size:19px;font-weight:700;color:var(--text-primary);line-height:1.25}
+
+/* ---------- map ---------- */
+.map-card{padding:14px 12px 10px}
+.map-card svg{display:block;width:100%;height:auto;border-radius:var(--r-md)}
+.legend{
+  display:flex;flex-wrap:wrap;gap:8px 16px;
+  padding:14px 8px 6px;border-top:1px solid var(--border);margin-top:10px;
+}
+.legend i{display:inline-block;width:22px;height:0;vertical-align:middle;margin-right:7px}
+.legend span{font-size:11.5px;color:var(--text-muted);font-weight:500;display:inline-flex;align-items:center}
+.lg-out{border-top:3px solid var(--data-blue)}
+.lg-ret{border-top:3px dashed var(--accent)}
+.lg-dot{width:11px;height:11px;border-radius:50%;background:var(--text-primary);border-top:none;margin-right:7px}
+.lg-poi{width:9px;height:9px;border-radius:50%;background:var(--surface);border:2px solid var(--text-faint);border-top:2px solid var(--text-faint);margin-right:7px}
+
+/* ---------- day header ---------- */
+.day-head{margin:34px 6px 14px;display:flex;align-items:baseline;gap:12px;flex-wrap:wrap}
+.day-num{
+  font-family:var(--serif);font-size:44px;line-height:.85;
+  color:var(--data-grey);letter-spacing:-.02em;
+}
+.day-title{font-size:19px;font-weight:700;color:var(--text-primary)}
+.day-sub{font-size:12.5px;color:var(--text-muted);width:100%;margin-top:-2px}
+
+/* ---------- stop card ---------- */
+.stop{
+  background:var(--surface);border-radius:var(--r-lg);
+  box-shadow:var(--shadow-sm);margin-bottom:12px;overflow:hidden;
+}
+.stop summary{
+  list-style:none;cursor:pointer;padding:20px 22px;
+  display:flex;gap:14px;align-items:flex-start;
+}
+.stop summary::-webkit-details-marker{display:none}
+.stop-marker{
+  flex:0 0 30px;height:30px;border-radius:50%;
+  background:var(--text-primary);color:#fff;
+  display:flex;align-items:center;justify-content:center;
+  font-size:13px;font-weight:700;margin-top:2px;
+}
+.stop-marker.turn{background:var(--accent)}
+.stop-marker.base{background:var(--data-blue)}
+.stop-body{flex:1;min-width:0}
+.stop-name{font-size:19px;font-weight:700;color:var(--text-primary);line-height:1.2}
+.cruise{
+  display:inline-flex;align-items:center;gap:6px;
+  font-size:12px;font-weight:600;color:var(--text-muted);
+  margin-top:5px;
+}
+.stop-line{font-size:14px;color:var(--text-body);margin-top:8px}
+.chev{
+  flex:0 0 auto;align-self:center;color:var(--text-faint);
+  transition:transform .2s;font-size:13px;
+}
+.stop[open] .chev{transform:rotate(180deg)}
+.stop-detail{padding:0 22px 22px;border-top:1px solid var(--border);margin-top:2px;padding-top:18px}
+
+.moor{
+  background:var(--surface-muted);border-radius:var(--r-md);
+  padding:13px 15px;font-size:13.5px;margin-bottom:18px;
+}
+.moor b{color:var(--text-primary);font-weight:600}
+
+.cat{margin-bottom:16px}
+.cat:last-child{margin-bottom:0}
+.cat-title{
+  font-size:11px;font-weight:600;letter-spacing:.09em;text-transform:uppercase;
+  color:var(--text-muted);margin-bottom:9px;
+  display:flex;align-items:center;gap:7px;
+}
+.item{padding:11px 0;border-bottom:1px solid var(--border)}
+.item:last-child{border-bottom:none;padding-bottom:0}
+.item-name{font-size:14.5px;font-weight:600;color:var(--text-primary);display:inline}
+.item-desc{font-size:13.5px;color:var(--text-body);margin-top:3px}
+.pills{display:flex;flex-wrap:wrap;gap:6px;margin-top:7px}
+.pill{
+  display:inline-flex;align-items:center;gap:4px;
+  padding:3px 9px;border-radius:var(--r-pill);
+  font-size:11.5px;font-weight:600;line-height:1.4;
+  background:var(--surface-muted);color:var(--text-muted);
+}
+.pill-kids{background:#EAF4EE;color:#1F7A45}
+.pill-adult{background:#EEF0F4;color:#4B5563}
+.pill-must{background:var(--accent);color:#fff}
+.pill-cost{background:transparent;border:1px solid var(--border);color:var(--text-muted)}
+
+/* ---------- notes ---------- */
+.note-list{list-style:none}
+.note-list li{
+  padding:13px 0;border-bottom:1px solid var(--border);
+  font-size:14px;display:flex;gap:12px;
+}
+.note-list li:last-child{border-bottom:none;padding-bottom:0}
+.note-list b{color:var(--text-primary);font-weight:600;display:block;margin-bottom:2px}
+.note-ico{flex:0 0 22px;font-size:15px;line-height:1.5}
+
+.alert{
+  background:var(--accent-light);border-radius:var(--r-md);
+  padding:14px 16px;font-size:13.5px;color:var(--text-body);margin-bottom:16px;
+}
+.alert b{color:var(--accent);font-weight:700;display:block;margin-bottom:3px;font-size:12px;letter-spacing:.05em;text-transform:uppercase}
+
+.packing{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:8px}
+.packing div{
+  background:var(--surface-muted);border-radius:var(--r-sm);
+  padding:9px 12px;font-size:13px;
 }
 
-* { box-sizing: border-box; margin: 0; padding: 0; }
+footer{
+  text-align:center;padding:34px 20px 10px;
+  font-size:12px;color:var(--text-faint);line-height:1.7;
+}
+footer b{color:var(--text-muted);font-weight:600}
 
-body {
-  font-family: var(--font);
-  font-size: 14px;
-  line-height: 1.6;
-  color: var(--text-body);
-  background: var(--bg);
-  -webkit-font-smoothing: antialiased;
-  overflow: hidden;
-  height: 100vh;
-}
-
-/* ── SPLIT LAYOUT ── */
-.app {
-  display: flex;
-  height: 100vh;
-  overflow: hidden;
-}
-
-/* Left panel: scrollable cards */
-.panel-left {
-  width: 500px;
-  min-width: 400px;
-  max-width: 540px;
-  height: 100vh;
-  overflow-y: auto;
-  overflow-x: hidden;
-  background: var(--bg);
-  padding: 24px 20px 48px;
-  flex-shrink: 0;
-  scrollbar-width: thin;
-  scrollbar-color: var(--data-grey) transparent;
-}
-.panel-left::-webkit-scrollbar { width: 6px; }
-.panel-left::-webkit-scrollbar-thumb { background: var(--data-grey); border-radius: 3px; }
-
-/* Right panel: sticky map */
-.panel-right {
-  flex: 1;
-  height: 100vh;
-  position: relative;
-  background: var(--surface);
-}
-
-#map {
-  width: 100%;
-  height: 100%;
-}
-
-/* ── HEADER ── */
-.header {
-  text-align: center;
-  padding: 32px 16px 24px;
-}
-.header-badge {
-  display: inline-block;
-  padding: 5px 16px;
-  border-radius: var(--radius-pill);
-  background: var(--accent-light);
-  color: var(--accent);
-  font-size: 11px;
-  font-weight: 700;
-  letter-spacing: 0.05em;
-  text-transform: uppercase;
-  margin-bottom: 14px;
-}
-.header h1 {
-  font-family: var(--font-display);
-  font-size: 32px;
-  color: var(--text-primary);
-  line-height: 1.1;
-  margin-bottom: 6px;
-  font-weight: 400;
-}
-.header p {
-  font-size: 13px;
-  color: var(--text-muted);
-  font-weight: 500;
-  letter-spacing: 0.01em;
-}
-
-/* ── STATS ROW ── */
-.stats-row {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 10px;
-  margin-bottom: 20px;
-}
-.stat-card {
-  background: var(--surface);
-  border-radius: var(--radius-lg);
-  box-shadow: var(--shadow-sm);
-  padding: 16px 10px;
-  text-align: center;
-}
-.stat-card .stat-value {
-  font-size: 28px;
-  font-weight: 800;
-  color: var(--text-primary);
-  line-height: 1;
-  margin-bottom: 4px;
-}
-.stat-card .stat-label {
-  font-size: 10px;
-  font-weight: 600;
-  color: var(--text-muted);
-  text-transform: uppercase;
-  letter-spacing: 0.06em;
-}
-
-/* ── ROUTE TIMELINE ── */
-.timeline-card {
-  background: var(--surface);
-  border-radius: var(--radius-lg);
-  box-shadow: var(--shadow-sm);
-  padding: 20px 20px 16px;
-  margin-bottom: 20px;
-}
-.timeline-card h2 {
-  font-size: 13px;
-  font-weight: 700;
-  color: var(--text-muted);
-  text-transform: uppercase;
-  letter-spacing: 0.06em;
-  margin-bottom: 14px;
-}
-.timeline {
-  display: flex;
-  align-items: flex-start;
-  overflow-x: auto;
-  gap: 0;
-  padding: 4px 0 8px;
-}
-.tl-stop {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  min-width: 64px;
-  flex-shrink: 0;
-  cursor: pointer;
-  transition: opacity 0.15s;
-}
-.tl-stop:hover { opacity: 0.8; }
-.tl-dot {
-  width: 32px;
-  height: 32px;
-  border-radius: 50%;
-  background: var(--data-blue);
-  color: #fff;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 13px;
-  font-weight: 700;
-  margin-bottom: 6px;
-  position: relative;
-  z-index: 1;
-  box-shadow: var(--shadow-sm);
-}
-.tl-dot.overnight { box-shadow: 0 0 0 3px var(--data-blue-light), var(--shadow-sm); }
-.tl-name {
-  font-size: 10px;
-  font-weight: 700;
-  color: var(--text-primary);
-  text-align: center;
-  line-height: 1.2;
-  max-width: 64px;
-}
-.tl-night {
-  font-size: 9px;
-  color: var(--data-blue);
-  font-weight: 600;
-  margin-top: 1px;
-}
-.tl-connector {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  min-width: 32px;
-  padding-top: 4px;
-}
-.tl-line {
-  width: 100%;
-  height: 2px;
-  background: var(--data-blue);
-  margin-bottom: 4px;
-}
-.tl-line.return {
-  background: repeating-linear-gradient(90deg, var(--accent) 0, var(--accent) 4px, transparent 4px, transparent 8px);
-}
-.tl-time {
-  font-size: 9px;
-  color: var(--text-muted);
-  font-weight: 600;
-  white-space: nowrap;
-}
-
-/* ── STOP CARDS ── */
-.stops-section h2 {
-  font-size: 13px;
-  font-weight: 700;
-  color: var(--text-muted);
-  text-transform: uppercase;
-  letter-spacing: 0.06em;
-  margin-bottom: 12px;
-}
-.stop-card {
-  background: var(--surface);
-  border-radius: var(--radius-lg);
-  box-shadow: var(--shadow-sm);
-  margin-bottom: 12px;
-  overflow: hidden;
-  transition: box-shadow 0.25s ease;
-}
-.stop-card:hover { box-shadow: var(--shadow-md); }
-.stop-card.active-stop { box-shadow: 0 0 0 2px var(--data-blue), var(--shadow-md); }
-.stop-header {
-  padding: 18px 20px;
-  display: flex;
-  align-items: center;
-  gap: 14px;
-  cursor: pointer;
-  user-select: none;
-}
-.stop-num {
-  width: 36px;
-  height: 36px;
-  border-radius: 50%;
-  background: var(--data-blue);
-  color: #fff;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 15px;
-  font-weight: 800;
-  flex-shrink: 0;
-  box-shadow: var(--shadow-sm);
-}
-.stop-info { flex: 1; min-width: 0; }
-.stop-title {
-  font-size: 16px;
-  font-weight: 700;
-  color: var(--text-primary);
-  line-height: 1.3;
-}
-.stop-meta {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 6px;
-  margin-top: 3px;
-  align-items: center;
-}
-.pill {
-  display: inline-flex;
-  align-items: center;
-  gap: 4px;
-  padding: 2px 8px;
-  border-radius: var(--radius-pill);
-  font-size: 10px;
-  font-weight: 600;
-}
-.pill-blue { background: var(--data-blue-light); color: #4A7A99; }
-.pill-dark { background: var(--text-primary); color: #fff; }
-.pill-muted { background: var(--surface-muted); color: var(--text-muted); }
-.pill-accent { background: var(--accent); color: #fff; }
-.stop-desc {
-  font-size: 12px;
-  color: var(--text-muted);
-  margin-top: 2px;
-  line-height: 1.3;
-}
-.stop-chevron {
-  width: 20px;
-  height: 20px;
-  flex-shrink: 0;
-  color: var(--text-faint);
-  transition: transform 0.25s;
-}
-.stop-card.open .stop-chevron { transform: rotate(180deg); }
-.stop-body {
-  max-height: 0;
-  overflow: hidden;
-  transition: max-height 0.4s ease;
-}
-.stop-card.open .stop-body { max-height: 5000px; }
-.stop-content {
-  padding: 0 20px 20px;
-  padding-left: 68px;
-}
-
-/* ── CATEGORY SECTIONS ── */
-.cat-section { margin-bottom: 16px; }
-.cat-section:last-child { margin-bottom: 0; }
-.cat-title {
-  font-size: 11px;
-  font-weight: 700;
-  color: var(--text-muted);
-  margin-bottom: 8px;
-  display: flex;
-  align-items: center;
-  gap: 5px;
-  text-transform: uppercase;
-  letter-spacing: 0.04em;
-}
-.cat-items {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-}
-.cat-item {
-  background: var(--surface-muted);
-  border-radius: var(--radius-md);
-  padding: 12px 14px;
-  font-size: 13px;
-  color: var(--text-body);
-  line-height: 1.55;
-  cursor: default;
-  transition: background 0.2s ease, box-shadow 0.2s ease, transform 0.15s ease;
-}
-.cat-item[data-place] {
-  cursor: pointer;
-}
-.cat-item[data-place]:hover {
-  background: var(--data-blue-light);
-  transform: translateY(-1px);
-  box-shadow: var(--shadow-sm);
-}
-.cat-item.item-active {
-  background: var(--data-blue-light);
-  box-shadow: inset 0 0 0 1.5px var(--data-blue), var(--shadow-sm);
-}
-.cat-item strong { color: var(--text-primary); font-weight: 600; }
-.dist-pill {
-  display: inline-flex;
-  align-items: center;
-  gap: 3px;
-  padding: 2px 8px;
-  border-radius: var(--radius-pill);
-  background: #fff;
-  font-size: 10px;
-  font-weight: 600;
-  color: var(--text-muted);
-  margin-left: 5px;
-  vertical-align: middle;
-}
-.must-do {
-  display: inline-flex;
-  align-items: center;
-  gap: 3px;
-  padding: 3px 10px;
-  border-radius: var(--radius-pill);
-  background: var(--accent);
-  color: #fff;
-  font-size: 10px;
-  font-weight: 700;
-  letter-spacing: 0.04em;
-  margin-left: 5px;
-  vertical-align: middle;
-}
-.kid-badge {
-  display: inline-flex;
-  align-items: center;
-  gap: 3px;
-  padding: 3px 10px;
-  border-radius: var(--radius-pill);
-  background: #ECFDF5;
-  color: #059669;
-  font-size: 10px;
-  font-weight: 700;
-  margin-left: 5px;
-  vertical-align: middle;
-}
-
-/* ── PLACES ENRICHMENT ── */
-.places-info {
-  display: flex;
-  align-items: flex-start;
-  gap: 10px;
-  margin-top: 10px;
-  padding-top: 10px;
-  border-top: 1px solid var(--border);
-}
-.places-photo {
-  width: 56px;
-  height: 56px;
-  border-radius: var(--radius-sm);
-  object-fit: cover;
-  flex-shrink: 0;
-  box-shadow: var(--shadow-sm);
-}
-.places-info > div {
-  display: flex;
-  flex-direction: column;
-  gap: 2px;
-}
-.places-rating {
-  display: inline-flex;
-  align-items: center;
-  gap: 4px;
-  font-size: 12px;
-  font-weight: 700;
-  color: var(--text-primary);
-}
-.places-rating .stars {
-  color: #F59E0B;
-  letter-spacing: -1px;
-  font-size: 13px;
-}
-.places-reviews {
-  font-size: 11px;
-  color: var(--text-muted);
-  font-weight: 500;
-}
-.places-hours {
-  font-size: 11px;
-  color: var(--success);
-  font-weight: 600;
-}
-.places-hours.closed { color: var(--accent); }
-
-/* ── PRACTICAL NOTES ── */
-.notes-card {
-  background: var(--surface);
-  border-radius: var(--radius-lg);
-  box-shadow: var(--shadow-sm);
-  padding: 20px;
-  margin-top: 20px;
-  margin-bottom: 20px;
-}
-.notes-card h2 {
-  font-size: 13px;
-  font-weight: 700;
-  color: var(--text-muted);
-  text-transform: uppercase;
-  letter-spacing: 0.06em;
-  margin-bottom: 14px;
-}
-.notes-grid {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 10px;
-}
-.note-item {
-  background: var(--surface-muted);
-  border-radius: var(--radius-md);
-  padding: 12px 14px;
-  font-size: 12px;
-  color: var(--text-body);
-  line-height: 1.5;
-}
-.note-item strong {
-  display: block;
-  color: var(--text-primary);
-  font-weight: 700;
-  margin-bottom: 2px;
-  font-size: 12px;
-}
-.note-item .note-emoji { margin-right: 3px; }
-
-/* ── LEGEND (overlaid on map) ── */
-.map-legend {
-  position: absolute;
-  bottom: 20px;
-  left: 20px;
-  background: rgba(255,255,255,0.96);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border-radius: var(--radius-lg);
-  padding: 12px 16px;
-  box-shadow: var(--shadow-md);
-  display: flex;
-  flex-wrap: wrap;
-  gap: 12px;
-  z-index: 5;
-}
-.legend-item {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  font-size: 10px;
-  color: var(--text-muted);
-  font-weight: 500;
-}
-.legend-line {
-  width: 20px;
-  height: 3px;
-  border-radius: 2px;
-}
-.legend-line.solid { background: var(--data-blue); }
-.legend-line.dashed {
-  background: repeating-linear-gradient(90deg, var(--accent) 0, var(--accent) 5px, transparent 5px, transparent 9px);
-}
-.legend-dot {
-  width: 12px;
-  height: 12px;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 7px;
-  font-weight: 700;
-  color: #fff;
-}
-
-/* ── ACTIVE PIN INDICATOR ── */
-.map-pin-label {
-  position: absolute;
-  top: 16px;
-  left: 50%;
-  transform: translateX(-50%);
-  background: var(--text-primary);
-  color: #fff;
-  padding: 6px 16px;
-  border-radius: var(--radius-pill);
-  font-size: 12px;
-  font-weight: 600;
-  box-shadow: var(--shadow-md);
-  z-index: 5;
-  white-space: nowrap;
-  opacity: 0;
-  transition: opacity 0.25s;
-  pointer-events: none;
-}
-.map-pin-label.visible { opacity: 1; }
-
-/* ── FOOTER ── */
-.footer {
-  text-align: center;
-  padding: 24px 16px 12px;
-  font-size: 11px;
-  color: var(--text-faint);
-  letter-spacing: 0.02em;
-}
-
-/* ── MOBILE RESPONSIVE ── */
-@media (max-width: 860px) {
-  body { overflow: auto; height: auto; }
-  .app {
-    flex-direction: column;
-    height: auto;
-  }
-  .panel-left {
-    width: 100%;
-    min-width: 0;
-    max-width: none;
-    height: auto;
-    overflow: visible;
-    padding: 16px 12px 0;
-  }
-  .panel-right {
-    height: 50vh;
-    position: sticky;
-    top: 0;
-    z-index: 10;
-    order: -1;
-    border-bottom: 3px solid var(--data-blue);
-  }
-  .map-legend { bottom: 10px; left: 10px; padding: 8px 12px; gap: 8px; }
-  .map-pin-label { top: 10px; font-size: 11px; padding: 5px 12px; }
-  .stats-row { grid-template-columns: repeat(4, 1fr); }
-  .stop-content { padding-left: 20px; }
-  .notes-grid { grid-template-columns: 1fr; }
-}
-
-@media (max-width: 480px) {
-  .stats-row { grid-template-columns: repeat(2, 1fr); }
-  .panel-right { height: 40vh; }
-  .header h1 { font-size: 26px; }
-  .stat-card .stat-value { font-size: 24px; }
+@media(max-width:520px){
+  .wrap{padding:14px 11px 0}
+  .card{padding:20px 18px}
+  .stop summary{padding:17px 16px}
+  .stop-detail{padding:16px 16px 20px}
+  .stat-cell{padding:14px 4px 15px}
+  .stat-value{font-size:24px}
+  .stat-label{font-size:9.5px;letter-spacing:.03em}
+  .day-num{font-size:36px}
 }
 </style>
 </head>
 <body>
+<div class="wrap">
 
-<div class="app">
+<header class="masthead">
+  <div class="eyebrow">⛵ Silver Star Cruisers · Banagher</div>
+  <h1>The Banagher <em>Leisurely</em> Tour</h1>
+  <p class="dek">Four nights on the Lower Shannon. North through the Callows to Athlone and Lough Ree, back down past Clonmacnoise. Roughly four hours' cruising a day, and never far from a pub.</p>
+</header>
 
-  <!-- LEFT PANEL: scrollable content -->
-  <div class="panel-left">
-
-    <!-- HEADER -->
-    <div class="header">
-      <div class="header-badge">Family Guide</div>
-      <h1>Banagher Leisurely Tour</h1>
-      <p>Lower Shannon &middot; 4 Nights &middot; 60 km Circular Cruise</p>
-    </div>
-
-    <!-- STATS ROW -->
-    <div class="stats-row">
-      <div class="stat-card"><div class="stat-value">4</div><div class="stat-label">Nights</div></div>
-      <div class="stat-card"><div class="stat-value">60</div><div class="stat-label">Kilometres</div></div>
-      <div class="stat-card"><div class="stat-value">~4h</div><div class="stat-label">Cruise / Day</div></div>
-      <div class="stat-card"><div class="stat-value">6</div><div class="stat-label">Stops</div></div>
-    </div>
-
-    <!-- ROUTE TIMELINE -->
-    <div class="timeline-card">
-      <h2>Route Overview</h2>
-      <div class="timeline">
-        <div class="tl-stop" onclick="flyToStop(0)">
-          <div class="tl-dot overnight">1</div>
-          <div class="tl-name">Banagher</div>
-          <div class="tl-night">Night 0 &amp; 4</div>
-        </div>
-        <div class="tl-connector"><div class="tl-line"></div><div class="tl-time">~1h</div></div>
-        <div class="tl-stop" onclick="flyToStop(1)">
-          <div class="tl-dot">2</div>
-          <div class="tl-name">Shannon&shy;bridge</div>
-          <div class="tl-night" style="color:var(--text-faint)">Pass-through</div>
-        </div>
-        <div class="tl-connector"><div class="tl-line"></div><div class="tl-time">~1h</div></div>
-        <div class="tl-stop" onclick="flyToStop(2)">
-          <div class="tl-dot">3</div>
-          <div class="tl-name">Clonmac&shy;noise</div>
-          <div class="tl-night" style="color:var(--text-faint)">Day stop</div>
-        </div>
-        <div class="tl-connector"><div class="tl-line"></div><div class="tl-time">~1h</div></div>
-        <div class="tl-stop" onclick="flyToStop(3)">
-          <div class="tl-dot overnight">4</div>
-          <div class="tl-name">Athlone</div>
-          <div class="tl-night">Night 1 &amp; 3</div>
-        </div>
-        <div class="tl-connector"><div class="tl-line"></div><div class="tl-time">~45m</div></div>
-        <div class="tl-stop" onclick="flyToStop(4)">
-          <div class="tl-dot overnight">5</div>
-          <div class="tl-name">Hodson Bay</div>
-          <div class="tl-night">Night 2</div>
-        </div>
-        <div class="tl-connector"><div class="tl-line"></div><div class="tl-time">~30m</div></div>
-        <div class="tl-stop" onclick="flyToStop(5)">
-          <div class="tl-dot">6</div>
-          <div class="tl-name">Killinure</div>
-          <div class="tl-night" style="color:var(--text-faint)">Turnaround</div>
-        </div>
-      </div>
-    </div>
-
-    <!-- STOP CARDS -->
-    <div class="stops-section">
-      <h2>Your Stops</h2>
-
-      <!-- STOP 1: BANAGHER -->
-      <div class="stop-card" id="stop-1" data-stop-idx="0">
-        <div class="stop-header" onclick="toggleStop('stop-1')">
-          <div class="stop-num">1</div>
-          <div class="stop-info">
-            <div class="stop-title">Banagher Harbour</div>
-            <div class="stop-meta">
-              <span class="pill pill-dark">Night 0 &amp; 4</span>
-              <span class="pill pill-blue">Start / End</span>
-            </div>
-            <div class="stop-desc">Marina in town centre — stock up, explore, settle in</div>
-          </div>
-          <svg class="stop-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
-        </div>
-        <div class="stop-body">
-          <div class="stop-content">
-            <div class="cat-section">
-              <div class="cat-title">🍽️ Eat &amp; Drink</div>
-              <div class="cat-items">
-                <div class="cat-item" data-place="JJ Hough's Pub, Banagher" data-place-loc="53.1895,-7.987"><strong>JJ Hough's Singing Pub</strong> <span class="must-do">MUST-DO</span> <span class="dist-pill">🚶 2 min</span><br>250-year heritage pub with trad music sessions. Try the local Bo Bristle craft beer.</div>
-                <div class="cat-item" data-place="The Vine House Restaurant, Banagher" data-place-loc="53.1895,-7.987"><strong>The Vine House Restaurant</strong> <span class="dist-pill">🚶 3 min</span><br>Georgian townhouse setting, refined Irish cooking.</div>
-                <div class="cat-item" data-place="Flynn's Bar, Banagher" data-place-loc="53.1895,-7.987"><strong>Flynn's Bar</strong> <span class="dist-pill">🚶 2 min</span><br>Proper locals' pub, casual pints.</div>
-              </div>
-            </div>
-            <div class="cat-section">
-              <div class="cat-title">🏰 History &amp; Heritage</div>
-              <div class="cat-items">
-                <div class="cat-item"><strong>Martello Tower / Fanesker Tower</strong> <span class="dist-pill">🚶 5 min</span><br>The only inland Martello tower in Ireland. Free to visit.</div>
-                <div class="cat-item"><strong>Fort Eliza</strong> <span class="dist-pill">🚶 10 min</span><br>Napoleonic-era gun battery overlooking the river.</div>
-                <div class="cat-item"><strong>Seven-Arch Bridge</strong> <span class="dist-pill">🚶 2 min</span><br>Beautiful stone bridge right in town.</div>
-                <div class="cat-item"><strong>Clonfert Cathedral</strong> <span class="dist-pill">🚕 15 min / 10 km</span><br>Stunning 12th-century Romanesque doorway — one of Ireland's finest. Free entry.</div>
-              </div>
-            </div>
-            <div class="cat-section">
-              <div class="cat-title">🌿 Outdoors &amp; Nature</div>
-              <div class="cat-items">
-                <div class="cat-item"><strong>Riverside Walk</strong> — Flat and pushchair-friendly along the Shannon.</div>
-                <div class="cat-item"><strong>Open-Air River Swimming Pool</strong> — Seasonal, right on the Shannon.</div>
-                <div class="cat-item"><strong>Shannon Callows</strong> — Birdlife haven, corncrake habitat.</div>
-                <div class="cat-item"><strong>Pitch &amp; Putt</strong> <span class="dist-pill">🚶 5 min</span></div>
-              </div>
-            </div>
-            <div class="cat-section">
-              <div class="cat-title">🎯 Activities</div>
-              <div class="cat-items">
-                <div class="cat-item"><strong>Playground at Harbour</strong> <span class="kid-badge">Kids</span><br>Right beside the mooring.</div>
-                <div class="cat-item"><strong>Mid Ireland Adventure</strong> — Kayaking, SUP, bike hire.</div>
-              </div>
-            </div>
-            <div class="cat-section">
-              <div class="cat-title">🛍️ Supplies &amp; Practical</div>
-              <div class="cat-items">
-                <div class="cat-item"><strong>Centra Supermarket</strong> <span class="dist-pill">🚶 3 min</span> — Stock up for the trip.</div>
-                <div class="cat-item"><strong>Boat Fuel</strong> — Available at the marina. Top up before departure.</div>
-              </div>
-            </div>
-            <div class="cat-section">
-              <div class="cat-title">🚕 Side Trip</div>
-              <div class="cat-items">
-                <div class="cat-item" data-place="Birr Castle and Gardens, Birr" data-place-loc="53.0968,-7.913"><strong>Birr Castle &amp; Demesne</strong> <span class="must-do">MUST-DO</span> <span class="kid-badge">Kids</span> <span class="dist-pill">🚕 15 min</span><br>120 acres of parkland, the Great Telescope, Science Centre, Ireland's tallest treehouse &amp; adventure playground. Adults ~&euro;12, kids ~&euro;6-7, family ~&euro;34.</div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- STOP 2: SHANNONBRIDGE -->
-      <div class="stop-card" id="stop-2" data-stop-idx="1">
-        <div class="stop-header" onclick="toggleStop('stop-2')">
-          <div class="stop-num">2</div>
-          <div class="stop-info">
-            <div class="stop-title">Shannonbridge</div>
-            <div class="stop-meta">
-              <span class="pill pill-muted">~1h cruise</span>
-              <span class="pill pill-muted">Pass-through (30-60 min)</span>
-            </div>
-            <div class="stop-desc">Quick stop for a famous sunset pub and Napoleonic history</div>
-          </div>
-          <svg class="stop-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
-        </div>
-        <div class="stop-body">
-          <div class="stop-content">
-            <div class="cat-section">
-              <div class="cat-title">🍽️ Eat &amp; Drink</div>
-              <div class="cat-items">
-                <div class="cat-item" data-place="Luker's Bar, Shannonbridge" data-place-loc="53.27,-7.934"><strong>Luker's Old Bar</strong> <span class="dist-pill">🚶 1 min</span><br>Famous for sunsets over the bog. Trad music sessions.</div>
-              </div>
-            </div>
-            <div class="cat-section">
-              <div class="cat-title">🏰 History &amp; Heritage</div>
-              <div class="cat-items">
-                <div class="cat-item"><strong>16-Arch Stone Bridge</strong> — Striking span across the Shannon.</div>
-                <div class="cat-item"><strong>Napoleonic Fortification</strong> <span class="dist-pill">🚶 5 min</span><br>Artillery battery defending the Shannon crossing.</div>
-              </div>
-            </div>
-            <div class="cat-section">
-              <div class="cat-title">🌿 Outdoors &amp; Nature</div>
-              <div class="cat-items">
-                <div class="cat-item"><strong>Peatland Walks</strong> — Explore the midlands bog landscape.</div>
-              </div>
-            </div>
-            <div class="cat-section">
-              <div class="cat-title">🛍️ Supplies &amp; Practical</div>
-              <div class="cat-items">
-                <div class="cat-item">Small local shop available. Mooring either side of bridge.</div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- STOP 3: CLONMACNOISE -->
-      <div class="stop-card" id="stop-3" data-stop-idx="2">
-        <div class="stop-header" onclick="toggleStop('stop-3')">
-          <div class="stop-num">3</div>
-          <div class="stop-info">
-            <div class="stop-title">Clonmacnoise</div>
-            <div class="stop-meta">
-              <span class="pill pill-muted">~1h from Shannonbridge</span>
-              <span class="pill pill-accent">Save for Day 3 return</span>
-            </div>
-            <div class="stop-desc">One of Europe's great monastic ruins — spectacular approach by water</div>
-          </div>
-          <svg class="stop-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
-        </div>
-        <div class="stop-body">
-          <div class="stop-content">
-            <div class="cat-section">
-              <div class="cat-title">🍽️ Eat &amp; Drink</div>
-              <div class="cat-items">
-                <div class="cat-item"><strong>Visitor Centre Caf&eacute;</strong> — Small caf&eacute; with snacks and hot drinks.</div>
-              </div>
-            </div>
-            <div class="cat-section">
-              <div class="cat-title">🏰 History &amp; Heritage</div>
-              <div class="cat-items">
-                <div class="cat-item" data-place="Clonmacnoise, Shannonbridge" data-place-loc="53.326,-7.987"><strong>Clonmacnoise Monastic Site</strong> <span class="must-do">MUST-DO</span> <span class="kid-badge">Kids</span><br>Founded 544 AD. Round towers, high crosses, cathedral ruins. Visitor centre has a 20-min history film. Open 10am&ndash;5:30pm. Adults ~&euro;8, kids free under 12.</div>
-                <div class="cat-item"><strong>Nuns' Church</strong> — Short walk from the main site, beautiful Romanesque arches.</div>
-                <div class="cat-item"><strong>Whiskey Footnote</strong> — The Annals of Clonmacnoise (1405) contain the earliest known reference to whiskey in Ireland.</div>
-              </div>
-            </div>
-            <div class="cat-section">
-              <div class="cat-title">🌿 Outdoors &amp; Nature</div>
-              <div class="cat-items">
-                <div class="cat-item"><strong>Riverside Walk</strong> — Along the Shannon from the jetty.</div>
-                <div class="cat-item"><strong>Callows Birdwatching</strong> — Seasonal waterfowl on the flood meadows.</div>
-              </div>
-            </div>
-            <div class="cat-section">
-              <div class="cat-title">🎯 Activities</div>
-              <div class="cat-items">
-                <div class="cat-item"><strong>Explore the Ruins</strong> <span class="kid-badge">Kids</span><br>Ruins are freely explorable with plenty of space for children to run.</div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- STOP 4: ATHLONE -->
-      <div class="stop-card" id="stop-4" data-stop-idx="3">
-        <div class="stop-header" onclick="toggleStop('stop-4')">
-          <div class="stop-num">4</div>
-          <div class="stop-info">
-            <div class="stop-title">Athlone</div>
-            <div class="stop-meta">
-              <span class="pill pill-dark">Night 1 &amp; 3</span>
-              <span class="pill pill-muted">~1h from Clonmacnoise</span>
-            </div>
-            <div class="stop-desc">Ireland's heartland town — world's oldest pub, castle, great food</div>
-          </div>
-          <svg class="stop-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
-        </div>
-        <div class="stop-body">
-          <div class="stop-content">
-            <div class="cat-section">
-              <div class="cat-title">🍽️ Eat &amp; Drink</div>
-              <div class="cat-items">
-                <div class="cat-item" data-place="Sean's Bar, Athlone" data-place-loc="53.423,-7.940"><strong>Sean's Bar</strong> <span class="must-do">MUST-DO</span> <span class="dist-pill">🚶 1 min</span><br>World's oldest pub (since ~900 AD). Has its own whiskey. Trad music sessions.</div>
-                <div class="cat-item" data-place="Thyme Restaurant, Athlone" data-place-loc="53.423,-7.940"><strong>Thyme Restaurant</strong> <span class="dist-pill">🚶 3 min</span><br>Riverside setting, modern Irish cuisine. Book dinner ahead.</div>
-                <div class="cat-item" data-place="The Fatted Calf, Athlone" data-place-loc="53.423,-7.940"><strong>The Fatted Calf</strong> <span class="dist-pill">🚶 5 min</span><br>Charcoal oven cooking, excellent lunch spot.</div>
-                <div class="cat-item" data-place="Kin Khao Thai, Athlone" data-place-loc="53.423,-7.940"><strong>Kin Khao Thai</strong> <span class="dist-pill">🚶 5 min</span> <span class="kid-badge">Kids</span><br>Family-friendly Thai restaurant.</div>
-                <div class="cat-item" data-place="Jalan Jalan, Athlone" data-place-loc="53.423,-7.940"><strong>Jalan Jalan</strong> <span class="dist-pill">🚶 5 min</span><br>Asian fusion above Peddler Mac's bar.</div>
-                <div class="cat-item" data-place="Docks Off 5th, Athlone" data-place-loc="53.423,-7.940"><strong>Docks Off 5th</strong> <span class="dist-pill">🚶 5 min</span><br>Great date night option.</div>
-                <div class="cat-item" data-place="Left Bank Bistro, Athlone" data-place-loc="53.423,-7.940"><strong>Left Bank Bistro</strong> <span class="dist-pill">🚶 5 min</span><br>Lovely for brunch.</div>
-              </div>
-            </div>
-            <div class="cat-section">
-              <div class="cat-title">🏰 History &amp; Heritage</div>
-              <div class="cat-items">
-                <div class="cat-item" data-place="Athlone Castle, Athlone" data-place-loc="53.423,-7.940"><strong>Athlone Castle</strong> <span class="must-do">MUST-DO</span> <span class="kid-badge">Kids</span> <span class="dist-pill">🚶 1 min</span><br>12th-century Norman castle with interactive museum. Adults ~&euro;10, family ~&euro;38. Allow 1&ndash;1.5 hours.</div>
-                <div class="cat-item"><strong>Luan Gallery</strong> <span class="dist-pill">🚶 5 min</span><br>Free contemporary art gallery by the river.</div>
-                <div class="cat-item"><strong>St Peter &amp; Paul's Church</strong> <span class="dist-pill">🚶 5 min</span><br>Beautiful twin-towered church.</div>
-              </div>
-            </div>
-            <div class="cat-section">
-              <div class="cat-title">🌿 Outdoors &amp; Nature</div>
-              <div class="cat-items">
-                <div class="cat-item"><strong>Shannon Banks Nature Trail</strong> <span class="kid-badge">Kids</span><br>5 km loop, flat and family-friendly. Allow 1.5 hours.</div>
-                <div class="cat-item"><strong>Old Rail Trail Greenway</strong><br>Flat cycling — 8 km to Moate or 40 km to Mullingar. Bike hire available.</div>
-              </div>
-            </div>
-            <div class="cat-section">
-              <div class="cat-title">🎯 Activities</div>
-              <div class="cat-items">
-                <div class="cat-item"><strong>Viking Tours</strong> <span class="kid-badge">Kids</span><br>Replica Viking longship from the castle pier. Daily, ~40 min. Viking hats provided!</div>
-                <div class="cat-item"><strong>Athlone Towncentre</strong> — Shopping centre for rainy-day browsing.</div>
-              </div>
-            </div>
-            <div class="cat-section">
-              <div class="cat-title">🛍️ Supplies &amp; Practical</div>
-              <div class="cat-items">
-                <div class="cat-item">Full town — Tesco, Aldi, pharmacies, everything within walking distance of the quay.</div>
-              </div>
-            </div>
-            <div class="cat-section">
-              <div class="cat-title">🚕 Side Trip</div>
-              <div class="cat-items">
-                <div class="cat-item" data-place="Kilbeggan Distillery, Kilbeggan" data-place-loc="53.370,-7.506"><strong>Kilbeggan Distillery</strong> <span class="dist-pill">🚕 20 min</span><br>World's oldest licensed distillery (1757). Tours and tastings.</div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- STOP 5: HODSON BAY -->
-      <div class="stop-card" id="stop-5" data-stop-idx="4">
-        <div class="stop-header" onclick="toggleStop('stop-5')">
-          <div class="stop-num">5</div>
-          <div class="stop-info">
-            <div class="stop-title">Hodson Bay</div>
-            <div class="stop-meta">
-              <span class="pill pill-dark">Night 2</span>
-              <span class="pill pill-muted">~45 min from Athlone</span>
-            </div>
-            <div class="stop-desc">Lakeshore luxury — inflatable waterpark, fine dining, floating hot tub</div>
-          </div>
-          <svg class="stop-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
-        </div>
-        <div class="stop-body">
-          <div class="stop-content">
-            <div class="cat-section">
-              <div class="cat-title">🍽️ Eat &amp; Drink</div>
-              <div class="cat-items">
-                <div class="cat-item" data-place="Hodson Bay Hotel, Athlone" data-place-loc="53.469,-7.980"><strong>Hodson Bay Hotel</strong> <span class="kid-badge">Kids</span><br>Waterfront Bar carvery for casual lunch, main restaurant for dinner.</div>
-                <div class="cat-item" data-place="Wineport Lodge, Glasson" data-place-loc="53.485,-7.920"><strong>Wineport Lodge</strong> <span class="dist-pill">🚕 short cab to Glasson</span><br>Lakeside fine dining. Special occasion worthy.</div>
-              </div>
-            </div>
-            <div class="cat-section">
-              <div class="cat-title">🎯 Activities</div>
-              <div class="cat-items">
-                <div class="cat-item" data-place="Baysports, Hodson Bay, Athlone" data-place-loc="53.467,-7.975"><strong>Baysports</strong> <span class="must-do">MUST-DO</span> <span class="kid-badge">Kids</span><br>Ireland's largest inflatable waterpark on Lough Ree. Also kayaking, SUP, pedal boats.</div>
-                <div class="cat-item"><strong>Viking Tours</strong> — Also sails from Hodson Bay.</div>
-                <div class="cat-item"><strong>Afterglow Floating Hot Tub</strong><br>90-min cruise on Lough Ree in a floating hot tub. BYO drinks. Adults only.</div>
-                <div class="cat-item"><strong>Hodson Bay Hotel Pool</strong><br>Pay-per-use if the weather turns. Good rainy-day backup.</div>
-              </div>
-            </div>
-            <div class="cat-section">
-              <div class="cat-title">🌿 Outdoors &amp; Nature</div>
-              <div class="cat-items">
-                <div class="cat-item"><strong>Lough Ree Shore Walks</strong> — Lovely lakeshore paths.</div>
-              </div>
-            </div>
-            <div class="cat-section">
-              <div class="cat-title">🚕 Side Trip</div>
-              <div class="cat-items">
-                <div class="cat-item" data-place="Glendeer Pet Farm, Athlone" data-place-loc="53.490,-8.060"><strong>Glendeer Pet Farm</strong> <span class="kid-badge">Kids</span> <span class="dist-pill">🚕 15 min</span><br>Animals, fairy trail, obstacle course, indoor and outdoor areas. Great for under-8s.</div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- STOP 6: KILLINURE -->
-      <div class="stop-card" id="stop-6" data-stop-idx="5">
-        <div class="stop-header" onclick="toggleStop('stop-6')">
-          <div class="stop-num">6</div>
-          <div class="stop-info">
-            <div class="stop-title">Killinure</div>
-            <div class="stop-meta">
-              <span class="pill pill-blue">Turnaround</span>
-              <span class="pill pill-muted">~30 min from Hodson Bay</span>
-            </div>
-            <div class="stop-desc">Wild anchorage — pure peace and quiet on Lough Ree</div>
-          </div>
-          <svg class="stop-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
-        </div>
-        <div class="stop-body">
-          <div class="stop-content">
-            <div class="cat-section">
-              <div class="cat-title">🌿 Outdoors &amp; Nature</div>
-              <div class="cat-items">
-                <div class="cat-item"><strong>Birdwatching</strong> — Herons, swans, cormorants, grebes in the sheltered lough.</div>
-                <div class="cat-item"><strong>Fishing</strong> — Pike, perch, and bream in calm waters.</div>
-                <div class="cat-item"><strong>Swimming</strong> <span class="kid-badge">Kids (supervised)</span><br>Calm, sheltered water — supervise children at all times.</div>
-              </div>
-            </div>
-            <div class="cat-section">
-              <div class="cat-title">🛍️ Supplies &amp; Practical</div>
-              <div class="cat-items">
-                <div class="cat-item"><strong>No food or shops</strong> — Eat on the boat, or dine in Athlone / Hodson Bay before heading out.</div>
-                <div class="cat-item">Consider an overnight stay if the weather is settled, otherwise loop back to Athlone.</div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-    </div>
-
-    <!-- PRACTICAL NOTES -->
-    <div class="notes-card">
-      <h2>Practical Notes</h2>
-      <div class="notes-grid">
-        <div class="note-item"><strong><span class="note-emoji">🔒</span> Locks</strong>One lock on the route — Meelick Lock, south of Banagher.</div>
-        <div class="note-item"><strong><span class="note-emoji">💨</span> Wind Warning</strong>Lough Ree gets rough quickly. Stay in the river if winds exceed Force 4.</div>
-        <div class="note-item"><strong><span class="note-emoji">⛽</span> Fuel</strong>Available at Banagher marina. Top up before departure.</div>
-        <div class="note-item"><strong><span class="note-emoji">🛒</span> Groceries</strong>Stock up in Banagher or Athlone — supermarkets near moorings.</div>
-        <div class="note-item"><strong><span class="note-emoji">🧭</span> Navigation</strong>Well-marked channel markers. Speed limit 5 knots in towns.</div>
-        <div class="note-item"><strong><span class="note-emoji">📱</span> Signal</strong>Generally good. Patchy on Lough Ree mid-lake.</div>
-      </div>
-    </div>
-
-    <div class="footer">
-      Banagher Leisurely Tour Guide &middot; Lower Shannon, Ireland
-    </div>
-
-  </div>
-
-  <!-- RIGHT PANEL: sticky map -->
-  <div class="panel-right">
-    <div id="map"></div>
-    <div class="map-pin-label" id="pinLabel"></div>
-    <div class="map-legend">
-      <div class="legend-item"><div class="legend-line solid"></div>Outbound</div>
-      <div class="legend-item"><div class="legend-line dashed"></div>Return</div>
-      <div class="legend-item"><div class="legend-dot" style="background:#7B9BB5; font-size:8px;">1</div>Stop</div>
-      <div class="legend-item"><svg width="8" height="8"><circle cx="4" cy="4" r="3.5" fill="#E84B3C" opacity="0.8"/></svg>Attraction</div>
-      <div class="legend-item"><svg width="8" height="8"><circle cx="4" cy="4" r="3.5" fill="#059669" opacity="0.8"/></svg>Family</div>
-    </div>
-  </div>
-
+<div class="stat-row">
+  <div class="stat-cell"><div class="stat-value">4</div><div class="stat-label">Nights</div></div>
+  <div class="stat-cell"><div class="stat-value">60<span>km</span></div><div class="stat-label">Round trip</div></div>
+  <div class="stat-cell"><div class="stat-value">6</div><div class="stat-label">Stops</div></div>
+  <div class="stat-cell"><div class="stat-value">0</div><div class="stat-label">Locks</div></div>
 </div>
 
-<script>
-// ── GLOBALS ──
-var map, infoWindow, activeMarker;
-var stopMarkers = [];
+<!-- ================= MAP ================= -->
+<div class="card map-card">
+<svg viewBox="0 0 820 990" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Map of the River Shannon from Banagher north to Lough Ree">
+  <defs>
+    <pattern id="bogtex" width="14" height="14" patternUnits="userSpaceOnUse">
+      <rect width="14" height="14" fill="var(--land-alt)"/>
+      <circle cx="3" cy="3" r="1" fill="#D6DACE"/>
+      <circle cx="10" cy="9" r="1" fill="#D6DACE"/>
+    </pattern>
+  </defs>
 
-var stops = [
-  { num: 1, name: 'Banagher Harbour', lat: 53.1895, lng: -7.9870, info: 'Start/End · Night 0 & 4', overnight: true },
-  { num: 2, name: 'Shannonbridge', lat: 53.2700, lng: -7.9340, info: '~1h from Banagher · Pass-through', overnight: false },
-  { num: 3, name: 'Clonmacnoise', lat: 53.3260, lng: -7.9870, info: '~1h from Shannonbridge · Monastic site', overnight: false },
-  { num: 4, name: 'Athlone', lat: 53.4230, lng: -7.9405, info: '~1h from Clonmacnoise · Night 1 & 3', overnight: true },
-  { num: 5, name: 'Hodson Bay', lat: 53.4690, lng: -7.9800, info: '~45 min from Athlone · Night 2', overnight: true },
-  { num: 6, name: 'Killinure', lat: 53.4850, lng: -7.8850, info: '~30 min from Hodson Bay · Turnaround', overnight: false }
-];
+  <!-- land base -->
+  <rect x="0" y="0" width="820" height="990" fill="var(--land)" rx="14"/>
+  <!-- bog / callows texture patches -->
+  <path d="M60,600 Q180,560 300,600 Q330,700 280,800 Q160,840 70,780 Z" fill="url(#bogtex)" opacity=".8"/>
+  <path d="M430,640 Q560,600 700,660 Q740,780 640,850 Q500,860 440,770 Z" fill="url(#bogtex)" opacity=".8"/>
+  <path d="M120,120 Q230,90 300,150 Q290,240 210,260 Q120,230 120,120 Z" fill="url(#bogtex)" opacity=".55"/>
 
-var pois = [
-  { name: 'Birr Castle & Demesne', lat: 53.0968, lng: -7.9130, color: '#E84B3C', info: 'MUST-DO · 120 acres, Great Telescope, treehouse playground' },
-  { name: 'Clonfert Cathedral', lat: 53.2260, lng: -8.0630, color: '#E84B3C', info: '12th-century Romanesque doorway' },
-  { name: "Sean's Bar", lat: 53.4237, lng: -7.9395, color: '#E84B3C', info: "World's oldest pub (~900 AD)" },
-  { name: 'Baysports', lat: 53.4670, lng: -7.9750, color: '#059669', info: "Ireland's largest inflatable waterpark" },
-  { name: 'Glendeer Pet Farm', lat: 53.4900, lng: -8.0600, color: '#059669', info: 'Animals, fairy trail, obstacle course' },
-  { name: 'Kilbeggan Distillery', lat: 53.3700, lng: -7.5060, color: '#E84B3C', info: "World's oldest licensed distillery (1757)" }
-];
+  <!-- ===== LOUGH REE ===== -->
+  <path d="M508,398
+           C492,382 470,372 448,352
+           C424,332 398,322 382,306
+           C368,292 396,286 400,272
+           C404,252 356,254 344,232
+           C330,206 336,178 330,150
+           C324,118 348,86 384,68
+           C420,50 452,44 486,50
+           C512,55 540,74 558,98
+           C578,124 600,146 612,180
+           C624,214 612,238 604,254
+           C598,266 590,272 584,282
+           C576,296 566,300 560,314
+           C552,332 546,352 532,368
+           C522,380 514,388 508,398 Z"
+        fill="var(--water)"/>
+  <!-- deeper water shading -->
+  <path d="M370,150 C368,110 400,78 442,68 C476,60 512,70 534,96 C556,122 566,160 556,196 C546,232 512,252 470,246 C424,240 372,196 370,150 Z"
+        fill="var(--water-deep)" opacity=".38"/>
 
-// ── TOGGLE STOP CARDS ──
-function toggleStop(id) {
-  var card = document.getElementById(id);
-  var wasOpen = card.classList.contains('open');
-  card.classList.toggle('open');
+  <!-- Hodson Bay indent (west shore) -->
+  <path d="M400,272 C388,278 376,290 382,306 C390,318 404,312 408,300 C411,290 408,278 400,272 Z" fill="var(--water)"/>
+  <!-- Killinure Lough — sheltered inner lough, east side -->
+  <path d="M604,254 C620,244 646,246 658,262 C670,278 664,300 646,308 C626,317 604,308 598,292 C593,278 594,262 604,254 Z"
+        fill="var(--water)"/>
+  <path d="M600,268 C606,262 616,260 622,266" stroke="var(--land)" stroke-width="5" fill="none" opacity=".55"/>
+  <!-- islands in Lough Ree -->
+  <ellipse cx="470" cy="140" rx="17" ry="10" fill="var(--land)" opacity=".9"/>
+  <ellipse cx="424" cy="196" rx="11" ry="7" fill="var(--land)" opacity=".9"/>
+  <ellipse cx="516" cy="212" rx="13" ry="8" fill="var(--land)" opacity=".9"/>
+  <ellipse cx="452" cy="272" rx="9" ry="6" fill="var(--land)" opacity=".9"/>
 
-  // If opening, fly map to this stop
-  if (!wasOpen) {
-    var idx = parseInt(card.getAttribute('data-stop-idx'));
-    flyToStop(idx);
-  }
-}
+  <!-- ===== RIVER SHANNON (south of Athlone) ===== -->
+  <path id="shannon" d="M508,398
+           C500,428 480,442 466,468
+           C452,494 448,520 428,546
+           C410,570 392,576 378,588
+           C364,602 358,626 362,650
+           C366,672 356,676 354,686
+           C349,702 344,722 352,748
+           C360,774 346,792 352,816
+           C357,838 359,846 365,856
+           C371,868 367,888 372,918
+           C376,942 366,958 358,972"
+        stroke="var(--water)" stroke-width="17" fill="none" stroke-linecap="round"/>
 
-function flyToStop(idx) {
-  if (!map || idx < 0 || idx >= stops.length) return;
-  var s = stops[idx];
-  map.panTo({ lat: s.lat, lng: s.lng });
-  map.setZoom(13);
+  <!-- ===== ROUTE LINES ===== -->
+  <!-- outbound: Banagher -> Killinure -->
+  <path d="M365,856 C359,846 357,838 352,816 C346,792 360,774 352,748 C344,722 349,702 354,686
+           C356,676 366,672 362,650 C358,626 364,602 378,588
+           C392,576 410,570 428,546 C448,520 452,494 466,468 C480,442 500,428 508,398
+           C514,388 522,380 532,368 C546,352 552,332 560,314 C566,300 576,296 584,282
+           C590,272 598,266 604,254 C612,248 620,250 626,258"
+        stroke="var(--data-blue)" stroke-width="3.4" fill="none" stroke-linecap="round" opacity=".95"/>
+  <!-- Athlone -> Hodson Bay spur -->
+  <path d="M508,398 C480,376 440,352 410,320 C396,306 388,300 382,292"
+        stroke="var(--data-blue)" stroke-width="3.4" fill="none" stroke-linecap="round" stroke-dasharray="1 0" opacity=".9"/>
+  <!-- return: dashed, offset slightly west -->
+  <path d="M620,268 C600,282 580,290 568,306 C556,324 548,344 534,360 C520,376 512,386 500,404
+           C490,432 470,448 456,474 C442,500 438,524 418,550 C400,574 384,582 370,594
+           C356,608 350,630 354,652 C358,674 348,678 346,688
+           C341,704 336,724 344,750 C352,776 338,792 344,818 C349,840 351,848 357,858"
+        stroke="var(--accent)" stroke-width="2.6" fill="none" stroke-linecap="round" stroke-dasharray="9 8" opacity=".85"/>
 
-  // Highlight stop card
-  document.querySelectorAll('.stop-card').forEach(function(c) { c.classList.remove('active-stop'); });
-  var card = document.querySelector('[data-stop-idx="' + idx + '"]');
-  if (card) {
-    card.classList.add('active-stop');
-    if (!card.classList.contains('open')) {
-      card.classList.add('open');
-    }
-  }
+  <!-- ===== TIME ANNOTATIONS ===== -->
+  <g font-family="DM Sans, sans-serif" font-size="11" font-weight="600" fill="var(--text-faint)">
+    <text x="316" y="778" text-anchor="end">~1h</text>
+    <text x="318" y="640" text-anchor="end">~1h</text>
+    <text x="404" y="512" text-anchor="start">~1h 15</text>
+    <text x="418" y="352" text-anchor="end">~45m</text>
+    <text x="588" y="330" text-anchor="start">~40m</text>
+  </g>
 
-  // Show pin label
-  showPinLabel(s.name);
+  <!-- ===== POI markers ===== -->
+  <g>
+    <!-- Birr Castle (off-river, SE of Banagher) -->
+    <circle cx="236" cy="906" r="4.5" fill="var(--surface)" stroke="var(--text-faint)" stroke-width="2"/>
+    <text x="228" y="910" text-anchor="end" font-family="DM Sans" font-size="11" fill="var(--text-muted)">Birr Castle</text>
+    <line x1="243" y1="900" x2="352" y2="864" stroke="var(--text-faint)" stroke-width="1" stroke-dasharray="3 3"/>
+    <!-- Clonfert Cathedral (west of Banagher) -->
+    <circle cx="486" cy="884" r="4.5" fill="var(--surface)" stroke="var(--text-faint)" stroke-width="2"/>
+    <text x="496" y="888" font-family="DM Sans" font-size="11" fill="var(--text-muted)">Clonfert Cathedral</text>
+    <line x1="479" y1="880" x2="378" y2="862" stroke="var(--text-faint)" stroke-width="1" stroke-dasharray="3 3"/>
+    <!-- Glasson -->
+    <circle cx="676" cy="222" r="4.5" fill="var(--surface)" stroke="var(--text-faint)" stroke-width="2"/>
+    <text x="686" y="226" font-family="DM Sans" font-size="11" fill="var(--text-muted)">Glasson</text>
+    <!-- Kilbeggan -->
+    <circle cx="732" cy="404" r="4.5" fill="var(--surface)" stroke="var(--text-faint)" stroke-width="2"/>
+    <text x="726" y="408" text-anchor="end" font-family="DM Sans" font-size="11" fill="var(--text-muted)">Kilbeggan ›</text>
+  </g>
 
-  // Trigger stop marker info window
-  if (stopMarkers[idx]) {
-    google.maps.event.trigger(stopMarkers[idx], 'click');
-  }
-}
+  <!-- ===== STOP MARKERS ===== -->
+  <g font-family="DM Sans, sans-serif">
+    <!-- 1 Banagher -->
+    <circle cx="365" cy="856" r="14" fill="var(--text-primary)"/>
+    <text x="365" y="861" text-anchor="middle" font-size="13" font-weight="700" fill="#fff">1</text>
+    <text x="386" y="854" font-size="15" font-weight="700" fill="var(--text-primary)">Banagher</text>
+    <text x="386" y="870" font-size="11" fill="var(--text-muted)">Start &amp; finish · Co. Offaly</text>
 
-// ── CLICK-TO-PIN ──
-function showPinOnMap(name, lat, lng) {
-  if (!map) return;
+    <!-- 2 Shannonbridge -->
+    <circle cx="354" cy="686" r="14" fill="var(--text-primary)"/>
+    <text x="354" y="691" text-anchor="middle" font-size="13" font-weight="700" fill="#fff">2</text>
+    <text x="375" y="684" font-size="15" font-weight="700" fill="var(--text-primary)">Shannonbridge</text>
+    <text x="375" y="700" font-size="11" fill="var(--text-muted)">16-arch bridge · Luker's</text>
 
-  // Remove previous active marker
-  if (activeMarker) {
-    activeMarker.setMap(null);
-    activeMarker = null;
-  }
+    <!-- 3 Clonmacnoise -->
+    <circle cx="378" cy="588" r="14" fill="var(--text-primary)"/>
+    <text x="378" y="593" text-anchor="middle" font-size="13" font-weight="700" fill="#fff">3</text>
+    <text x="399" y="586" font-size="15" font-weight="700" fill="var(--text-primary)">Clonmacnoise</text>
+    <text x="399" y="602" font-size="11" fill="var(--text-muted)">6th-c. monastic city</text>
 
-  var pos = { lat: lat, lng: lng };
+    <!-- 4 Athlone -->
+    <circle cx="508" cy="398" r="14" fill="var(--text-primary)"/>
+    <text x="508" y="403" text-anchor="middle" font-size="13" font-weight="700" fill="#fff">4</text>
+    <text x="529" y="396" font-size="15" font-weight="700" fill="var(--text-primary)">Athlone</text>
+    <text x="529" y="412" font-size="11" fill="var(--text-muted)">Castle · Sean's Bar</text>
 
-  // If we got coords from Places API detail, use those; otherwise use data-place-loc
-  activeMarker = new google.maps.Marker({
-    position: pos,
-    map: map,
-    icon: {
-      path: google.maps.SymbolPath.BACKWARD_CLOSED_ARROW,
-      scale: 7,
-      fillColor: '#E84B3C',
-      fillOpacity: 1,
-      strokeColor: '#FFFFFF',
-      strokeWeight: 2.5
-    },
-    title: name,
-    zIndex: 100,
-    animation: google.maps.Animation.DROP
-  });
+    <!-- 5 Hodson Bay -->
+    <circle cx="382" cy="292" r="14" fill="var(--text-primary)"/>
+    <text x="382" y="297" text-anchor="middle" font-size="13" font-weight="700" fill="#fff">5</text>
+    <text x="361" y="290" text-anchor="end" font-size="15" font-weight="700" fill="var(--text-primary)">Hodson Bay</text>
+    <text x="361" y="306" text-anchor="end" font-size="11" fill="var(--text-muted)">Baysports</text>
 
-  map.panTo(pos);
-  map.setZoom(15);
+    <!-- 6 Killinure -->
+    <circle cx="626" cy="262" r="14" fill="var(--accent)"/>
+    <text x="626" y="267" text-anchor="middle" font-size="13" font-weight="700" fill="#fff">6</text>
+    <text x="646" y="260" font-size="15" font-weight="700" fill="var(--text-primary)">Killinure</text>
+    <text x="646" y="276" font-size="11" fill="var(--accent)">Turnaround</text>
+  </g>
 
-  showPinLabel(name);
+  <!-- ===== PLACE LABELS ===== -->
+  <g font-family="DM Sans, sans-serif" font-size="12.5" font-weight="600" fill="var(--text-faint)" letter-spacing="1.6">
+    <text x="470" y="120" text-anchor="middle" fill="var(--water-deep)" font-size="15" letter-spacing="3">LOUGH REE</text>
+    <text x="150" y="330">ROSCOMMON</text>
+    <text x="690" y="130">WESTMEATH</text>
+    <text x="612" y="620">OFFALY</text>
+    <text x="120" y="700">GALWAY</text>
+  </g>
 
-  // Clear previous active items
-  document.querySelectorAll('.cat-item.item-active').forEach(function(el) { el.classList.remove('item-active'); });
-}
+  <!-- continuing south note -->
+  <text x="348" y="984" text-anchor="end" font-family="DM Sans" font-size="10.5" fill="var(--text-faint)">↓ Meelick Lock · Portumna · Lough Derg</text>
 
-function showPinLabel(text) {
-  var label = document.getElementById('pinLabel');
-  label.textContent = text;
-  label.classList.add('visible');
-  clearTimeout(window._pinLabelTimer);
-  window._pinLabelTimer = setTimeout(function() {
-    label.classList.remove('visible');
-  }, 4000);
-}
+  <!-- compass -->
+  <g transform="translate(756,64)">
+    <circle r="21" fill="var(--surface)" opacity=".85"/>
+    <path d="M0,-15 L5,3 L0,-1 L-5,3 Z" fill="var(--accent)"/>
+    <text x="0" y="-19" text-anchor="middle" font-family="DM Sans" font-size="10" font-weight="700" fill="var(--text-muted)">N</text>
+  </g>
 
-// ── INIT MAP ──
-function initMap() {
-  var mapCenter = { lat: 53.34, lng: -7.88 };
-  map = new google.maps.Map(document.getElementById('map'), {
-    center: mapCenter,
-    zoom: 10,
-    mapTypeId: 'terrain',
-    styles: [
-      { featureType: 'water', elementType: 'geometry.fill', stylers: [{ color: '#A9C4D6' }] },
-      { featureType: 'landscape.natural', elementType: 'geometry.fill', stylers: [{ color: '#E8EDE0' }] },
-      { featureType: 'road', stylers: [{ visibility: 'simplified' }, { saturation: -70 }] },
-      { featureType: 'poi', stylers: [{ visibility: 'off' }] },
-      { featureType: 'transit', stylers: [{ visibility: 'off' }] },
-      { featureType: 'administrative', elementType: 'labels.text.fill', stylers: [{ color: '#8B9674' }] }
-    ],
-    mapTypeControl: true,
-    mapTypeControlOptions: { style: google.maps.MapTypeControlStyle.DROPDOWN_MENU },
-    streetViewControl: false,
-    fullscreenControl: true,
-    zoomControl: true
-  });
+  <text x="42" y="962" font-family="DM Sans" font-size="10" fill="var(--text-faint)">Schematic — not for navigation. Carry the Waterways Ireland Shannon chart.</text>
+</svg>
 
-  infoWindow = new google.maps.InfoWindow();
-  // Places service now uses new Place API (legacy PlacesService deprecated for new customers)
+<div class="legend">
+  <span><i class="lg-out"></i>Outbound</span>
+  <span><i class="lg-ret"></i>Return</span>
+  <span><i class="lg-dot"></i>Overnight / main stop</span>
+  <span><i class="lg-poi"></i>Off-river, short cab</span>
+</div>
+</div>
 
-  // ── Stop markers ──
-  stops.forEach(function(stop, i) {
-    var marker = new google.maps.Marker({
-      position: { lat: stop.lat, lng: stop.lng },
-      map: map,
-      label: { text: String(stop.num), color: '#FFFFFF', fontSize: '12px', fontWeight: '800', fontFamily: 'DM Sans' },
-      icon: {
-        path: google.maps.SymbolPath.CIRCLE,
-        scale: stop.overnight ? 15 : 12,
-        fillColor: '#7B9BB5',
-        fillOpacity: 1,
-        strokeColor: '#FFFFFF',
-        strokeWeight: 3
-      },
-      title: stop.name,
-      zIndex: 10
-    });
-    marker.addListener('click', function() {
-      infoWindow.setContent(
-        '<div style="font-family:DM Sans,sans-serif;padding:4px 2px;max-width:200px;">' +
-        '<div style="font-weight:700;font-size:13px;color:#111827;margin-bottom:3px;">' +
-        '<span style="display:inline-block;width:20px;height:20px;border-radius:50%;background:#7B9BB5;color:#fff;text-align:center;line-height:20px;font-size:10px;margin-right:5px;">' + stop.num + '</span>' +
-        stop.name + '</div>' +
-        '<div style="font-size:11px;color:#6B7280;line-height:1.4;">' + stop.info + '</div></div>'
-      );
-      infoWindow.open(map, marker);
-    });
-    stopMarkers.push(marker);
-  });
+<!-- ================= DAY 1 ================= -->
+<div class="day-head">
+  <div class="day-num">01</div>
+  <div class="day-title">Board at Banagher</div>
+  <div class="day-sub">Handover, provisioning, and a night alongside in town · No cruising</div>
+</div>
 
-  // ── POI markers ──
-  pois.forEach(function(poi) {
-    var marker = new google.maps.Marker({
-      position: { lat: poi.lat, lng: poi.lng },
-      map: map,
-      icon: {
-        path: google.maps.SymbolPath.CIRCLE,
-        scale: 6,
-        fillColor: poi.color,
-        fillOpacity: 0.85,
-        strokeColor: '#FFFFFF',
-        strokeWeight: 2
-      },
-      title: poi.name,
-      zIndex: 5
-    });
-    marker.addListener('click', function() {
-      infoWindow.setContent(
-        '<div style="font-family:DM Sans,sans-serif;padding:4px 2px;max-width:200px;">' +
-        '<div style="font-weight:700;font-size:12px;color:' + poi.color + ';margin-bottom:3px;">' + poi.name + '</div>' +
-        '<div style="font-size:11px;color:#6B7280;line-height:1.4;">' + poi.info + '</div></div>'
-      );
-      infoWindow.open(map, marker);
-    });
-  });
+<details class="stop" open>
+  <summary>
+    <div class="stop-marker base">1</div>
+    <div class="stop-body">
+      <div class="stop-name">Banagher Harbour</div>
+      <div class="cruise">⚓ Start &amp; finish · Co. Offaly</div>
+      <div class="stop-line">A proper river town with a seven-arch bridge, a Napoleonic fort, and one of the best trad pubs on the Shannon. Everything is within a five-minute walk of the marina.</div>
+    </div>
+    <div class="chev">▾</div>
+  </summary>
+  <div class="stop-detail">
+    <div class="moor"><b>Mooring:</b> Silver Star's marina sits right at the town end of the harbour. Pontoon berths, power, water and fuel on site. Town centre is a two-minute walk up the hill.</div>
 
-  // ── Route polylines ──
-  var outboundPath = [
-    { lat: 53.1895, lng: -7.9870 }, { lat: 53.2100, lng: -7.9850 }, { lat: 53.2400, lng: -7.9650 },
-    { lat: 53.2700, lng: -7.9340 }, { lat: 53.2950, lng: -7.9500 }, { lat: 53.3260, lng: -7.9870 },
-    { lat: 53.3500, lng: -7.9700 }, { lat: 53.3800, lng: -7.9550 }, { lat: 53.4000, lng: -7.9450 },
-    { lat: 53.4230, lng: -7.9405 }, { lat: 53.4400, lng: -7.9500 }, { lat: 53.4550, lng: -7.9650 },
-    { lat: 53.4690, lng: -7.9800 }, { lat: 53.4750, lng: -7.9600 }, { lat: 53.4800, lng: -7.9300 },
-    { lat: 53.4850, lng: -7.8850 }
-  ];
-  new google.maps.Polyline({ path: outboundPath, geodesic: true, strokeColor: '#7B9BB5', strokeOpacity: 0.9, strokeWeight: 4, map: map });
+    <div class="alert"><b>Do this first</b>Photo and video the hull, prop area, fenders and interior at handover, and get the condition sheet signed. Deposit disputes are won here. Top up fuel and water before you leave.</div>
 
-  var returnPath = [
-    { lat: 53.4850, lng: -7.8850 }, { lat: 53.4800, lng: -7.9250 }, { lat: 53.4750, lng: -7.9550 },
-    { lat: 53.4690, lng: -7.9800 }, { lat: 53.4550, lng: -7.9700 }, { lat: 53.4400, lng: -7.9550 },
-    { lat: 53.4230, lng: -7.9405 }, { lat: 53.4000, lng: -7.9500 }, { lat: 53.3800, lng: -7.9600 },
-    { lat: 53.3500, lng: -7.9750 }, { lat: 53.3260, lng: -7.9870 }, { lat: 53.2950, lng: -7.9550 },
-    { lat: 53.2700, lng: -7.9340 }, { lat: 53.2400, lng: -7.9700 }, { lat: 53.2100, lng: -7.9900 },
-    { lat: 53.1895, lng: -7.9870 }
-  ];
-  new google.maps.Polyline({
-    path: returnPath, geodesic: true, strokeColor: '#E84B3C', strokeOpacity: 0, strokeWeight: 0,
-    icons: [{ icon: { path: 'M 0,-1 0,1', strokeOpacity: 0.85, strokeColor: '#E84B3C', strokeWeight: 3, scale: 4 }, offset: '0', repeat: '16px' }],
-    map: map
-  });
+    <div class="cat">
+      <div class="cat-title">🍽️ Eat &amp; drink</div>
+      <div class="item">
+        <span class="item-name">JJ Hough's Singing Pub</span>
+        <div class="item-desc">250-year-old heritage pub, ivy-covered front, trad music most nights in season. Part of the floor is reclaimed from a 14th-century monastery. Ask for a Bo Bristle — brewed a few doors up.</div>
+        <div class="pills"><span class="pill pill-must">Must do</span><span class="pill">🚶 2 min</span><span class="pill pill-adult">Kids fine early</span></div>
+      </div>
+      <div class="item">
+        <span class="item-name">The Vine House</span>
+        <div class="item-desc">Georgian townhouse restaurant, the upmarket option in town. Worth booking if you want a proper sit-down on the first night.</div>
+        <div class="pills"><span class="pill">🚶 3 min</span><span class="pill pill-adult">Book ahead</span></div>
+      </div>
+      <div class="item">
+        <span class="item-name">Flynn's Bar</span>
+        <div class="item-desc">Locals' pub, straightforward food, no ceremony. The reliable fallback.</div>
+        <div class="pills"><span class="pill">🚶 2 min</span></div>
+      </div>
+    </div>
 
-  // ── Wire up clickable items ──
-  setupClickablePlaces();
+    <div class="cat">
+      <div class="cat-title">🏰 History &amp; heritage</div>
+      <div class="item">
+        <span class="item-name">Martello Tower (Fanesker)</span>
+        <div class="item-desc">The only inland Martello tower in Ireland, thrown up around 1812 when Napoleon looked like he might come up the Shannon. Free to walk to and view.</div>
+        <div class="pills"><span class="pill">🚶 5 min</span><span class="pill pill-cost">Free</span></div>
+      </div>
+      <div class="item">
+        <span class="item-name">Fort Eliza</span>
+        <div class="item-desc">Five-sided Napoleonic gun battery on the west bank, overlooking the river. Good spot for a scramble and a view.</div>
+        <div class="pills"><span class="pill">🚶 10 min</span><span class="pill pill-kids">Great for kids</span><span class="pill pill-cost">Free</span></div>
+      </div>
+      <div class="item">
+        <span class="item-name">Clonfert Cathedral</span>
+        <div class="item-desc">Twelfth-century Romanesque doorway — carved heads, chevrons, the lot. One of the finest in Ireland and almost always empty. Worth the taxi.</div>
+        <div class="pills"><span class="pill">🚕 15 min</span><span class="pill pill-adult">Adults mainly</span><span class="pill pill-cost">Free</span></div>
+      </div>
+    </div>
 
-  // ── Enrich with Places API ──
-  enrichPlaces();
+    <div class="cat">
+      <div class="cat-title">🌿 Outdoors &amp; nature</div>
+      <div class="item">
+        <span class="item-name">Riverside walk &amp; open-air pool</span>
+        <div class="item-desc">Flat paved path along the Shannon from the marina, buggy-friendly. The seasonal open-air river swimming spot beside the harbour is a hit if the weather holds.</div>
+        <div class="pills"><span class="pill">🚶 At the marina</span><span class="pill pill-kids">Great for kids</span></div>
+      </div>
+      <div class="item">
+        <span class="item-name">Shannon Callows</span>
+        <div class="item-desc">Flood meadows either side of the river, and one of the last corncrake strongholds in the country. Bring the binoculars — you'll cruise straight through them tomorrow.</div>
+        <div class="pills"><span class="pill">🌾 From the boat</span></div>
+      </div>
+      <div class="item">
+        <span class="item-name">Playground &amp; pitch and putt</span>
+        <div class="item-desc">Playground right at the harbour in decent nick. The pitch and putt runs along the river bank.</div>
+        <div class="pills"><span class="pill">🚶 2–5 min</span><span class="pill pill-kids">Great for kids</span></div>
+      </div>
+    </div>
 
-  // Open first card by default
-  document.getElementById('stop-1').classList.add('open');
-}
+    <div class="cat">
+      <div class="cat-title">🎯 Half-day side trip</div>
+      <div class="item">
+        <span class="item-name">Birr Castle Demesne</span>
+        <div class="item-desc">120 acres of gardens, the Great Telescope that was the largest in the world for seventy years, a hands-on science centre, and Ireland's tallest treehouse with an adventure playground under it. If you have a spare afternoon at either end of the trip, this is the one.</div>
+        <div class="pills"><span class="pill pill-must">Best for kids</span><span class="pill">🚕 15 min</span><span class="pill pill-cost">~€34 family</span></div>
+      </div>
+    </div>
 
-// ── CLICKABLE PLACES ──
-function setupClickablePlaces() {
-  document.querySelectorAll('.cat-item[data-place]').forEach(function(item) {
-    item.addEventListener('click', function(e) {
-      e.stopPropagation();
-      var name = item.querySelector('strong') ? item.querySelector('strong').textContent : item.getAttribute('data-place');
-      var locStr = item.getAttribute('data-place-loc');
+    <div class="cat">
+      <div class="cat-title">🛍️ Supplies</div>
+      <div class="item">
+        <span class="item-name">Centra, Main Street</span>
+        <div class="item-desc">Big enough shop for a full provision run. Three minutes up from the harbour. Stock up here — Shannonbridge has a village shop and not much more.</div>
+        <div class="pills"><span class="pill">🚶 3 min</span></div>
+      </div>
+    </div>
+  </div>
+</details>
 
-      // Clear previous
-      document.querySelectorAll('.cat-item.item-active').forEach(function(el) { el.classList.remove('item-active'); });
-      item.classList.add('item-active');
+<!-- ================= DAY 2 ================= -->
+<div class="day-head">
+  <div class="day-num">02</div>
+  <div class="day-title">Banagher → Athlone</div>
+  <div class="day-sub">~3 hours cruising · Lunch at Shannonbridge, wave at Clonmacnoise, night in Athlone</div>
+</div>
 
-      // Check if we have a resolved lat/lng from Places API
-      var resolvedLat = item.getAttribute('data-resolved-lat');
-      var resolvedLng = item.getAttribute('data-resolved-lng');
-      if (resolvedLat && resolvedLng) {
-        showPinOnMap(name, parseFloat(resolvedLat), parseFloat(resolvedLng));
-      } else if (locStr) {
-        var parts = locStr.split(',');
-        showPinOnMap(name, parseFloat(parts[0]), parseFloat(parts[1]));
-      }
-    });
-  });
-}
+<details class="stop">
+  <summary>
+    <div class="stop-marker">2</div>
+    <div class="stop-body">
+      <div class="stop-name">Shannonbridge</div>
+      <div class="cruise">⛵ ~1 hour from Banagher</div>
+      <div class="stop-line">A one-street village either side of a beautiful sixteen-arch bridge, with a Napoleonic fort guarding the crossing. Thirty minutes will do it — unless you're eating at Luker's, in which case give it two.</div>
+    </div>
+    <div class="chev">▾</div>
+  </summary>
+  <div class="stop-detail">
+    <div class="moor"><b>Mooring:</b> Jetties on both sides of the bridge, usually space. The bridge arches are narrow — take it slow and pick your arch early.</div>
 
-// ── PLACES API ENRICHMENT (New Place API) ──
-async function enrichPlaces() {
-  var items = document.querySelectorAll('[data-place]');
+    <div class="cat">
+      <div class="cat-title">🍽️ Eat &amp; drink</div>
+      <div class="item">
+        <span class="item-name">Luker's Old Bar &amp; Restaurant</span>
+        <div class="item-desc">The reason to stop. Right on the water, famous locally for sunsets over the Shannon and for trad sessions. Food is proper pub food done well.</div>
+        <div class="pills"><span class="pill pill-must">Must do</span><span class="pill">🚶 1 min</span><span class="pill pill-kids">Family friendly</span></div>
+      </div>
+    </div>
 
-  for (var i = 0; i < items.length; i++) {
-    var item = items[i];
-    // Stagger requests to avoid rate limits
-    if (i > 0) await new Promise(function(r) { setTimeout(r, 350); });
+    <div class="cat">
+      <div class="cat-title">🏰 History &amp; heritage</div>
+      <div class="item">
+        <span class="item-name">The sixteen-arch bridge</span>
+        <div class="item-desc">One of the oldest crossings on the Shannon and genuinely striking from the water. You'll go under it — have the camera ready on the approach.</div>
+        <div class="pills"><span class="pill">⛵ From the boat</span><span class="pill pill-cost">Free</span></div>
+      </div>
+      <div class="item">
+        <span class="item-name">Napoleonic fortifications</span>
+        <div class="item-desc">A full defensive complex — batteries, redoubt, bridgehead — built to stop a French army crossing here. Self-guided walk around the whole thing, no ticket, no queue.</div>
+        <div class="pills"><span class="pill">🚶 5 min</span><span class="pill pill-kids">Good for kids</span><span class="pill pill-cost">Free</span></div>
+      </div>
+    </div>
 
-    try {
-      var query = item.getAttribute('data-place');
-      var locStr = item.getAttribute('data-place-loc');
-      var parts = locStr.split(',');
-      var loc = new google.maps.LatLng(parseFloat(parts[0]), parseFloat(parts[1]));
+    <div class="cat">
+      <div class="cat-title">🌿 Outdoors &amp; nature</div>
+      <div class="item">
+        <span class="item-name">Bog walks</span>
+        <div class="item-desc">The raised bog around Shannonbridge is a strange, flat, enormous landscape unlike anywhere else on the route. Easy flat walking straight out of the village.</div>
+        <div class="pills"><span class="pill">🚶 From the village</span></div>
+      </div>
+    </div>
+  </div>
+</details>
 
-      var request = {
-        textQuery: query,
-        fields: ['displayName', 'location', 'rating', 'userRatingCount', 'photos', 'regularOpeningHours'],
-        locationBias: new google.maps.Circle({ center: loc, radius: 5000 }),
-        maxResultCount: 1
-      };
+<details class="stop">
+  <summary>
+    <div class="stop-marker">4</div>
+    <div class="stop-body">
+      <div class="stop-name">Athlone</div>
+      <div class="cruise">⛵ ~2 hours from Shannonbridge (past Clonmacnoise)</div>
+      <div class="stop-line">The big stop. A Norman castle looming over the quay, the oldest pub in Ireland a minute's walk from your mooring, and enough restaurants to make choosing hard. Two nights here would not be wasted.</div>
+    </div>
+    <div class="chev">▾</div>
+  </summary>
+  <div class="stop-detail">
+    <div class="moor"><b>Mooring:</b> Town centre quay below the castle — the best mooring on the route, and you step off into the middle of everything. Fills up in season, so aim to arrive by mid-afternoon.</div>
 
-      var response = await google.maps.places.Place.searchByText(request);
-      if (response.places && response.places.length > 0) {
-        var place = response.places[0];
+    <div class="cat">
+      <div class="cat-title">🍽️ Eat &amp; drink</div>
+      <div class="item">
+        <span class="item-name">Sean's Bar</span>
+        <div class="item-desc">Guinness World Record holder as the oldest pub in Ireland, with wattle-and-daub walls found during 1970s renovations to back the claim. Sloping sawdust floor, own-brand whiskey, trad sessions. It will be rammed — go early afternoon or late.</div>
+        <div class="pills"><span class="pill pill-must">Must do</span><span class="pill">🚶 1 min</span><span class="pill pill-adult">Go early with kids</span></div>
+      </div>
+      <div class="item">
+        <span class="item-name">Thyme Restaurant</span>
+        <div class="item-desc">Riverside, modern Irish, the best dinner in town. Book ahead — it's small and it fills.</div>
+        <div class="pills"><span class="pill">🚶 3 min</span><span class="pill pill-adult">Book ahead</span></div>
+      </div>
+      <div class="item">
+        <span class="item-name">The Fatted Calf</span>
+        <div class="item-desc">Charcoal oven, unfussy, excellent. The best lunch option and easier to get into than Thyme.</div>
+        <div class="pills"><span class="pill">🚶 5 min</span></div>
+      </div>
+      <div class="item">
+        <span class="item-name">Kin Khao Thai</span>
+        <div class="item-desc">Long-running Thai in the old quarter, consistently the highest-rated place in Athlone. Genuinely good with kids.</div>
+        <div class="pills"><span class="pill">🚶 5 min</span><span class="pill pill-kids">Family friendly</span></div>
+      </div>
+      <div class="item">
+        <span class="item-name">Left Bank Bistro</span>
+        <div class="item-desc">Breakfast and brunch institution. Worth walking off the boat for on the morning you head north.</div>
+        <div class="pills"><span class="pill">🚶 4 min</span></div>
+      </div>
+    </div>
 
-        // Store resolved location
-        if (place.location) {
-          item.setAttribute('data-resolved-lat', place.location.lat());
-          item.setAttribute('data-resolved-lng', place.location.lng());
-        }
+    <div class="cat">
+      <div class="cat-title">🏰 History &amp; heritage</div>
+      <div class="item">
+        <span class="item-name">Athlone Castle</span>
+        <div class="item-desc">Twelfth-century Norman castle rebuilt as an artillery fort, now a museum with genuinely good interactive exhibits on the 1691 siege. It's the thing you moor underneath. Allow an hour.</div>
+        <div class="pills"><span class="pill pill-must">Must do</span><span class="pill">🚶 1 min</span><span class="pill pill-kids">Good for kids</span><span class="pill pill-cost">~€38 family</span></div>
+      </div>
+      <div class="item">
+        <span class="item-name">Luan Gallery</span>
+        <div class="item-desc">Contemporary art in a smart modern wing grafted onto an 1897 library, right on the river. Free, quiet, and a good half hour if it rains.</div>
+        <div class="pills"><span class="pill">🚶 5 min</span><span class="pill pill-cost">Free</span></div>
+      </div>
+    </div>
 
-        renderPlacesInfo(item, place);
-      }
-    } catch(e) {
-      console.log('Places enrichment failed for: ' + item.getAttribute('data-place'), e);
-    }
-  }
-}
+    <div class="cat">
+      <div class="cat-title">🎯 Activities</div>
+      <div class="item">
+        <span class="item-name">Viking Tours</span>
+        <div class="item-desc">A replica Viking longship that runs from the castle pier up to Lough Ree and back, about forty minutes with commentary. Viking hats and swords are handed out, which lands very well with small crew. Two or three sailings a day.</div>
+        <div class="pills"><span class="pill pill-kids">Great for kids</span><span class="pill">🚶 1 min</span><span class="pill">~40 min</span></div>
+      </div>
+      <div class="item">
+        <span class="item-name">Old Rail Trail Greenway</span>
+        <div class="item-desc">Flat, traffic-free cycle path on a disused railway. Athlone to Moate is 8km and very doable with kids; the full run to Mullingar is 40km. Bike hire at the Garrycastle trailhead.</div>
+        <div class="pills"><span class="pill pill-kids">Great for kids</span><span class="pill">🚕 5 min to trailhead</span></div>
+      </div>
+      <div class="item">
+        <span class="item-name">Shannon Banks Nature Trail</span>
+        <div class="item-desc">A 5km loop from the castle through meadows and along the canal towpath. Flat, well-marked, about an hour and a half at a family pace.</div>
+        <div class="pills"><span class="pill">🚶 From the quay</span><span class="pill pill-kids">All ages</span></div>
+      </div>
+    </div>
 
-function renderPlacesInfo(item, place) {
-  var html = '<div class="places-info">';
-  var hasContent = false;
+    <div class="cat">
+      <div class="cat-title">🛍️ Supplies &amp; practical</div>
+      <div class="item">
+        <span class="item-name">Full town</span>
+        <div class="item-desc">Tesco, Aldi, pharmacies, a launderette and a big shopping centre, all within walking distance of the quay. This is your best restock point on the route and the last real one before you turn for home.</div>
+        <div class="pills"><span class="pill">🚶 5–10 min</span></div>
+      </div>
+    </div>
 
-  if (place.photos && place.photos.length > 0) {
-    try {
-      var photoUrl = place.photos[0].getURI({ maxWidth: 120, maxHeight: 120 });
-      html += '<img class="places-photo" src="' + photoUrl + '" alt="Photo" loading="lazy">';
-      hasContent = true;
-    } catch(e) {}
-  }
+    <div class="cat">
+      <div class="cat-title">🥃 Side trip</div>
+      <div class="item">
+        <span class="item-name">Kilbeggan Distillery</span>
+        <div class="item-desc">The world's oldest licensed distillery, working since 1757, still with a functioning water wheel. Tastings are adults-only but the tour and the mill machinery hold older kids fine.</div>
+        <div class="pills"><span class="pill">🚕 20 min</span><span class="pill pill-adult">Adults mainly</span></div>
+      </div>
+    </div>
+  </div>
+</details>
 
-  html += '<div>';
+<!-- ================= DAY 3 ================= -->
+<div class="day-head">
+  <div class="day-num">03</div>
+  <div class="day-title">Athlone → Lough Ree → Killinure</div>
+  <div class="day-sub">~1.5 hours cruising · The open-water day. Check the forecast before you leave the quay.</div>
+</div>
 
-  if (place.rating) {
-    var fullStars = Math.floor(place.rating);
-    var halfStar = (place.rating - fullStars) >= 0.3;
-    var starsHtml = '';
-    for (var i = 0; i < fullStars; i++) starsHtml += '\u2605';
-    if (halfStar) starsHtml += '\u00BD';
-    html += '<div class="places-rating"><span class="stars">' + starsHtml + '</span> ' + place.rating.toFixed(1);
-    if (place.userRatingCount) {
-      html += ' <span class="places-reviews">(' + place.userRatingCount.toLocaleString() + ' reviews)</span>';
-    }
-    html += '</div>';
-    hasContent = true;
-  }
+<details class="stop">
+  <summary>
+    <div class="stop-marker">5</div>
+    <div class="stop-body">
+      <div class="stop-name">Hodson Bay</div>
+      <div class="cruise">⛵ ~45 min from Athlone</div>
+      <div class="stop-line">Where the river opens out into Lough Ree and the horizon suddenly gets a lot wider. Also where the single biggest kid-pleaser on the whole trip lives.</div>
+    </div>
+    <div class="chev">▾</div>
+  </summary>
+  <div class="stop-detail">
+    <div class="moor"><b>Mooring:</b> Jetty by the hotel and Baysports on the western shore. More exposed than the river moorings — check which way the wind is blowing before you tie up for long.</div>
 
-  if (place.regularOpeningHours) {
-    if (typeof place.regularOpeningHours.isOpen === 'function') {
-      try {
-        var isOpen = place.regularOpeningHours.isOpen();
-        html += '<div class="places-hours ' + (isOpen ? '' : 'closed') + '">' + (isOpen ? 'Open now' : 'Closed now') + '</div>';
-        hasContent = true;
-      } catch(e) {}
-    }
-    if (place.regularOpeningHours.weekdayDescriptions) {
-      var today = new Date().getDay();
-      var gIdx = today === 0 ? 6 : today - 1;
-      if (place.regularOpeningHours.weekdayDescriptions[gIdx]) {
-        html += '<div class="places-reviews">' + place.regularOpeningHours.weekdayDescriptions[gIdx] + '</div>';
-        hasContent = true;
-      }
-    }
-  }
+    <div class="cat">
+      <div class="cat-title">🎯 Activities</div>
+      <div class="item">
+        <span class="item-name">Baysports</span>
+        <div class="item-desc">Ireland's largest inflatable waterpark, floating on Lough Ree, including the Guinness-record tallest inflatable slide in the world. Wetsuits and lifejackets provided, lifeguarded throughout. There's a separate junior park for ages two to six, so the small one isn't left on the bank. Kayaks, paddleboards and pedal boats too — combo tickets around €39.</div>
+        <div class="pills"><span class="pill pill-must">Trip highlight</span><span class="pill pill-kids">Great for kids</span><span class="pill">🚶 On the doorstep</span><span class="pill pill-cost">Book online first</span></div>
+      </div>
+      <div class="item">
+        <span class="item-name">Hodson Bay Hotel pool</span>
+        <div class="item-desc">Pay-per-use leisure centre for non-residents. The wet-weather backup if the lake is too rough for Baysports.</div>
+        <div class="pills"><span class="pill">🚶 2 min</span><span class="pill pill-kids">All ages</span></div>
+      </div>
+      <div class="item">
+        <span class="item-name">Afterglow floating hot tub</span>
+        <div class="item-desc">A ninety-minute cruise on Lough Ree in a wood-fired floating hot tub. Bring your own drinks. Not a children's activity.</div>
+        <div class="pills"><span class="pill pill-adult">Adults only</span><span class="pill">Book ahead</span></div>
+      </div>
+    </div>
 
-  html += '</div></div>';
+    <div class="cat">
+      <div class="cat-title">🍽️ Eat &amp; drink</div>
+      <div class="item">
+        <span class="item-name">Hodson Bay Hotel — Waterfront Bar</span>
+        <div class="item-desc">Carvery and bar food, kids' menus, no fuss. Easiest lunch on the lake.</div>
+        <div class="pills"><span class="pill">🚶 2 min</span><span class="pill pill-kids">Family friendly</span></div>
+      </div>
+      <div class="item">
+        <span class="item-name">Wineport Lodge, Glasson</span>
+        <div class="item-desc">Lakeside fine dining on the far shore, and about as good a setting as Ireland offers for a slow dinner. The one to keep in your back pocket for a night without the kids.</div>
+        <div class="pills"><span class="pill">🚕 15 min</span><span class="pill pill-adult">Adults · book ahead</span></div>
+      </div>
+    </div>
 
-  if (hasContent) {
-    item.insertAdjacentHTML('beforeend', html);
-  }
-}
-</script>
+    <div class="cat">
+      <div class="cat-title">🐐 Side trip</div>
+      <div class="item">
+        <span class="item-name">Glendeer Pet Farm</span>
+        <div class="item-desc">Animals, a fairy trail, an obstacle course and a playground, with enough indoor space that rain doesn't ruin it. Squarely aimed at under-eights.</div>
+        <div class="pills"><span class="pill pill-kids">Great for kids</span><span class="pill">🚕 15 min</span><span class="pill">Any weather</span></div>
+      </div>
+    </div>
+  </div>
+</details>
 
+<details class="stop">
+  <summary>
+    <div class="stop-marker turn">6</div>
+    <div class="stop-body">
+      <div class="stop-name">Killinure Lough</div>
+      <div class="cruise">⛵ ~40 min from Hodson Bay · Turnaround</div>
+      <div class="stop-line">A sheltered inner lough tucked off the eastern side of Lough Ree. No village, no pub, no facilities — that's the entire point. The quietest night of the trip.</div>
+    </div>
+    <div class="chev">▾</div>
+  </summary>
+  <div class="stop-detail">
+    <div class="moor"><b>Mooring:</b> This is an anchorage, not a marina. Sheltered from most wind directions, which is what makes it usable when the main lough is lively. If the forecast turns, drop back to Athlone for the night instead — no shame in it.</div>
+
+    <div class="cat">
+      <div class="cat-title">🌿 Outdoors &amp; nature</div>
+      <div class="item">
+        <span class="item-name">Birdwatching</span>
+        <div class="item-desc">Herons, swans, cormorants, great crested grebes. Still water and no engine noise, so you actually see things. Best at dusk and first thing.</div>
+        <div class="pills"><span class="pill">🔭 Binoculars</span><span class="pill pill-kids">All ages</span></div>
+      </div>
+      <div class="item">
+        <span class="item-name">Fishing</span>
+        <div class="item-desc">Pike, perch and bream. Buy or hire gear in Athlone on the way through if anyone fancies it — there's nothing to buy out here.</div>
+        <div class="pills"><span class="pill">🎣 Gear from Athlone</span></div>
+      </div>
+      <div class="item">
+        <span class="item-name">Swimming</span>
+        <div class="item-desc">Calm and sheltered, and swimmable in settled weather. Lifejackets on, adult in the water, boat engine off.</div>
+        <div class="pills"><span class="pill pill-kids">Supervised</span></div>
+      </div>
+    </div>
+
+    <div class="cat">
+      <div class="cat-title">🍽️ Eat &amp; drink</div>
+      <div class="item">
+        <span class="item-name">Whatever's in the fridge</span>
+        <div class="item-desc">Nothing here. Cook aboard — this is the night for it. Make sure you've provisioned in Athlone before you head north.</div>
+        <div class="pills"><span class="pill">⚠️ Provision in Athlone</span></div>
+      </div>
+    </div>
+  </div>
+</details>
+
+<!-- ================= DAY 4 ================= -->
+<div class="day-head">
+  <div class="day-num">04</div>
+  <div class="day-title">Killinure → Clonmacnoise</div>
+  <div class="day-sub">~3 hours cruising · The long leg south, then the best stop on the river</div>
+</div>
+
+<details class="stop">
+  <summary>
+    <div class="stop-marker">3</div>
+    <div class="stop-body">
+      <div class="stop-name">Clonmacnoise</div>
+      <div class="cruise">⛵ ~2h 45 from Killinure via Athlone</div>
+      <div class="stop-line">A sixth-century monastic city on the riverbank — round towers, high crosses, nine churches and seven hundred grave slabs. Arriving by water is how it was meant to be seen, and almost nobody does it that way any more.</div>
+    </div>
+    <div class="chev">▾</div>
+  </summary>
+  <div class="stop-detail">
+    <div class="moor"><b>Mooring:</b> There's a river jetty below the site — moor up and walk straight in. Overnight is peaceful; you'll have the ruins to yourselves once the coaches leave around five.</div>
+
+    <div class="alert"><b>2026 — check before you go</b>The visitor centre is closed for a €7.8m redevelopment, so there's no audiovisual presentation and the original high crosses aren't on display. The monastic site itself stays fully open with temporary toilets and a welcome hub. Small groups are walk-in only — no online booking, no guided tours. Bring a guidebook or download the OPW visitor guide, because you won't get a guide on the day.</div>
+
+    <div class="cat">
+      <div class="cat-title">🏰 History &amp; heritage</div>
+      <div class="item">
+        <span class="item-name">The monastic site</span>
+        <div class="item-desc">Founded by St Ciarán in the sixth century at the crossing of the Shannon and the Esker Riada, and for four hundred years the closest thing Ireland had to a university. A cathedral, two round towers, replica high crosses, nine churches, and the burial place of two High Kings. Allow an hour and a half to two hours.</div>
+        <div class="pills"><span class="pill pill-must">Best on the route</span><span class="pill pill-cost">€8 adult · €4 child · €20 family</span><span class="pill">Daily 9:00–17:30</span></div>
+      </div>
+      <div class="item">
+        <span class="item-name">The Nuns' Church</span>
+        <div class="item-desc">Three hundred metres east of the main enclosure along a green lane, and worth every step. One of the finest Hiberno-Romanesque doorways in the country, and usually completely deserted.</div>
+        <div class="pills"><span class="pill">🚶 5 min</span><span class="pill pill-cost">Free</span></div>
+      </div>
+    </div>
+
+    <div class="cat">
+      <div class="cat-title">🌿 Outdoors &amp; nature</div>
+      <div class="item">
+        <span class="item-name">Riverside walk from the jetty</span>
+        <div class="item-desc">Flat walking along the Callows with the ruins on the skyline. Good light in the evening and the best photograph you'll take all week.</div>
+        <div class="pills"><span class="pill">🚶 From the jetty</span><span class="pill pill-kids">All ages</span></div>
+      </div>
+    </div>
+
+    <div class="cat">
+      <div class="cat-title">👧 With kids</div>
+      <div class="item">
+        <span class="item-name">How it actually plays</span>
+        <div class="item-desc">Better than you'd expect. The ruins are open and explorable, there's grass to run on, and the round towers do the work. With the AV presentation out of action this year, give them something to hunt for — count the high crosses, find the carved animals on the grave slabs.</div>
+        <div class="pills"><span class="pill pill-kids">Good for kids</span></div>
+      </div>
+    </div>
+  </div>
+</details>
+
+<!-- ================= DAY 5 ================= -->
+<div class="day-head">
+  <div class="day-num">05</div>
+  <div class="day-title">Clonmacnoise → Banagher</div>
+  <div class="day-sub">~2 hours cruising · Home by lunchtime, boat back, pint earned</div>
+</div>
+
+<div class="card">
+  <div class="section-label">Last leg</div>
+  <p style="font-size:14.5px">Two hours back downstream through the Callows, under the sixteen arches at Shannonbridge, and into Banagher. Aim to be alongside by late morning if handover is at noon — leave slack for fuelling, and do the return walkaround with the same camera you used on day one.</p>
+  <p style="font-size:14.5px;margin-top:12px">If you've time before the drive home: JJ Hough's for one, or Birr Castle if you skipped it at the start.</p>
+</div>
+
+<!-- ================= PRACTICAL ================= -->
+<div class="card">
+  <div class="section-label">On the water</div>
+  <h2 style="margin-bottom:14px">Practical notes</h2>
+  <ul class="note-list">
+    <li><span class="note-ico">🌬️</span><div><b>Lough Ree is the one to watch</b>It builds a short, steep chop very quickly and it's the only genuinely exposed water on this route. Above Force 4, stay in the river below Athlone — the trip works perfectly well without going north. Check the forecast at the quay each morning, not the night before.</div></li>
+    <li><span class="note-ico">🔒</span><div><b>No locks on this stretch</b>The route from Banagher up to Lough Ree is lock-free. Meelick, the nearest one, is downstream of Banagher toward Portumna — you won't meet it unless you head south.</div></li>
+    <li><span class="note-ico">⛽</span><div><b>Fuel and water</b>Fill both at Banagher before departure. Athlone is your reliable mid-trip top-up. Don't count on anything at Killinure.</div></li>
+    <li><span class="note-ico">🛒</span><div><b>Provisioning</b>Two real shops on the route: Banagher and Athlone. Shannonbridge has a village shop for milk and ice cream, and that's it. Stock properly in Athlone before turning north.</div></li>
+    <li><span class="note-ico">🧭</span><div><b>Navigation</b>Well-marked with red and green channel markers — keep red to starboard heading upstream. Five knots through the towns, wake discipline past moored boats. Carry the Waterways Ireland Shannon chart; this page is not a navigation aid.</div></li>
+    <li><span class="note-ico">📶</span><div><b>Signal</b>Fine in the towns and along most of the river. Patchy out on Lough Ree and around Killinure — download anything you need before heading north.</div></li>
+    <li><span class="note-ico">🛟</span><div><b>Kids aboard</b>Lifejackets on deck and on jetties, always. Engine off before anyone swims. Brief both of them on where to sit while under way and where not to stand during mooring.</div></li>
+  </ul>
+</div>
+
+<div class="card">
+  <div class="section-label">Don't forget</div>
+  <div class="packing">
+    <div>🧥 Waterproofs — all four</div>
+    <div>👟 Non-slip deck shoes</div>
+    <div>🔭 Binoculars</div>
+    <div>🧢 Sun hats &amp; suncream</div>
+    <div>🔌 Power bank</div>
+    <div>🃏 Cards &amp; a board game</div>
+    <div>🩹 First aid kit</div>
+    <div>🔦 Torch</div>
+    <div>🧤 Gloves for lines</div>
+    <div>📱 Offline maps downloaded</div>
+    <div>🩱 Swim gear for Baysports</div>
+    <div>📷 Camera for handover</div>
+  </div>
+</div>
+
+<footer>
+  <b>Banagher Leisurely Tour</b> · Lower Shannon · 4 nights · ~60km<br>
+  Silver Star Cruisers, Banagher, Co. Offaly<br>
+  <span style="font-size:11px">Prices and opening hours checked August 2026 — confirm before you rely on them.</span>
+</footer>
+
+</div>
 </body>
 </html>
