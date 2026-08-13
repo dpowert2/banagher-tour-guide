@@ -2,329 +2,493 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<meta name="theme-color" content="#1C1C2C">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+<meta name="theme-color" content="#0E1218">
 <title>Passage — Silver Spray</title>
 <link rel="manifest" href="./manifest.webmanifest">
 <link rel="apple-touch-icon" href="./icon-192.png">
 <meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,600;9..40,700;9..40,800&display=swap" rel="stylesheet">
 <style>
 :root{
-  --bg:#0E1218; --panel:#171C24; --panel2:#1F2630; --line:#2A3340;
-  --txt:#F3F5F8; --mut:#9AA7B6; --faint:#6B7885;
+  --bg:#0E1218; --panel:#171C24; --panel2:#212934; --line:#2C3542;
+  --txt:#F5F7FA; --mut:#9AA7B6; --faint:#6B7885;
   --blue:#7BB5E8; --coral:#E84B3C; --green:#3DD68C; --amber:#F0A93B;
+  --safe-b:env(safe-area-inset-bottom,0px);
+  --safe-t:env(safe-area-inset-top,0px);
   --font:'DM Sans',-apple-system,BlinkMacSystemFont,sans-serif;
 }
-*{box-sizing:border-box;margin:0;padding:0}
-body{font-family:var(--font);background:var(--bg);color:var(--txt);font-size:15px;-webkit-font-smoothing:antialiased;overscroll-behavior:none}
-.wrap{max-width:720px;margin:0 auto;padding:12px 12px 40px}
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+html,body{height:100%;overflow:hidden}
+body{font-family:var(--font);background:var(--bg);color:var(--txt);font-size:16px;-webkit-font-smoothing:antialiased;overscroll-behavior:none;position:fixed;width:100%}
 
-.topbar{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:6px 4px 12px}
-.brand{font-size:13px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--mut)}
-.back{font-size:12.5px;font-weight:600;color:var(--blue);text-decoration:none;background:var(--panel);padding:7px 13px;border-radius:999px}
+#map{position:absolute;inset:0;background:var(--panel)}
 
-.warn{background:#2A1F1C;border:1px solid #5A3129;border-radius:12px;padding:12px 14px;font-size:12.5px;color:#F0C4BC;margin-bottom:12px;line-height:1.5}
-.warn b{color:var(--coral);display:block;font-size:11px;letter-spacing:.06em;text-transform:uppercase;margin-bottom:3px}
+/* top HUD */
+.hud{position:absolute;top:calc(var(--safe-t) + 8px);left:8px;right:8px;z-index:20;display:flex;gap:8px;align-items:flex-start;pointer-events:none}
+.hud>*{pointer-events:auto}
+.hback{background:rgba(14,18,24,.88);backdrop-filter:blur(12px);color:var(--blue);text-decoration:none;font-size:14px;font-weight:700;padding:11px 15px;border-radius:14px;flex:0 0 auto}
+.speedbox{background:rgba(14,18,24,.88);backdrop-filter:blur(12px);border-radius:14px;padding:8px 14px;display:flex;gap:16px;align-items:center;flex:1;justify-content:center}
+.sb{text-align:center;min-width:52px}
+.sb .v{font-size:23px;font-weight:800;line-height:1;font-variant-numeric:tabular-nums}
+.sb .k{font-size:9.5px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--faint);margin-top:3px}
 
-#map{width:100%;height:46vh;min-height:300px;border-radius:16px;background:var(--panel);margin-bottom:12px}
+/* floating right buttons */
+.fabs{position:absolute;right:10px;top:calc(var(--safe-t) + 70px);z-index:20;display:flex;flex-direction:column;gap:8px}
+.fab{width:52px;height:52px;border-radius:16px;border:none;background:rgba(14,18,24,.88);backdrop-filter:blur(12px);color:var(--txt);font-size:21px;display:flex;align-items:center;justify-content:center;cursor:pointer}
+.fab.on{background:var(--green);color:#0E1218}
+.fab.alarm{background:var(--coral);color:#fff}
 
-.fixrow{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:12px}
-.fix{background:var(--panel);border-radius:14px;padding:12px 10px;text-align:center}
-.fix .k{font-size:10px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:var(--faint)}
-.fix .v{font-size:26px;font-weight:800;line-height:1.1;margin-top:4px;font-variant-numeric:tabular-nums}
-.fix .u{font-size:11px;font-weight:600;color:var(--mut)}
+/* bottom sheet */
+.sheet{position:absolute;left:0;right:0;bottom:0;z-index:30;background:var(--bg);border-radius:22px 22px 0 0;box-shadow:0 -8px 32px rgba(0,0,0,.55);padding-bottom:var(--safe-b);transition:transform .28s cubic-bezier(.4,0,.2,1);max-height:78%;display:flex;flex-direction:column}
+.sheet.down{transform:translateY(calc(100% - 158px - var(--safe-b)))}
+.grab{padding:9px 0 4px;display:flex;justify-content:center;flex:0 0 auto;cursor:pointer}
+.grab i{width:40px;height:5px;border-radius:3px;background:var(--line);display:block}
+.tabs{display:flex;gap:6px;padding:4px 14px 10px;flex:0 0 auto}
+.tabs button{flex:1;font-family:var(--font);font-size:13.5px;font-weight:700;padding:10px 4px;border:none;border-radius:12px;background:var(--panel);color:var(--mut);cursor:pointer}
+.tabs button.on{background:var(--txt);color:var(--bg)}
+.tabs button.warnflag{color:var(--amber)}
+.body{overflow-y:auto;-webkit-overflow-scrolling:touch;padding:0 14px 18px;flex:1}
 
-.next{background:var(--panel);border-radius:16px;padding:16px 18px;margin-bottom:12px}
-.next .lbl{font-size:10.5px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--faint);margin-bottom:8px;display:flex;justify-content:space-between}
-.next .nm{font-size:22px;font-weight:800;line-height:1.15}
-.next .sub{font-size:13px;color:var(--mut);margin-top:3px}
-.nextgrid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin-top:14px;padding-top:14px;border-top:1px solid var(--line)}
-.nextgrid div{text-align:center}
-.nextgrid .k{font-size:10px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--faint)}
-.nextgrid .v{font-size:20px;font-weight:800;margin-top:3px;font-variant-numeric:tabular-nums}
-.arrow{display:inline-block;transition:transform .3s;font-size:19px}
+/* big readout */
+.big{background:var(--panel);border-radius:18px;padding:16px 18px;margin-bottom:10px}
+.big .to{font-size:10.5px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--faint)}
+.big .nm{font-size:24px;font-weight:800;line-height:1.15;margin-top:4px}
+.big .sub{font-size:13px;color:var(--mut);margin-top:2px}
+.trio{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-top:14px;padding-top:14px;border-top:1px solid var(--line)}
+.trio div{text-align:center}
+.trio .k{font-size:9.5px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--faint)}
+.trio .v{font-size:22px;font-weight:800;margin-top:3px;font-variant-numeric:tabular-nums;line-height:1.1}
+#arrow{display:inline-block;transition:transform .35s;font-size:21px;color:var(--blue)}
 
-.lock{background:var(--panel);border-radius:16px;padding:16px 18px;margin-bottom:12px;border-left:4px solid var(--amber)}
-.lock h3{font-size:16px;font-weight:800;margin-bottom:2px}
-.lock .st{font-size:13.5px;margin-top:6px;font-weight:600}
-.lock .st.open{color:var(--green)}
-.lock .st.shut{color:var(--coral)}
-.lock .st.lunch{color:var(--amber)}
-.lock p{font-size:12.5px;color:var(--mut);margin-top:8px;line-height:1.55}
-.lock a{color:var(--blue);font-weight:700;text-decoration:none}
+/* verdict banner */
+.verdict{border-radius:16px;padding:14px 16px;margin-bottom:10px;font-size:14px;line-height:1.5}
+.verdict b{display:block;font-size:11px;font-weight:800;letter-spacing:.07em;text-transform:uppercase;margin-bottom:4px}
+.v-go{background:rgba(61,214,140,.13)} .v-go b{color:var(--green)}
+.v-tight{background:rgba(240,169,59,.13)} .v-tight b{color:var(--amber)}
+.v-no{background:rgba(232,75,60,.15)} .v-no b{color:var(--coral)}
+.v-idle{background:var(--panel)} .v-idle b{color:var(--faint)}
 
-.wps{background:var(--panel);border-radius:16px;overflow:hidden;margin-bottom:12px}
-.wps h3{font-size:10.5px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--faint);padding:16px 18px 10px}
-.wp{display:flex;gap:12px;align-items:center;padding:12px 18px;border-top:1px solid var(--line);cursor:pointer}
-.wp.on{background:var(--panel2)}
-.wp .b{flex:0 0 26px;height:26px;border-radius:50%;background:var(--panel2);color:var(--mut);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:800}
+/* waypoint rows */
+.wp{display:flex;gap:12px;align-items:center;padding:13px 14px;border-radius:14px;background:var(--panel);margin-bottom:7px;cursor:pointer}
+.wp.on{background:var(--panel2);outline:2px solid var(--coral)}
+.wp .b{flex:0 0 30px;height:30px;border-radius:50%;background:var(--panel2);color:var(--mut);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:800}
 .wp.on .b{background:var(--coral);color:#fff}
-.wp.hz .b{background:var(--amber);color:#1C1C2C}
+.wp.hz .b{background:var(--amber);color:#0E1218}
 .wp .n{flex:1;min-width:0}
-.wp .n b{font-size:14.5px;font-weight:700;display:block}
-.wp .n span{font-size:12px;color:var(--mut)}
-.wp .d{font-size:13px;font-weight:700;color:var(--blue);font-variant-numeric:tabular-nums;white-space:nowrap}
+.wp .n b{font-size:15px;font-weight:700;display:block}
+.wp .n span{font-size:12.5px;color:var(--mut)}
+.wp .d{font-size:14px;font-weight:800;color:var(--blue);font-variant-numeric:tabular-nums;white-space:nowrap}
 
-.btnrow{display:flex;gap:8px;margin-bottom:12px}
-.btn{flex:1;font-family:var(--font);font-size:13px;font-weight:700;padding:13px 10px;border-radius:12px;border:none;cursor:pointer;background:var(--panel);color:var(--txt)}
-.btn.go{background:var(--blue);color:#0E1218}
-.btn.on{background:var(--green);color:#0E1218}
-
-.note{font-size:11.5px;color:var(--faint);line-height:1.6;padding:4px 6px 0}
-.note b{color:var(--mut)}
-#status{font-size:12px;color:var(--amber);padding:0 6px 10px}
+/* generic card */
+.c{background:var(--panel);border-radius:16px;padding:16px 18px;margin-bottom:10px}
+.c h3{font-size:16px;font-weight:800;margin-bottom:6px}
+.c p{font-size:13.5px;color:var(--mut);line-height:1.6;margin-top:8px}
+.c p b{color:var(--txt)}
+.c a{color:var(--blue);font-weight:700;text-decoration:none}
+.st{font-size:15px;font-weight:800;margin-top:4px}
+.st.open{color:var(--green)} .st.shut{color:var(--coral)} .st.lunch{color:var(--amber)}
+.row{display:flex;gap:8px;margin-top:12px}
+.bt{flex:1;font-family:var(--font);font-size:14px;font-weight:700;padding:14px 8px;border:none;border-radius:14px;background:var(--panel2);color:var(--txt);cursor:pointer}
+.bt.pri{background:var(--blue);color:#0E1218}
+.bt.dgr{background:var(--coral);color:#fff}
+.bt.on{background:var(--green);color:#0E1218}
+.tel{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
+.tel a{flex:1 1 44%;text-align:center;background:var(--panel2);padding:13px 8px;border-radius:14px;font-size:13.5px;font-weight:700;color:var(--blue);text-decoration:none}
+.tel a.sos{background:rgba(232,75,60,.18);color:#FF8B7E}
+.mini{font-size:11.5px;color:var(--faint);line-height:1.6;margin-top:10px}
+.mini b{color:var(--mut)}
+#msg{font-size:12.5px;color:var(--amber);padding:2px 2px 10px;min-height:0}
+.anchorbig{font-size:40px;font-weight:800;text-align:center;font-variant-numeric:tabular-nums;line-height:1;margin:6px 0 2px}
+.anchorbig.warn{color:var(--coral)}
+.anchorsub{text-align:center;font-size:12px;color:var(--faint);font-weight:700;letter-spacing:.06em;text-transform:uppercase}
 </style>
 </head>
 <body>
-<div class="wrap">
-
-<div class="topbar">
-  <div class="brand">⚓ Passage · Silver Spray</div>
-  <a class="back" href="./">← Guide</a>
-</div>
-
-<div class="warn">
-  <b>Not a navigation chart</b>
-  Steer by the <b style="display:inline;font-size:12.5px;text-transform:none;letter-spacing:0">Waterways Ireland chart and the Silverline navigation book aboard</b>, and by the red and green channel markers on the water. The channel shifts, the shoals don't move for anyone, and the line on this map is an indicative track between moorings — <b style="display:inline;font-size:12.5px;text-transform:none;letter-spacing:0">not a surveyed channel</b>. Use this for position, speed and timing only.
-</div>
-
-<div id="status">Tap "Start GPS" to begin.</div>
-
-<div class="btnrow">
-  <button class="btn go" id="gps" type="button">Start GPS</button>
-  <button class="btn" id="wake" type="button">Keep screen on</button>
-  <button class="btn" id="centre" type="button">Centre</button>
-</div>
 
 <div id="map"></div>
 
-<div class="fixrow">
-  <div class="fix"><div class="k">Speed</div><div class="v" id="kn">—</div><div class="u">knots</div></div>
-  <div class="fix"><div class="k">Speed</div><div class="v" id="kmh">—</div><div class="u">km/h</div></div>
-  <div class="fix"><div class="k">Heading</div><div class="v" id="hdg">—</div><div class="u">degrees</div></div>
-</div>
-
-<div class="next">
-  <div class="lbl"><span>Next waypoint</span><span id="acc"></span></div>
-  <div class="nm" id="nextname">—</div>
-  <div class="sub" id="nextsub">Start GPS, or tap a waypoint below to target it.</div>
-  <div class="nextgrid">
-    <div><div class="k">Distance</div><div class="v" id="dist">—</div></div>
-    <div><div class="k">Bearing</div><div class="v"><span class="arrow" id="arrow">↑</span> <span id="brg">—</span></div></div>
-    <div><div class="k">ETA</div><div class="v" id="eta">—</div></div>
+<div class="hud">
+  <a class="hback" href="./">‹ Guide</a>
+  <div class="speedbox">
+    <div class="sb"><div class="v" id="kn">—</div><div class="k">knots</div></div>
+    <div class="sb"><div class="v" id="kmh">—</div><div class="k">km/h</div></div>
+    <div class="sb"><div class="v" id="hdg">—</div><div class="k">heading</div></div>
   </div>
 </div>
 
-<div class="lock">
-  <h3>Athlone Lock</h3>
-  <div class="st" id="lockst">Checking…</div>
-  <p>The only lock on your route — and you pass it <b style="color:var(--txt)">twice</b>: northbound to Lough Ree on Saturday, southbound back on Sunday. Keeper-operated, no VHF. August hours <b style="color:var(--txt)">09:30–19:30 Mon–Sat, 09:30–18:00 Sun</b>, closed <b style="color:var(--txt)">13:00–14:00</b> for lunch. €1.50 by smart card or cash. Gates open outside these hours only in exceptional circumstances.</p>
-  <p>Lock-keeper: <a href="tel:+353906492026">090 649 2026</a> · Silverline: <a href="tel:+353579151112">057 915 1112</a> · Emergency: <a href="tel:112">112</a></p>
+<div class="fabs">
+  <button class="fab" id="fgps" type="button" title="GPS">📍</button>
+  <button class="fab" id="fcentre" type="button" title="Centre">◎</button>
+  <button class="fab" id="fwake" type="button" title="Keep screen on">☀</button>
+  <button class="fab" id="fmob" type="button" title="Mark this spot">⚑</button>
 </div>
 
-<div class="wps">
-  <h3>Waypoints — tap to target</h3>
-  <div id="wplist"></div>
-</div>
+<div class="sheet" id="sheet">
+  <div class="grab" id="grab"><i></i></div>
+  <div class="tabs">
+    <button id="t-run" class="on" type="button">Passage</button>
+    <button id="t-lock" type="button">Lock</button>
+    <button id="t-anch" type="button">Anchor</button>
+  </div>
+  <div class="body">
+    <div id="msg">Tap 📍 to start GPS.</div>
 
-<div class="note">
-  <b>Rules of the road:</b> keep red markers to starboard heading upstream (north), green to port; reverse coming back. 5 knots through towns and past moored boats. Bridge arches at Shannonbridge and Banagher are narrow — line up early and commit.<br><br>
-  <b>Lough Ree:</b> the only genuinely exposed water. Cross in the morning, keep the marked channel between Athlone and Hodson Bay, and don't cut corners near the islands — they have shoals off them.<br><br>
-  Distances are straight-line, so they read short against the river's meander — expect the actual run to be 15–25% longer. ETA assumes 9 km/h.
-</div>
+    <!-- PASSAGE -->
+    <div id="p-run">
+      <div class="big">
+        <div class="to">Steering for <span id="acc" style="float:right;font-weight:600"></span></div>
+        <div class="nm" id="nextname">—</div>
+        <div class="sub" id="nextsub">Tap a waypoint to target it.</div>
+        <div class="trio">
+          <div><div class="k">Distance</div><div class="v" id="dist">—</div></div>
+          <div><div class="k">Bearing</div><div class="v"><span id="arrow">↑</span></div><div class="k" id="brg" style="margin-top:2px;color:var(--mut)">—</div></div>
+          <div><div class="k">ETA</div><div class="v" id="eta">—</div></div>
+        </div>
+      </div>
+      <div id="wplist"></div>
+      <div class="mini">
+        <b>Red to starboard heading upstream</b> (north), green to port — reverse coming home. 5 knots through towns and past moored boats.<br><br>
+        Distances are straight-line, so the river run will be 15–25% longer. ETA uses your actual speed when moving, 9 km/h when stopped.<br><br>
+        <b>This is not a chart.</b> The track is an indicative line between moorings, not a surveyed channel. Steer by the Waterways Ireland chart aboard and by the markers on the water.
+      </div>
+    </div>
 
+    <!-- LOCK -->
+    <div id="p-lock" style="display:none">
+      <div class="verdict v-idle" id="lockverdict"><b>Lock timing</b>Start GPS and I'll work out whether you make it.</div>
+      <div class="c">
+        <h3>Athlone Lock</h3>
+        <div class="st" id="lockst">Checking…</div>
+        <p>The only lock on your route, and you pass it <b>twice</b> — north to Lough Ree on Saturday, south again on Sunday.</p>
+        <p><b>Aug hours:</b> 09:30–19:30 Mon–Sat · 09:30–18:00 Sun · shut 13:00–14:00 for lunch. €1.50 by smart card or cash. Keeper-operated, no VHF. Gates open outside those hours only in exceptional circumstances.</p>
+        <div class="tel">
+          <a href="tel:+353906492026">Lock keeper</a>
+          <a href="tel:+353579151112">Silverline</a>
+        </div>
+      </div>
+      <div class="c">
+        <h3>Sunday is the tight one</h3>
+        <p>Coming south off Lough Ree the lock shuts at <b>18:00</b> and closes for lunch <b>13:00–14:00</b>. Be through before one and the day stays simple. Miss the last locking and you're on the wrong side of it overnight.</p>
+      </div>
+    </div>
+
+    <!-- ANCHOR -->
+    <div id="p-anch" style="display:none">
+      <div class="c">
+        <h3>Anchor watch</h3>
+        <div class="anchorbig" id="adrift">—</div>
+        <div class="anchorsub" id="adriftsub">not set</div>
+        <div class="row">
+          <button class="bt pri" id="aset" type="button">Drop anchor here</button>
+          <button class="bt" id="aclear" type="button">Clear</button>
+        </div>
+        <div class="row">
+          <button class="bt" data-r="30" type="button">30 m</button>
+          <button class="bt" data-r="50" type="button">50 m</button>
+          <button class="bt" data-r="75" type="button">75 m</button>
+        </div>
+        <p>Set it once you've settled back on the chain at Killinure. If you drift beyond the radius the phone sounds and vibrates. Keep this tab open and the screen lock on — a backgrounded browser will stop watching.</p>
+        <p><b>It is not a substitute for keeping an eye out.</b> Phone GPS wanders 5–15 m at rest, so use 50 m unless you're tight to something.</p>
+      </div>
+      <div class="c">
+        <h3>Marks</h3>
+        <p id="mobtxt">Tap ⚑ any time to drop a pin at your exact position — a good mooring, a shoal you touched, or something gone over the side. Marks stay until you clear them.</p>
+        <div class="row"><button class="bt dgr" id="mclear" type="button">Clear marks</button></div>
+        <div class="tel"><a class="sos" href="tel:112">Emergency 112 / 999</a></div>
+      </div>
+    </div>
+  </div>
 </div>
 
 <script>
 var WP = [
-  {n:'Banagher Marina',    s:'Base · handover',           lat:53.1925, lng:-7.9905},
-  {n:'Shannonbridge',      s:'16-arch bridge · Night 1',  lat:53.2789, lng:-8.0440},
-  {n:'Clonmacnoise jetty', s:'Monastic site · Night 4',   lat:53.3259, lng:-7.9868},
-  {n:'Athlone town quay',  s:'Below the bridge · Night 2',lat:53.4231, lng:-7.9428},
-  {n:'Athlone Lock',       s:'Keeper-operated · €1.50',   lat:53.4248, lng:-7.9437, hz:true},
-  {n:'Lough Ree entrance', s:'Open water begins',         lat:53.4400, lng:-7.9560, hz:true},
-  {n:'Hodson Bay',         s:'Baysports jetty',           lat:53.4697, lng:-7.9871},
-  {n:'Killinure Lough',    s:'Anchorage · Night 3',       lat:53.4600, lng:-7.9050}
+  {n:'Banagher Marina',    s:'Base · handover',            lat:53.1925, lng:-7.9905},
+  {n:'Shannonbridge',      s:'16-arch bridge · Night 1',   lat:53.2789, lng:-8.0440},
+  {n:'Clonmacnoise jetty', s:'Monastic site · Night 4',    lat:53.3259, lng:-7.9868},
+  {n:'Athlone town quay',  s:'Below the bridge · Night 2', lat:53.4231, lng:-7.9428},
+  {n:'Athlone Lock',       s:'Keeper-operated · €1.50',    lat:53.4248, lng:-7.9437, hz:true, lock:true},
+  {n:'Lough Ree entrance', s:'Open water begins',          lat:53.4400, lng:-7.9560, hz:true},
+  {n:'Hodson Bay',         s:'Baysports jetty',            lat:53.4697, lng:-7.9871},
+  {n:'Killinure Lough',    s:'Anchorage · Night 3',        lat:53.4600, lng:-7.9050}
 ];
-var TRACK = [[53.1925,-7.9905],[53.2100,-8.0060],[53.2280,-8.0255],[53.2530,-8.0420],[53.2789,-8.0440],
-             [53.2990,-8.0210],[53.3110,-8.0060],[53.3259,-7.9868],[53.3470,-7.9720],[53.3600,-7.9690],
-             [53.3860,-7.9810],[53.3990,-7.9790],[53.4170,-7.9520],[53.4231,-7.9428],[53.4248,-7.9437],
-             [53.4400,-7.9560],[53.4570,-7.9730],[53.4697,-7.9871],[53.4700,-7.9600],[53.4650,-7.9250],[53.4600,-7.9050]];
+var TRACK=[[53.1925,-7.9905],[53.2100,-8.0060],[53.2280,-8.0255],[53.2530,-8.0420],[53.2789,-8.0440],
+[53.2990,-8.0210],[53.3110,-8.0060],[53.3259,-7.9868],[53.3470,-7.9720],[53.3600,-7.9690],
+[53.3860,-7.9810],[53.3990,-7.9790],[53.4170,-7.9520],[53.4231,-7.9428],[53.4248,-7.9437],
+[53.4400,-7.9560],[53.4570,-7.9730],[53.4697,-7.9871],[53.4700,-7.9600],[53.4650,-7.9250],[53.4600,-7.9050]];
 
-var map, me, meAcc, target = null, watchId = null, last = null, wl = null;
+var map, me, meAcc, target=null, watchId=null, last=null, wl=null;
+var anchor=null, aRadius=50, aAlarm=false, aCircle=null, aMk=null, marks=[], follow=true;
+var LOCK = WP[4];
 
-function rad(d){ return d*Math.PI/180; }
-function haversine(a,b,c,d){
-  var R=6371, dLat=rad(c-a), dLon=rad(d-b);
-  var x=Math.sin(dLat/2)*Math.sin(dLat/2)+Math.cos(rad(a))*Math.cos(rad(c))*Math.sin(dLon/2)*Math.sin(dLon/2);
-  return R*2*Math.atan2(Math.sqrt(x),Math.sqrt(1-x));
-}
-function bearing(a,b,c,d){
-  var y=Math.sin(rad(d-b))*Math.cos(rad(c));
+function rad(d){return d*Math.PI/180;}
+function hav(a,b,c,d){var R=6371,dLa=rad(c-a),dLo=rad(d-b);
+  var x=Math.sin(dLa/2)*Math.sin(dLa/2)+Math.cos(rad(a))*Math.cos(rad(c))*Math.sin(dLo/2)*Math.sin(dLo/2);
+  return R*2*Math.atan2(Math.sqrt(x),Math.sqrt(1-x));}
+function brg(a,b,c,d){var y=Math.sin(rad(d-b))*Math.cos(rad(c));
   var x=Math.cos(rad(a))*Math.sin(rad(c))-Math.sin(rad(a))*Math.cos(rad(c))*Math.cos(rad(d-b));
-  return (Math.atan2(y,x)*180/Math.PI+360)%360;
-}
-function compass(d){
-  var p=['N','NNE','NE','ENE','E','ESE','SE','SSE','S','SSW','SW','WSW','W','WNW','NW','NNW'];
-  return p[Math.round(d/22.5)%16];
-}
+  return (Math.atan2(y,x)*180/Math.PI+360)%360;}
+function cmp(d){var p=['N','NNE','NE','ENE','E','ESE','SE','SSE','S','SSW','SW','WSW','W','WNW','NW','NNW'];return p[Math.round(d/22.5)%16];}
+function fkm(k){return k<1?Math.round(k*1000)+' m':k.toFixed(1)+' km';}
+function pad(n){return String(n).padStart(2,'0');}
 
 function initMap(){
-  map = new google.maps.Map(document.getElementById('map'), {
-    center:{lat:53.34,lng:-7.97}, zoom:10, mapTypeId:'hybrid',
-    disableDefaultUI:true, zoomControl:true, gestureHandling:'greedy'
-  });
-  new google.maps.Polyline({path:TRACK.map(function(p){return {lat:p[0],lng:p[1]};}),map:map,
-    strokeColor:'#7BB5E8',strokeOpacity:.75,strokeWeight:3});
+  map=new google.maps.Map(document.getElementById('map'),{
+    center:{lat:53.34,lng:-7.97},zoom:10,mapTypeId:'hybrid',
+    disableDefaultUI:true,gestureHandling:'greedy',clickableIcons:false});
+  new google.maps.Polyline({path:TRACK.map(function(p){return{lat:p[0],lng:p[1]};}),map:map,
+    strokeColor:'#7BB5E8',strokeOpacity:.7,strokeWeight:3});
   WP.forEach(function(w,i){
-    var mk = new google.maps.Marker({position:{lat:w.lat,lng:w.lng},map:map,title:w.n,
+    w.mk=new google.maps.Marker({position:{lat:w.lat,lng:w.lng},map:map,title:w.n,
       label:{text:String(i+1),color:'#fff',fontWeight:'700',fontSize:'11px'},
-      icon:{path:google.maps.SymbolPath.CIRCLE,scale:11,
-        fillColor:w.hz?'#F0A93B':'#111827',fillOpacity:1,strokeColor:'#fff',strokeWeight:2}});
-    mk.addListener('click',function(){ setTarget(i); });
-    w.mk = mk;
+      icon:{path:google.maps.SymbolPath.CIRCLE,scale:12,fillColor:w.hz?'#F0A93B':'#111827',
+        fillOpacity:1,strokeColor:'#fff',strokeWeight:2}});
+    w.mk.addListener('click',function(){setTarget(i);});
   });
-  me = new google.maps.Marker({map:map,visible:false,zIndex:999,
-    icon:{path:google.maps.SymbolPath.FORWARD_CLOSED_ARROW,scale:6,
-      fillColor:'#3DD68C',fillOpacity:1,strokeColor:'#0E1218',strokeWeight:2,rotation:0}});
-  meAcc = new google.maps.Circle({map:map,visible:false,fillColor:'#3DD68C',fillOpacity:.10,
-    strokeColor:'#3DD68C',strokeOpacity:.35,strokeWeight:1});
+  me=new google.maps.Marker({map:map,visible:false,zIndex:999,
+    icon:{path:google.maps.SymbolPath.FORWARD_CLOSED_ARROW,scale:7,fillColor:'#3DD68C',
+      fillOpacity:1,strokeColor:'#0E1218',strokeWeight:2,rotation:0}});
+  meAcc=new google.maps.Circle({map:map,visible:false,fillColor:'#3DD68C',fillOpacity:.10,
+    strokeColor:'#3DD68C',strokeOpacity:.3,strokeWeight:1});
+  map.addListener('dragstart',function(){follow=false;});
   var b=new google.maps.LatLngBounds();
-  TRACK.forEach(function(p){ b.extend({lat:p[0],lng:p[1]}); });
-  map.fitBounds(b,20);
-  renderList();
+  TRACK.forEach(function(p){b.extend({lat:p[0],lng:p[1]});});
+  map.fitBounds(b,24);
+  renderList(); restoreAnchor();
 }
-window.initMap = initMap;
+window.initMap=initMap;
 
 function renderList(){
-  var el = document.getElementById('wplist');
-  el.innerHTML = '';
+  var el=document.getElementById('wplist'); el.innerHTML='';
   WP.forEach(function(w,i){
-    var d = document.createElement('div');
-    d.className = 'wp' + (target===i?' on':'') + (w.hz?' hz':'');
-    d.innerHTML = '<div class="b">'+(i+1)+'</div><div class="n"><b>'+w.n+'</b><span>'+w.s+'</span></div>'+
-                  '<div class="d" id="wd'+i+'">'+(last?fmtKm(haversine(last.lat,last.lng,w.lat,w.lng)):'')+'</div>';
-    d.addEventListener('click',function(){ setTarget(i); });
+    var d=document.createElement('div');
+    d.className='wp'+(target===i?' on':'')+(w.hz?' hz':'');
+    d.innerHTML='<div class="b">'+(i+1)+'</div><div class="n"><b>'+w.n+'</b><span>'+w.s+'</span></div>'+
+      '<div class="d" id="wd'+i+'">'+(last?fkm(hav(last.lat,last.lng,w.lat,w.lng)):'')+'</div>';
+    d.addEventListener('click',function(){setTarget(i);});
     el.appendChild(d);
   });
 }
-function fmtKm(k){ return k<1 ? Math.round(k*1000)+' m' : k.toFixed(1)+' km'; }
-
 function setTarget(i){
-  target = i;
-  document.getElementById('nextname').textContent = WP[i].n;
-  document.getElementById('nextsub').textContent = WP[i].s;
-  renderList();
-  update();
-  if(map) map.panTo({lat:WP[i].lat,lng:WP[i].lng});
+  target=i;
+  document.getElementById('nextname').textContent=WP[i].n;
+  document.getElementById('nextsub').textContent=WP[i].s;
+  renderList(); update();
+  if(map){follow=false;map.panTo({lat:WP[i].lat,lng:WP[i].lng});}
 }
-
 function nearestAhead(){
-  if(!last) return null;
-  var best=null,bd=1e9;
-  WP.forEach(function(w,i){
-    var d=haversine(last.lat,last.lng,w.lat,w.lng);
-    if(d>0.25 && d<bd){ bd=d; best=i; }
-  });
+  if(!last)return null; var best=null,bd=1e9;
+  WP.forEach(function(w,i){var d=hav(last.lat,last.lng,w.lat,w.lng);if(d>0.25&&d<bd){bd=d;best=i;}});
   return best;
 }
+function speedKmh(){ return (last&&last.spd!=null&&last.spd>0.5)?last.spd*3.6:9; }
 
 function update(){
-  if(!last){ return; }
-  if(target===null){ var n=nearestAhead(); if(n!==null) setTarget(n); return; }
-  var w = WP[target];
-  var d = haversine(last.lat,last.lng,w.lat,w.lng);
-  var b = bearing(last.lat,last.lng,w.lat,w.lng);
-  document.getElementById('dist').textContent = fmtKm(d);
-  document.getElementById('brg').textContent = Math.round(b)+'° '+compass(b);
-  var rot = b - (last.hdg||0);
-  document.getElementById('arrow').style.transform = 'rotate('+rot+'deg)';
-  var kmh = (last.spd!=null && last.spd>0.3) ? last.spd*3.6 : 9;
-  var mins = (d/kmh)*60;
-  document.getElementById('eta').textContent = mins<1 ? 'here' : (mins<60 ? Math.round(mins)+' min' : (Math.floor(mins/60)+'h '+Math.round(mins%60)+'m'));
-  WP.forEach(function(x,i){
-    var e=document.getElementById('wd'+i);
-    if(e) e.textContent = fmtKm(haversine(last.lat,last.lng,x.lat,x.lng));
-  });
+  if(!last)return;
+  if(target===null){var n=nearestAhead();if(n!==null){setTarget(n);}return;}
+  var w=WP[target];
+  var d=hav(last.lat,last.lng,w.lat,w.lng), b=brg(last.lat,last.lng,w.lat,w.lng);
+  document.getElementById('dist').textContent=fkm(d);
+  document.getElementById('brg').textContent=Math.round(b)+'° '+cmp(b);
+  document.getElementById('arrow').style.transform='rotate('+(b-(last.hdg||0))+'deg)';
+  var mins=(d/speedKmh())*60;
+  document.getElementById('eta').textContent=mins<1?'here':(mins<60?Math.round(mins)+'m':(Math.floor(mins/60)+'h'+pad(Math.round(mins%60))));
+  WP.forEach(function(x,i){var e=document.getElementById('wd'+i);if(e)e.textContent=fkm(hav(last.lat,last.lng,x.lat,x.lng));});
+  lockVerdict();
 }
 
+/* ---- will we make the lock? ---- */
+function lockWindow(now){
+  var sun=now.getDay()===0;
+  return {open:9*60+30, close:sun?18*60:19*60+30, lunchA:13*60, lunchB:14*60, sun:sun};
+}
+function lockVerdict(){
+  var el=document.getElementById('lockverdict');
+  if(!last){el.className='verdict v-idle';el.innerHTML='<b>Lock timing</b>Start GPS and I\'ll work out whether you make it.';return;}
+  var now=new Date(), w=lockWindow(now);
+  var d=hav(last.lat,last.lng,LOCK.lat,LOCK.lng);
+  var mins=(d*1.2/speedKmh())*60;            // +20% for river meander
+  var arr=now.getHours()*60+now.getMinutes()+mins;
+  var ah=Math.floor(arr/60)%24, am=Math.round(arr%60);
+  var at=pad(ah)+':'+pad(am);
+  if(d<0.3){el.className='verdict v-go';el.innerHTML='<b>At the lock</b>You\'re on top of it. Ropes ready, €1.50 on the smart card, and wait for the keeper\'s signal.';return;}
+  if(arr>=w.close){
+    el.className='verdict v-no';
+    el.innerHTML='<b>Won\'t make it today</b>'+fkm(d)+' out, arriving about '+at+' — the lock shuts at '+pad(Math.floor(w.close/60))+':'+pad(w.close%60)+'. Plan to moor this side and lock through in the morning.';
+  } else if(arr>=w.lunchA && arr<w.lunchB){
+    el.className='verdict v-tight';
+    el.innerHTML='<b>You\'ll hit the lunch closure</b>'+fkm(d)+' out, arriving about '+at+'. Gates shut 13:00–14:00. Either push on hard to beat one o\'clock, or ease off and take an hour somewhere pleasant.';
+  } else if(w.close-arr<45){
+    el.className='verdict v-tight';
+    el.innerHTML='<b>Tight</b>'+fkm(d)+' out, arriving about '+at+' with only '+Math.round(w.close-arr)+' minutes before the gates shut. Don\'t dawdle, and ring the keeper on 090 649 2026 to say you\'re coming.';
+  } else {
+    el.className='verdict v-go';
+    el.innerHTML='<b>Comfortable</b>'+fkm(d)+' out, arriving about '+at+'. Gates are open and you\'ve plenty in hand.';
+  }
+}
+
+/* ---- anchor watch ---- */
+function restoreAnchor(){
+  try{var a=JSON.parse(localStorage.getItem('bg-anchor')||'null');
+    if(a){anchor=a.pos;aRadius=a.r||50;drawAnchor();}}catch(e){}
+}
+function drawAnchor(){
+  if(!map)return;
+  if(aCircle){aCircle.setMap(null);aCircle=null;}
+  if(aMk){aMk.setMap(null);aMk=null;}
+  if(!anchor)return;
+  aCircle=new google.maps.Circle({map:map,center:anchor,radius:aRadius,fillColor:'#F0A93B',
+    fillOpacity:.10,strokeColor:'#F0A93B',strokeOpacity:.7,strokeWeight:2});
+  aMk=new google.maps.Marker({position:anchor,map:map,title:'Anchor',
+    icon:{path:google.maps.SymbolPath.CIRCLE,scale:6,fillColor:'#F0A93B',fillOpacity:1,strokeColor:'#0E1218',strokeWeight:2}});
+}
+function checkAnchor(){
+  var big=document.getElementById('adrift'), sub=document.getElementById('adriftsub');
+  if(!anchor||!last){big.textContent='—';big.className='anchorbig';sub.textContent='not set';return;}
+  var m=hav(last.lat,last.lng,anchor.lat,anchor.lng)*1000;
+  big.textContent=Math.round(m)+' m';
+  sub.textContent='drift · limit '+aRadius+' m';
+  if(m>aRadius){big.className='anchorbig warn';fireAlarm();}
+  else{big.className='anchorbig';aAlarm=false;}
+}
+var actx=null;
+function fireAlarm(){
+  if(aAlarm)return; aAlarm=true;
+  try{ if(navigator.vibrate) navigator.vibrate([400,200,400,200,400]); }catch(e){}
+  try{
+    actx=actx||new (window.AudioContext||window.webkitAudioContext)();
+    for(var i=0;i<3;i++){
+      var o=actx.createOscillator(), g=actx.createGain();
+      o.type='square'; o.frequency.value=880;
+      g.gain.value=.0001; o.connect(g); g.connect(actx.destination);
+      var t=actx.currentTime+i*0.6;
+      g.gain.setValueAtTime(.0001,t); g.gain.exponentialRampToValueAtTime(.35,t+.03);
+      g.gain.exponentialRampToValueAtTime(.0001,t+.35);
+      o.start(t); o.stop(t+.4);
+    }
+  }catch(e){}
+  document.getElementById('msg').textContent='⚠ ANCHOR DRAGGING — drift beyond '+aRadius+' m.';
+  showTab('anch');
+}
+document.getElementById('aset').addEventListener('click',function(){
+  if(!last){document.getElementById('msg').textContent='Start GPS first.';return;}
+  anchor={lat:last.lat,lng:last.lng}; aAlarm=false;
+  try{localStorage.setItem('bg-anchor',JSON.stringify({pos:anchor,r:aRadius}));}catch(e){}
+  drawAnchor(); checkAnchor();
+  document.getElementById('msg').textContent='Anchor set. Keep this open and the screen on.';
+});
+document.getElementById('aclear').addEventListener('click',function(){
+  anchor=null;aAlarm=false;try{localStorage.removeItem('bg-anchor');}catch(e){}
+  drawAnchor();checkAnchor();document.getElementById('msg').textContent='';
+});
+document.querySelectorAll('.bt[data-r]').forEach(function(b){
+  b.addEventListener('click',function(){
+    aRadius=parseInt(b.getAttribute('data-r'),10);
+    document.querySelectorAll('.bt[data-r]').forEach(function(x){x.classList.remove('on');});
+    b.classList.add('on');
+    if(anchor){try{localStorage.setItem('bg-anchor',JSON.stringify({pos:anchor,r:aRadius}));}catch(e){}}
+    drawAnchor();checkAnchor();
+  });
+});
+
+/* ---- marks ---- */
+document.getElementById('fmob').addEventListener('click',function(){
+  if(!last){document.getElementById('msg').textContent='Start GPS first.';return;}
+  var p={lat:last.lat,lng:last.lng};
+  var mk=new google.maps.Marker({position:p,map:map,zIndex:900,
+    icon:{path:google.maps.SymbolPath.BACKWARD_CLOSED_ARROW,scale:6,fillColor:'#E84B3C',
+      fillOpacity:1,strokeColor:'#fff',strokeWeight:2}});
+  marks.push(mk);
+  try{if(navigator.vibrate)navigator.vibrate(60);}catch(e){}
+  document.getElementById('mobtxt').textContent='Mark '+marks.length+' dropped at '+
+    p.lat.toFixed(5)+', '+p.lng.toFixed(5)+' — read that to the emergency services if you need to.';
+  document.getElementById('msg').textContent='Mark dropped.';
+});
+document.getElementById('mclear').addEventListener('click',function(){
+  marks.forEach(function(m){m.setMap(null);}); marks=[];
+  document.getElementById('mobtxt').textContent='Marks cleared.';
+});
+
+/* ---- GPS ---- */
 function onFix(p){
-  last = {lat:p.coords.latitude, lng:p.coords.longitude,
-          spd:p.coords.speed, hdg:p.coords.heading, acc:p.coords.accuracy};
-  document.getElementById('status').textContent = '';
-  var kn = (last.spd!=null && last.spd>=0) ? last.spd*1.94384 : null;
-  document.getElementById('kn').textContent  = kn!=null ? kn.toFixed(1) : '—';
-  document.getElementById('kmh').textContent = (last.spd!=null && last.spd>=0) ? (last.spd*3.6).toFixed(1) : '—';
-  document.getElementById('hdg').textContent = (last.hdg!=null && !isNaN(last.hdg)) ? Math.round(last.hdg) : '—';
-  document.getElementById('acc').textContent = last.acc ? ('±'+Math.round(last.acc)+' m') : '';
+  last={lat:p.coords.latitude,lng:p.coords.longitude,spd:p.coords.speed,hdg:p.coords.heading,acc:p.coords.accuracy};
+  document.getElementById('msg').textContent='';
+  document.getElementById('kn').textContent=(last.spd!=null&&last.spd>=0)?(last.spd*1.94384).toFixed(1):'—';
+  document.getElementById('kmh').textContent=(last.spd!=null&&last.spd>=0)?(last.spd*3.6).toFixed(1):'—';
+  document.getElementById('hdg').textContent=(last.hdg!=null&&!isNaN(last.hdg))?Math.round(last.hdg)+'°':'—';
+  document.getElementById('acc').textContent=last.acc?('±'+Math.round(last.acc)+' m'):'';
   if(me){
     var pos={lat:last.lat,lng:last.lng};
-    me.setPosition(pos); me.setVisible(true);
-    if(last.hdg!=null && !isNaN(last.hdg)){ var ic=me.getIcon(); ic.rotation=last.hdg; me.setIcon(ic); }
-    meAcc.setCenter(pos); meAcc.setRadius(last.acc||20); meAcc.setVisible(true);
+    me.setPosition(pos);me.setVisible(true);
+    if(last.hdg!=null&&!isNaN(last.hdg)){var ic=me.getIcon();ic.rotation=last.hdg;me.setIcon(ic);}
+    meAcc.setCenter(pos);meAcc.setRadius(last.acc||20);meAcc.setVisible(true);
+    if(follow)map.panTo(pos);
   }
-  update();
+  update(); checkAnchor();
 }
-
-document.getElementById('gps').addEventListener('click', function(){
-  var btn=this;
+document.getElementById('fgps').addEventListener('click',function(){
+  var b=this;
   if(watchId!==null){
-    navigator.geolocation.clearWatch(watchId); watchId=null;
-    btn.textContent='Start GPS'; btn.classList.remove('on'); btn.classList.add('go');
-    document.getElementById('status').textContent='GPS stopped.';
-    return;
+    navigator.geolocation.clearWatch(watchId);watchId=null;
+    b.classList.remove('on');document.getElementById('msg').textContent='GPS stopped.';return;
   }
-  if(!navigator.geolocation){ document.getElementById('status').textContent='This device has no GPS support.'; return; }
-  document.getElementById('status').textContent='Acquiring position…';
-  watchId = navigator.geolocation.watchPosition(onFix, function(err){
-    document.getElementById('status').textContent = 'GPS: '+err.message+' — allow location access in your browser settings.';
-  }, {enableHighAccuracy:true, maximumAge:2000, timeout:20000});
-  btn.textContent='GPS running'; btn.classList.add('on'); btn.classList.remove('go');
+  if(!navigator.geolocation){document.getElementById('msg').textContent='No GPS on this device.';return;}
+  document.getElementById('msg').textContent='Acquiring position…';
+  watchId=navigator.geolocation.watchPosition(onFix,function(e){
+    document.getElementById('msg').textContent='GPS: '+e.message+' — allow location in browser settings.';
+  },{enableHighAccuracy:true,maximumAge:2000,timeout:20000});
+  b.classList.add('on'); follow=true;
 });
-
-document.getElementById('centre').addEventListener('click', function(){
-  if(last && map){ map.panTo({lat:last.lat,lng:last.lng}); map.setZoom(14); }
+document.getElementById('fcentre').addEventListener('click',function(){
+  if(last&&map){follow=true;map.panTo({lat:last.lat,lng:last.lng});map.setZoom(15);}
 });
-
-document.getElementById('wake').addEventListener('click', async function(){
-  var btn=this;
+document.getElementById('fwake').addEventListener('click',async function(){
+  var b=this;
   try{
-    if(wl){ await wl.release(); wl=null; btn.textContent='Keep screen on'; btn.classList.remove('on'); return; }
-    wl = await navigator.wakeLock.request('screen');
-    btn.textContent='Screen locked on'; btn.classList.add('on');
-    wl.addEventListener('release',function(){ wl=null; btn.textContent='Keep screen on'; btn.classList.remove('on'); });
-  }catch(e){ btn.textContent='Not supported'; }
+    if(wl){await wl.release();wl=null;b.classList.remove('on');return;}
+    wl=await navigator.wakeLock.request('screen');b.classList.add('on');
+    wl.addEventListener('release',function(){wl=null;b.classList.remove('on');});
+  }catch(e){document.getElementById('msg').textContent='Screen lock not supported here.';}
 });
-document.addEventListener('visibilitychange', async function(){
-  if(wl===null && document.visibilityState==='visible'){ /* user can re-arm */ }
+document.addEventListener('visibilitychange',async function(){
+  if(document.visibilityState==='visible'&&wl===null&&document.getElementById('fwake').classList.contains('on')){
+    try{wl=await navigator.wakeLock.request('screen');}catch(e){}
+  }
 });
 
-/* Athlone Lock status */
+/* ---- sheet + tabs ---- */
+var sheet=document.getElementById('sheet');
+document.getElementById('grab').addEventListener('click',function(){sheet.classList.toggle('down');});
+function showTab(k){
+  ['run','lock','anch'].forEach(function(x){
+    document.getElementById('t-'+x).classList.toggle('on',x===k);
+    document.getElementById('p-'+x).style.display = (x===k)?'':'none';
+  });
+  sheet.classList.remove('down');
+}
+document.getElementById('t-run').addEventListener('click',function(){showTab('run');});
+document.getElementById('t-lock').addEventListener('click',function(){showTab('lock');});
+document.getElementById('t-anch').addEventListener('click',function(){showTab('anch');});
+
+/* ---- lock clock ---- */
 function lockStatus(){
-  var el=document.getElementById('lockst');
-  var now=new Date();
-  var sun = now.getDay()===0;
-  var mins = now.getHours()*60 + now.getMinutes();
-  var open=9*60+30, close = sun ? 18*60 : 19*60+30;
-  var lunchA=13*60, lunchB=14*60;
-  function hm(m){ return String(Math.floor(m/60)).padStart(2,'0')+':'+String(m%60).padStart(2,'0'); }
-  if(mins>=lunchA && mins<lunchB){
-    el.className='st lunch'; el.textContent='Closed for lunch — reopens 14:00 ('+(lunchB-mins)+' min)';
-  } else if(mins>=open && mins<close){
-    var left=close-mins;
-    el.className='st open';
-    el.textContent='Open — closes '+hm(close)+(left<90?(' · only '+left+' min left'):'');
-  } else {
-    el.className='st shut';
-    el.textContent = mins<open ? ('Closed — opens 09:30') : ('Closed for the day — reopens 09:30');
-  }
+  var el=document.getElementById('lockst'), tab=document.getElementById('t-lock');
+  var now=new Date(), w=lockWindow(now), m=now.getHours()*60+now.getMinutes();
+  function hm(x){return pad(Math.floor(x/60))+':'+pad(x%60);}
+  if(m>=w.lunchA&&m<w.lunchB){el.className='st lunch';el.textContent='Closed for lunch — reopens 14:00 (in '+(w.lunchB-m)+' min)';tab.classList.add('warnflag');}
+  else if(m>=w.open&&m<w.close){
+    var left=w.close-m;el.className='st open';
+    el.textContent='Open — closes '+hm(w.close)+(left<90?' · '+left+' min left':'');
+    tab.classList.toggle('warnflag',left<90);
+  } else {el.className='st shut';el.textContent=m<w.open?'Closed — opens 09:30':'Closed for the day — reopens 09:30';tab.classList.add('warnflag');}
+  lockVerdict();
 }
 lockStatus(); setInterval(lockStatus,30000);
 
-if('serviceWorker' in navigator){ navigator.serviceWorker.register('./sw.js').catch(function(){}); }
+if('serviceWorker' in navigator){navigator.serviceWorker.register('./sw.js').catch(function(){});}
 </script>
 <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCwU1X-mknScWu4beKJ7wjvehmLotGh-eY&callback=initMap"></script>
 </body>
