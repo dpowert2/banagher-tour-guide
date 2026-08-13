@@ -247,6 +247,19 @@ footer a{color:var(--text-muted)}
   <div class="stat-cell"><div class="stat-value">1</div><div class="stat-label">Lock ×2</div></div>
 </div>
 
+<div class="card" id="now" style="padding:0;overflow:hidden;margin-bottom:14px">
+  <div style="background:var(--text-primary);color:#fff;padding:15px 20px 16px">
+    <div style="font-size:10.5px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;opacity:.55" id="nowday">Right now</div>
+    <div style="font-size:20px;font-weight:800;line-height:1.25;margin-top:5px" id="nowtitle">—</div>
+    <div style="font-size:13.5px;opacity:.78;margin-top:4px;line-height:1.5" id="nownote"></div>
+  </div>
+  <div style="display:flex;gap:8px;padding:12px 14px;background:var(--surface)">
+    <a href="./navigate.html" style="flex:1;text-align:center;background:var(--accent);color:#fff;text-decoration:none;font-size:13.5px;font-weight:700;padding:12px 8px;border-radius:var(--r-md)">⚓ Underway</a>
+    <a href="#live" style="flex:1;text-align:center;background:var(--surface-muted);color:var(--text-primary);text-decoration:none;font-size:13.5px;font-weight:700;padding:12px 8px;border-radius:var(--r-md)">🌬 Wind</a>
+    <a href="tel:+353579151112" style="flex:1;text-align:center;background:var(--surface-muted);color:var(--text-primary);text-decoration:none;font-size:13.5px;font-weight:700;padding:12px 8px;border-radius:var(--r-md)">📞 Base</a>
+  </div>
+</div>
+
 <div class="card" id="brief" style="scroll-margin-top:64px">
   <div class="section-label" style="color:var(--accent)">Booking #905983 · Silver Spray · Thu 13 → Mon 17 Aug</div>
   <h2 style="margin-bottom:10px">Today</h2>
@@ -1306,12 +1319,78 @@ function applyClosures(start){
 document.getElementById('tripdate').addEventListener('change', function(e){
   try{ localStorage.setItem(DKEY, e.target.value); }catch(err){}
   applyDates();
+  renderNow();
   var c = null;
   try{ c = JSON.parse(localStorage.getItem(WKEY) || 'null'); }catch(err){}
   if(c){ renderWx(c.data, c.at); }
 });
 applyDates();
+renderNow();
+setInterval(renderNow,60000);
 loadWx();
+
+/* ---------- "Right now" strip ---------- */
+var NOWPLAN = [
+  {d:'Day 1 · Thu 13 Aug', seg:[
+    [0,   'Get to Banagher',        'Check-in from 10am, boarding 4pm. Balance €729.50 plus deposit. Bring photo ID and the booking card.'],
+    [16,  'Handover — film it',     'Walkaround on video, condition sheet signed, smart card bought. Aim to be casting off inside the hour.'],
+    [17,  'Cast off for Shannonbridge','13 km, about 1h 20. Kids up top, engine gentle.'],
+    [18.5,'Moor and eat at Luker\'s','Jetties either side of the bridge. Sunset over the river around 9.'],
+    [22,  'Night 1 · Shannonbridge','']]},
+  {d:'Day 2 · Fri 14 Aug', seg:[
+    [0,   'Night 1 · Shannonbridge',''],
+    [9,   'Breakfast at JJ Killeen\'s','Opens 9:30. Scones, full Irish, high chairs.'],
+    [11,  'North to Athlone',       '21 km, about 2h 10. Slow past Clonmacnoise — you stop there Sunday.'],
+    [13.5,'Moor under the castle',  'Shore power on the smart card. Lunch at Left Bank, then the castle at 3.'],
+    [17,  'Sean\'s Bar, then dinner','Sean\'s before the evening crush. Thyme 5–9 if you booked it, else Kin Khao.'],
+    [22,  'Night 2 · Athlone quay','']]},
+  {d:'Day 3 · Sat 15 Aug', seg:[
+    [0,   'Night 2 · Athlone quay',''],
+    [8.5, 'Check the wind first',   'Read the Lough Ree panel below before you commit. Above F4, stay put — the day still works.'],
+    [9.5, 'Lock through, then north','Athlone Lock opens 09:30 — €1.50, allow 20–30 min. Then open water.'],
+    [10.5,'Baysports at Hodson Bay','Open till 7pm today. Socks, and an adult in the water with Caoimhe.'],
+    [16,  'East to Killinure',      '40 minutes to the anchorage. Swim off the platform, then the quiet.'],
+    [21,  'Night 3 · at anchor',    'Set the anchor watch in the passage tool.']]},
+  {d:'Day 4 · Sun 16 Aug', seg:[
+    [0,   'Night 3 · Killinure',    'Anchor watch on.'],
+    [8.5, 'South, and mind the lock','Sunday hours are 09:30–18:00 with a 13:00–14:00 lunch closure. Be through before one.'],
+    [10,  'Athlone pit stop',       'Water, last real shop. Left Bank is closed Sundays — deli and eat on deck.'],
+    [13.5,'Down to Clonmacnoise',   '90 minutes with the current. Aim to moor about 3, after the coaches thin.'],
+    [15,  'The monastic city',      'Last admission 5:30. Ask for the kids\' scavenger-hunt map.'],
+    [20,  'Night 4 · the jetty',    'Site empties at six. Walk the riverside path in the last light.']]},
+  {d:'Day 5 · Mon 17 Aug', seg:[
+    [0,   'Night 4 · Clonmacnoise',''],
+    [7,   'Coffee, then lines off', 'Away by 7:45. Two hours of dawn river, mist on the Callows.'],
+    [9.5, 'Alongside at Banagher',  'Before 10am. Return walkaround filmed, HVO settled, cases collected.'],
+    [10.5,'Banagher on foot',       'Martello Tower, Fort Eliza, the bridge. Crank Café is shut Mondays — Flynn\'s from 10:30.'],
+    [13,  'Birr Castle',            'Fifteen minutes away, open till 6. Treehouse, telescope, science centre if it rains.'],
+    [16,  'Home',                   'About 1h 40 to Johnstown.']]}
+];
+function renderNow(){
+  var el=document.getElementById('nowtitle'); if(!el) return;
+  var start=getStart(), now=new Date();
+  var s=new Date(start+'T00:00:00');
+  var idx=Math.floor((now-s)/86400000);
+  var dEl=document.getElementById('nowday'), nEl=document.getElementById('nownote');
+  if(idx<0){
+    var away=Math.ceil((s-now)/86400000);
+    dEl.textContent='Before you go';
+    el.textContent=away===1?'Boarding tomorrow':(away+' days to go');
+    nEl.textContent='Check the briefing below — bookings, balance and what to pack.';
+    return;
+  }
+  if(idx>4){
+    dEl.textContent='Trip complete';
+    el.textContent='Back on dry land';
+    nEl.textContent='Deposit release usually takes a few days. Worth a look at Lough Derg next time — six nights, going south.';
+    return;
+  }
+  var p=NOWPLAN[idx], h=now.getHours()+now.getMinutes()/60, cur=p.seg[0];
+  p.seg.forEach(function(sg){ if(h>=sg[0]) cur=sg; });
+  dEl.textContent=p.d;
+  el.textContent=cur[1];
+  nEl.textContent=cur[2]||'';
+}
 
 /* ---------- packing list ---------- */
 (function(){
