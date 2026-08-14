@@ -1,4 +1,4 @@
-var VERSION = 'banagher-v6';
+var VERSION = 'banagher-v7';
 var CORE = 'banagher-core-' + VERSION;
 var EXT = 'banagher-ext-' + VERSION;
 var PRECACHE = ['./', './index.html', './navigate.html', './manifest.webmanifest', './icon-192.png', './icon-512.png'];
@@ -41,7 +41,24 @@ self.addEventListener('fetch', function (e) {
     return;
   }
 
-  // Same-origin core: cache first, refresh in background
+  // HTML pages: network-first, fall back to cache offline
+  if (url.origin === location.origin &&
+      (req.mode === 'navigate' || url.pathname.endsWith('.html') || url.pathname.endsWith('/'))) {
+    e.respondWith(
+      fetch(req).then(function (res) {
+        if (res && res.ok) {
+          var copy = res.clone();
+          caches.open(CORE).then(function (c) { c.put(req, copy); });
+        }
+        return res;
+      }).catch(function () {
+        return caches.match(req).then(function (hit) { return hit || caches.match('./index.html'); });
+      })
+    );
+    return;
+  }
+
+  // Other same-origin assets: cache first, refresh in background
   if (url.origin === location.origin) {
     e.respondWith(
       caches.match(req).then(function (hit) {
