@@ -487,32 +487,50 @@ function gpsHelp(){
 function startGPS(){
   var b=document.getElementById('fgps');
   if(!navigator.geolocation){setMsg('This device reports no GPS support.');return;}
-  if(!window.isSecureContext){setMsg('GPS needs a secure connection. Open the https:// version of this page.');return;}
-  setMsg('Acquiring position…');
-  watchId=navigator.geolocation.watchPosition(onFix,function(e){
-    if(e.code===1){ gpsHelp(); }
-    else if(e.code===2){ setMsg('No position fix yet — normal below deck or under trees. Move somewhere with sky view; still trying.'); }
-    else { setMsg('GPS timed out, still trying. Keep the phone where it can see sky.'); }
-    b.classList.remove('on');
-  },{enableHighAccuracy:true,maximumAge:2000,timeout:30000});
+  if(!window.isSecureContext){setMsg('GPS needs https. Open the secure version of this page.');return;}
+  stopGPS(true);
+  setMsg('Asking for position\u2026');
+  /* one-shot first: on iOS this is what reliably triggers the prompt */
+  navigator.geolocation.getCurrentPosition(function(p){
+    onFix(p); beginWatch();
+  }, function(e){
+    gpsError(e);
+  }, {enableHighAccuracy:true, maximumAge:0, timeout:25000});
   b.classList.add('on'); follow=true;
 }
-document.getElementById('fgps').addEventListener('click',function(){
-  var b=this;
-  if(watchId!==null){
-    navigator.geolocation.clearWatch(watchId);watchId=null;
-    b.classList.remove('on');setMsg('GPS stopped.');return;
+function beginWatch(){
+  if(watchId!==null)return;
+  watchId=navigator.geolocation.watchPosition(onFix, gpsError,
+    {enableHighAccuracy:true, maximumAge:2000, timeout:30000});
+}
+function stopGPS(quiet){
+  if(watchId!==null){ navigator.geolocation.clearWatch(watchId); watchId=null; }
+  document.getElementById('fgps').classList.remove('on');
+  if(!quiet) setMsg('GPS stopped.');
+}
+function gpsError(e){
+  /* critical: drop the watch so the button state stays honest */
+  if(watchId!==null){ navigator.geolocation.clearWatch(watchId); watchId=null; }
+  document.getElementById('fgps').classList.remove('on');
+  if(e.code===1){ gpsHelp(); }
+  else if(e.code===2){
+    setMsg('<b>No fix yet (POSITION_UNAVAILABLE).</b><br>Usually means no sky view \u2014 try up on deck, away from the canopy. Tap \uD83D\uDCCD to retry.');
+  } else {
+    setMsg('<b>Timed out waiting for a fix.</b><br>Phone GPS can take 30\u201360s from cold. Go up on deck and tap \uD83D\uDCCD again.');
   }
-  startGPS();
-});
+}
 /* if permission is already granted, start automatically */
 if(navigator.permissions&&navigator.permissions.query){
   navigator.permissions.query({name:'geolocation'}).then(function(p){
     if(p.state==='granted'){ startGPS(); }
     else if(p.state==='denied'){ gpsHelp(); }
-    p.onchange=function(){ if(p.state==='granted'&&watchId===null){ startGPS(); } };
   }).catch(function(){});
 }
+/* build stamp so you can see which version you're actually running */
+setTimeout(function(){
+  var m=document.getElementById('msg');
+  if(m && !m.innerHTML.trim()){ m.innerHTML='<span style="color:#6B7885">Build v10 \u00B7 tap \uD83D\uDCCD to start GPS</span>'; }
+},400);
 document.getElementById('fsat').addEventListener('click',function(){
   var sat=map.getMapTypeId()==='hybrid';
   map.setMapTypeId(sat?'terrain':'hybrid');
