@@ -37,10 +37,12 @@ body{font-family:var(--font);background:var(--bg);color:var(--txt);font-size:16p
 .sb .k{font-size:9.5px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--faint);margin-top:3px}
 
 /* floating right buttons */
-.fabs{position:absolute;right:10px;top:calc(var(--safe-t) + 70px);z-index:20;display:flex;flex-direction:column;gap:8px}
-.fab{width:52px;height:52px;border-radius:16px;border:none;background:rgba(14,18,24,.88);backdrop-filter:blur(12px);color:var(--txt);font-size:21px;display:flex;align-items:center;justify-content:center;cursor:pointer}
+.fabs{display:flex;gap:8px;padding:2px 14px 10px;flex:0 0 auto}
+.fab{flex:1;height:50px;border-radius:14px;border:none;background:var(--panel);color:var(--txt);font-size:20px;display:flex;align-items:center;justify-content:center;cursor:pointer;position:relative}
+.fab:active{background:var(--panel2)}
 .fab.on{background:var(--green);color:#0E1218}
 .fab.alarm{background:var(--coral);color:#fff}
+.fab i{position:absolute;bottom:5px;font-size:8px;font-style:normal;font-weight:700;letter-spacing:.04em;opacity:.55;text-transform:uppercase}
 
 /* bottom sheet */
 .sheet{position:absolute;left:0;right:0;bottom:0;z-index:30;background:var(--bg);border-radius:22px 22px 0 0;box-shadow:0 -8px 32px rgba(0,0,0,.55);padding-bottom:var(--safe-b);height:82%;display:flex;flex-direction:column;touch-action:none;will-change:transform}
@@ -121,16 +123,17 @@ body{font-family:var(--font);background:var(--bg);color:var(--txt);font-size:16p
   </div>
 </div>
 
-<div class="fabs">
-  <button class="fab" id="fgps" type="button" title="GPS">📍</button>
-  <button class="fab" id="fcentre" type="button" title="Centre">◎</button>
-  <button class="fab" id="fwake" type="button" title="Keep screen on">☀</button>
-  <button class="fab" id="fsat" type="button" title="Chart / satellite">🛰</button>
-  <button class="fab" id="fmob" type="button" title="Mark this spot">⚑</button>
-</div>
+
 
 <div class="sheet" id="sheet">
   <div class="grab" id="grab"><i></i></div>
+  <div class="fabs">
+    <button class="fab" id="fgps" type="button">📍<i>GPS</i></button>
+    <button class="fab" id="fcentre" type="button">◎<i>Centre</i></button>
+    <button class="fab" id="fwake" type="button">☀<i>Screen</i></button>
+    <button class="fab" id="fsat" type="button">🛰<i>Sat</i></button>
+    <button class="fab" id="fmob" type="button">⚑<i>Mark</i></button>
+  </div>
   <div class="tabs">
     <button id="t-run" class="on" type="button">Passage</button>
     <button id="t-chart" type="button">Chart</button>
@@ -529,7 +532,7 @@ if(navigator.permissions&&navigator.permissions.query){
 /* build stamp so you can see which version you're actually running */
 setTimeout(function(){
   var m=document.getElementById('msg');
-  if(m && !m.innerHTML.trim()){ m.innerHTML='<span style="color:#6B7885">Build v10 \u00B7 tap \uD83D\uDCCD to start GPS</span>'; }
+  if(m && !m.innerHTML.trim()){ m.innerHTML='<span style="color:#6B7885">Build v11 \u00B7 tap \uD83D\uDCCD to start GPS</span>'; }
 },400);
 document.getElementById('fsat').addEventListener('click',function(){
   var sat=map.getMapTypeId()==='hybrid';
@@ -601,11 +604,14 @@ function drawStrip(){
 var sheetOpen=function(){};
 (function(){
   var sh=document.getElementById('sheet'), gr=document.getElementById('grab');
-  var peek=0,cur=0,sY=0,sT=0,sTime=0,drag=false,moved=0;
+  var peek=0,cur=0,sY=0,sT=0,sTime=0,drag=false,moved=0,measured=false;
   function measure(){
     var r=sh.getBoundingClientRect();
     var tb=document.querySelector('.tabs').getBoundingClientRect().bottom-r.top;
+    var fb=document.querySelector('.fabs').getBoundingClientRect().bottom-r.top;
+    tb=Math.max(tb,fb);
     peek=Math.max(0,r.height-tb-10);
+    if(!measured){ cur=peek; measured=true; }
     if(cur>peek)cur=peek;
     apply(cur);
   }
