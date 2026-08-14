@@ -1,4 +1,4 @@
-var VERSION = 'banagher-v5';
+var VERSION = 'banagher-v6';
 var CORE = 'banagher-core-' + VERSION;
 var EXT = 'banagher-ext-' + VERSION;
 var PRECACHE = ['./', './index.html', './navigate.html', './manifest.webmanifest', './icon-192.png', './icon-512.png'];
